@@ -1,0 +1,123 @@
+
+
+$text-alt:#F4F5F6;
+
+
+$background-secondary: rgb(0,0,0);
+
+.title {
+  text-align: center;
+  font-size: 3rem;
+  padding: 6rem 0;
+  font-weight: bold;
+  background-color: $background-secondary;
+  margin: 0em;
+  position: relative;
+  height: 160px;
+  overflow: hidden;
+  .overlay {
+    position: absolute;
+    padding: 3rem;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    letter-spacing: .5rem;
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  a {
+    color: $text-alt;
+  }
+  @include medium-only {
+    font-size: 6rem;
+    height: 227px;
+  }
+  @include large-only {
+    font-size: 8.5rem;
+    height: 312px;
+    .overlay {
+      position: absolute;
+      padding: 6rem;
+    }
+  }
+  @include very-large-only {
+    font-size: 8.5rem;
+    height: 342px;
+    .overlay {
+      position: absolute;
+      padding: 6rem;
+    }
+  }
+  &:hover {
+    .subtitle {
+      color: $marvel;
+    }
+  }
+  .marvel {
+    display: inline-block;
+    width: 94px;
+    text-indent: -9999px;
+    background-image: url('./images/marvel-logo.jpg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    @include medium-only {
+      width: 153px;
+    }
+    @include large-only {
+      width: 220px;
+    }
+    &:hover {}
+  }
+  .subtitle {
+    transition: color 1s ease;
+    font-size: 1.3rem;
+    text-align: center;
+    @include large-only {
+      margin-top: 0px;
+      line-height: 0px;
+    }
+  }
+  .video {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 0;
+  }
+}
+
+
+.small-header {
+  .title {
+    margin: 0;
+    text-align: left;
+    height:auto;
+    padding: 1rem 1rem;
+    &:before,
+    &:after {
+      content: ' ';
+      display: table;
+    }
+    .overlay {
+      position: static;
+      font-size: 2rem;
+      padding:0;
+    }
+    .video {
+      display: none;
+    }
+    .subtitle {
+      line-height: 2rem;
+      font-size: 1rem;
+      margin: 0;
+      text-align: left;
+    }
+  }
+  .marvel {
+    width: 80px;
+  }
+}

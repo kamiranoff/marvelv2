@@ -1,0 +1,11 @@
+{
+  "generator-ng-fullstack": {
+    "username": "kamiranoff",
+    "appName": "marvel-encyclopedia",
+    "stack": "fullstack",
+    "server": "node",
+    "client": "ng2",
+    "transpilerServer": "node",
+    "secure": false
+  }
+}
