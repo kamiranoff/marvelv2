@@ -14,9 +14,14 @@ var CharactersGrid = (function () {
     function CharactersGrid(chractersService) {
         this.characters = chractersService.getCharacters();
     }
+    CharactersGrid.prototype.changeBgOnHover = function ($event) {
+        console.log('hover', $event);
+        this.vibrantColor = "red";
+    };
     CharactersGrid = __decorate([
         core_1.Component({
-            selector: 'character-grid',
+            selector: 'characters-grid',
+            providers: [characters_service_1.CharactersService],
             templateUrl: "marvel-app/modules/characters-grid/characters-grid.component.html"
         }), 
         __metadata('design:paramtypes', [characters_service_1.CharactersService])
