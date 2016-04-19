@@ -1,16 +1,23 @@
 
 import {Component} from 'angular2/core';
-import {RouteConfig,ROUTER_DIRECTIVES} from 'angular2/router';
+import {RouteConfig,ROUTER_DIRECTIVES,Router} from 'angular2/router';
 
+
+import {Homepage} from "./pages/homepage/homepage.component";
 import {HeaderComponent} from "./modules/header/header.component";
-import {CharactersGrid} from "./modules/characters-grid/characters-grid.component";
+import {CharacterDetail} from "./modules/character-detail/character-detail.component";
 
 @RouteConfig([
   {
     path: '/',
-    name: 'CharactersGrid',
-    component: CharactersGrid,
+    name: 'Homepage',
+    component: Homepage,
     useAsDefault:true
+  },
+  {
+    path: '/characters/:id',
+    name: 'CharacterDetail',
+    component: CharacterDetail
   }
 
 ])
@@ -19,7 +26,7 @@ import {CharactersGrid} from "./modules/characters-grid/characters-grid.componen
   selector: 'my-app',
   directives:[HeaderComponent,ROUTER_DIRECTIVES],
   template:`
-  <header-component></header-component>
+  <header-component [class.small-header]="!router.isRouteActive(router.generate(['/Homepage']))">"></header-component>
   <router-outlet></router-outlet>
   `,
   styleUrls: ['app/app.component.css'],
@@ -27,7 +34,8 @@ import {CharactersGrid} from "./modules/characters-grid/characters-grid.componen
 })
 
 export class AppComponent {
+  constructor(public router: Router) {
 
-
+  }
 
 }

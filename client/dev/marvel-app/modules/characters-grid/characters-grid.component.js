@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("angular2/core");
+var router_1 = require('angular2/router');
 var characters_service_1 = require("../../services/characters.service");
 var CharactersGrid = (function () {
     function CharactersGrid(chractersService) {
@@ -22,6 +23,7 @@ var CharactersGrid = (function () {
         core_1.Component({
             selector: 'characters-grid',
             providers: [characters_service_1.CharactersService],
+            directives: [router_1.ROUTER_DIRECTIVES],
             templateUrl: "marvel-app/modules/characters-grid/characters-grid.component.html"
         }), 
         __metadata('design:paramtypes', [characters_service_1.CharactersService])

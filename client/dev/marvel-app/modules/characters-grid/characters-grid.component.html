@@ -1,6 +1,6 @@
 <div class="characters-list">
   <div class="single-hero-link" *ngFor="#character of characters" #heroInGrid  (mouseenter)="changeBgOnHover($event)">
-  <a  class="character-link" href="#/character/{{_id}}" data-id="{{_id}}" data-name="{{character.character.name}}">
+  <a  class="character-link" [routerLink]="['CharacterDetail',{id:character.character.id}]">
       <img  crossOrigin="anonymous" src="{{character.character.thumbnail.path}}.{{character.character.thumbnail.extension}}"/>
 
       <h3 class="name" style="background-color:{{vibrantColor}}" >{{character.character.name}} </h3>

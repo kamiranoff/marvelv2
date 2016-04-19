@@ -1,10 +1,13 @@
 import {Component} from "angular2/core";
+import {ROUTER_DIRECTIVES} from 'angular2/router';
+
 import {CharactersService} from "../../services/characters.service";
 
 
 @Component({
   selector:'characters-grid',
   providers:[CharactersService],
+  directives:[ROUTER_DIRECTIVES],
   templateUrl:"marvel-app/modules/characters-grid/characters-grid.component.html"
 })
 

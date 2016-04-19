@@ -10,27 +10,34 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('angular2/core');
 var router_1 = require('angular2/router');
+var homepage_component_1 = require("./pages/homepage/homepage.component");
 var header_component_1 = require("./modules/header/header.component");
-var characters_grid_component_1 = require("./modules/characters-grid/characters-grid.component");
+var character_detail_component_1 = require("./modules/character-detail/character-detail.component");
 var AppComponent = (function () {
-    function AppComponent() {
+    function AppComponent(router) {
+        this.router = router;
     }
     AppComponent = __decorate([
         router_1.RouteConfig([
             {
                 path: '/',
-                name: 'CharactersGrid',
-                component: characters_grid_component_1.CharactersGrid,
+                name: 'Homepage',
+                component: homepage_component_1.Homepage,
                 useAsDefault: true
+            },
+            {
+                path: '/characters/:id',
+                name: 'CharacterDetail',
+                component: character_detail_component_1.CharacterDetail
             }
         ]),
         core_1.Component({
             selector: 'my-app',
             directives: [header_component_1.HeaderComponent, router_1.ROUTER_DIRECTIVES],
-            template: "\n  <header-component></header-component>\n  <router-outlet></router-outlet>\n  ",
+            template: "\n  <header-component [class.small-header]=\"!router.isRouteActive(router.generate(['/Homepage']))\">\"></header-component>\n  <router-outlet></router-outlet>\n  ",
             styleUrls: ['app/app.component.css'],
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [router_1.Router])
     ], AppComponent);
     return AppComponent;
 }());

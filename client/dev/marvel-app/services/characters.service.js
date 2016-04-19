@@ -101,6 +101,12 @@ var CharactersService = (function () {
                 }
             }];
     };
+    CharactersService.prototype.getCharacterById = function (id) {
+        var characters = this.getCharacters();
+        return characters.filter(function (v) {
+            return v.character.id === id; // Filter out the appropriate one
+        })[0];
+    };
     return CharactersService;
 }());
 exports.CharactersService = CharactersService;

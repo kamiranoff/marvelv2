@@ -98,6 +98,13 @@ export class CharactersService {
       }
     }]
   }
+  getCharacterById(id) {
+    var characters = this.getCharacters();
+
+    return characters.filter(function(v) {
+      return v.character.id === id; // Filter out the appropriate one
+    })[0]
+  }
 }
 
 
