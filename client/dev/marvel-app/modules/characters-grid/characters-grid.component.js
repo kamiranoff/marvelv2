@@ -11,13 +11,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("angular2/core");
 var router_1 = require('angular2/router');
 var characters_service_1 = require("../../services/characters.service");
+var get_average_rgb_helper_1 = require("../../helpers/get-average-rgb.helper");
 var CharactersGrid = (function () {
-    function CharactersGrid(chractersService) {
-        this.characters = chractersService.getCharacters();
+    function CharactersGrid(_characterService) {
+        this._characterService = _characterService;
+        this.characters = [];
+        this.getCharacters();
     }
-    CharactersGrid.prototype.changeBgOnHover = function ($event) {
-        console.log('hover', $event);
-        this.vibrantColor = "red";
+    CharactersGrid.prototype.getCharacters = function () {
+        var _this = this;
+        this._characterService.getCharacters()
+            .subscribe(function (characters) {
+            _this.characters = characters;
+        }, function (error) { return _this.errorMessage = error; });
+    };
+    CharactersGrid.prototype.changeBgOnHover = function (idx, elm) {
+        var img = elm.currentTarget.getElementsByTagName("img")[0];
+        var imageColor = get_average_rgb_helper_1.GetAverageRgb.getAverageRGB(img);
+        var rgbImageColor = "rgb(" + imageColor.r + "," + imageColor.g + "," + imageColor.b + ")";
+        this.characters[idx].dominantColor = rgbImageColor;
     };
     CharactersGrid = __decorate([
         core_1.Component({

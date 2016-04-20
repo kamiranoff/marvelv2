@@ -1,10 +1,11 @@
 "use strict";
 
-const TodoRoutes = require('../api/todo/routes/todo-routes');
+//const TodoRoutes = require('../api/todo/routes/todo-routes');
+const MarvelRoutes = require('../api/marvelapi/marvel-routes');
 const StaticDispatcher = require('../commons/static/index');
 
 module.exports = class Routes {
-   static init(app, router) {
+/*   static init(app, router) {
      TodoRoutes.init(router);
 
      router
@@ -12,5 +13,15 @@ module.exports = class Routes {
        .get(StaticDispatcher.sendIndex);
 
      app.use('/', router);
-   }
+   }*/
+
+  static init(app, router) {
+    MarvelRoutes.init(router);
+
+    router
+      .route('*')
+      .get(StaticDispatcher.sendIndex);
+
+    app.use('/', router);
+  }
 }

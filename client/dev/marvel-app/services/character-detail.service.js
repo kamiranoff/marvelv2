@@ -11,33 +11,34 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var Rx_1 = require("rxjs/Rx");
 var core_1 = require('angular2/core');
 var http_1 = require("angular2/http");
-var CharactersService = (function () {
-    function CharactersService(http) {
+var CharacterDetailService = (function () {
+    function CharacterDetailService(http) {
         this.http = http;
-        this._heroesUrl = '/api/marvelapi/characters';
+        this._heroDetailUrl = '/api/marvelapi/character/';
     }
-    CharactersService.prototype.getCharacters = function () {
-        return this.http.get(this._heroesUrl)
+    CharacterDetailService.prototype.getCharacterById = function (id) {
+        return this.http.get(this._heroDetailUrl + id)
             .map(this.extractData)
             .catch(this.handleError);
     };
-    CharactersService.prototype.extractData = function (res) {
+    CharacterDetailService.prototype.extractData = function (res) {
         if (res.status < 200 || res.status >= 300) {
             throw new Error('Bad response status: ' + res.status);
         }
         var body = res.json();
         return body || {};
     };
-    CharactersService.prototype.handleError = function (error) {
+    CharacterDetailService.prototype.handleError = function (error) {
         // In a real world app, we might send the error to remote logging infrastructure
         var errMsg = error.message || 'Server error';
+        console.log('error.message', error.message);
         console.error(errMsg); // log to console instead
         return Rx_1.Observable.throw(errMsg);
     };
-    CharactersService = __decorate([
+    CharacterDetailService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [http_1.Http])
-    ], CharactersService);
-    return CharactersService;
+    ], CharacterDetailService);
+    return CharacterDetailService;
 }());
-exports.CharactersService = CharactersService;
+exports.CharacterDetailService = CharacterDetailService;

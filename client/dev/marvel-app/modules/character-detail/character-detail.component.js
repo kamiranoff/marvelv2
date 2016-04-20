@@ -9,15 +9,32 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("angular2/core");
+var router_1 = require('angular2/router');
+var character_detail_service_1 = require("../../services/character-detail.service");
+var parallax_directive_1 = require("../../helpers/parallax.directive");
 var CharacterDetail = (function () {
-    function CharacterDetail() {
+    function CharacterDetail(_characterDetailService, params) {
+        this._characterDetailService = _characterDetailService;
+        this.character = {};
+        this.id = params.get('id');
+        this.getCharacterDetail(this.id);
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
     }
+    CharacterDetail.prototype.getCharacterDetail = function (id) {
+        var _this = this;
+        this._characterDetailService.getCharacterById(id)
+            .subscribe(function (character) {
+            _this.character = character[0].character;
+        }, function (error) { return _this.errorMessage = error; });
+    };
     CharacterDetail = __decorate([
         core_1.Component({
             selector: 'character-detail',
-            template: "\n  detail\n  "
+            directives: [parallax_directive_1.Parallax],
+            providers: [character_detail_service_1.CharacterDetailService],
+            templateUrl: 'marvel-app/modules/character-detail/character-detail.component.html'
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [character_detail_service_1.CharacterDetailService, router_1.RouteParams])
     ], CharacterDetail);
     return CharacterDetail;
 }());
