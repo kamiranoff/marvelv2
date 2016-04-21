@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+///<reference path="../../../../node_modules/rxjs/Observable.d.ts"/>
 var Rx_1 = require("rxjs/Rx");
 var core_1 = require('angular2/core');
 var http_1 = require("angular2/http");
@@ -18,6 +19,11 @@ var CharactersService = (function () {
     }
     CharactersService.prototype.getCharacters = function () {
         return this.http.get(this._heroesUrl)
+            .map(this.extractData)
+            .catch(this.handleError);
+    };
+    CharactersService.prototype.searchCharactersByName = function (userInput) {
+        return this.http.get(this._heroesUrl + "?name=" + userInput)
             .map(this.extractData)
             .catch(this.handleError);
     };

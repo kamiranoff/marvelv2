@@ -1,3 +1,4 @@
+///<reference path="../../../../node_modules/rxjs/Observable.d.ts"/>
 import {Observable} from "rxjs/Rx";
 import {Injectable} from 'angular2/core';
 import {Http,Response} from "angular2/http";
@@ -15,6 +16,13 @@ export class CharactersService {
       .map(this.extractData)
       .catch(this.handleError);
   }
+
+  searchCharactersByName(userInput):Observable{
+    return this.http.get(this._heroesUrl + "?name=" + userInput )
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
   private extractData(res: Response) {
     if (res.status < 200 || res.status >= 300) {
       throw new Error('Bad response status: ' + res.status);
@@ -28,6 +36,7 @@ export class CharactersService {
     console.error(errMsg); // log to console instead
     return Observable.throw(errMsg);
   }
+
 
 }
 

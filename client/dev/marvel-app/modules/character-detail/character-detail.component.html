@@ -1,5 +1,9 @@
 <div class="single-hero-page">
-<h1 class="hero-name" parallax [config]="{parallaxInitVal: 0, parallaxRatio: -.15,parallaxCss: 'backgroundPositionY'}" style=" background-image:url('{{character.thumbnail?.path}}/landscape_incredible.{{character.thumbnail?.extension}}');"><span class="hero-name-text">{{character.name}}</span></h1>
+<h1 class="hero-name"
+    parallax [config]="{parallaxInitVal: 0, parallaxRatio: -.15,parallaxCss: 'backgroundPositionY'}"
+    style=" background-image:url('{{character.thumbnail?.path}}.{{character.thumbnail?.extension}}');">
+  <span class="hero-name-text">{{character.name}}</span>
+</h1>
 <section class="hero-description">
   <section class="hero-description-wiki">
     <div class="main-hero-image"><img src="{{character.thumbnail?.path}}.{{character.thumbnail?.extension}}"></div>
