@@ -3,11 +3,19 @@
 const MarvelDAO = require('./marvel-dao');
 
 module.exports = class MarvelController {
-  static getAll(req, res) {
-    MarvelDAO
-      .getAll()
-      .then(characters => res.status(200).json(characters))
-      .catch(error => res.status(400).json(error));
+  static getCharacters(req, res) {
+    if(req.query.name){
+      MarvelDAO.getCharactersByName(req.query.name)
+        .then(characters => res.status(200).json(characters))
+        .catch(error => res.status(400).json(error));
+
+    }else{
+      MarvelDAO
+        .getAll()
+        .then(characters => res.status(200).json(characters))
+        .catch(error => res.status(400).json(error));
+
+    }
   }
 
   static getCharacterDetail(req, res) {

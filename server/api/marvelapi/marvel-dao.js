@@ -40,6 +40,25 @@ characterSchema.statics.getCharacterDetail = (id) => {
   });
 };
 
+characterSchema.statics.getCharactersByName = (input) => {
+
+  return new Promise((resolve, reject) => {
+    if (!_.isString(input)) {
+      return reject(new TypeError('Id is not a valid number.'));
+    }
+    let fields = 'character.id character.thumbnail character.name character.wiki.categories character.wiki.groups character.wiki.bio';
+    Marvel
+      .find( { "character.name": { "$regex": input, "$options": "i" } },fields)
+      .exec((err, characters) => {
+        if(err){
+          reject(err)
+        }else{
+          resolve(characters);
+        }
+      });
+  });
+};
+
 
 
 
