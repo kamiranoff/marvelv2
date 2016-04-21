@@ -16,16 +16,8 @@ var CharactersGrid = (function () {
     function CharactersGrid(_characterService) {
         this._characterService = _characterService;
         this.characters = [];
-        this.getCharacters();
     }
-    CharactersGrid.prototype.getCharacters = function () {
-        var _this = this;
-        this._characterService.getCharacters()
-            .subscribe(function (characters) {
-            _this.characters = characters;
-        }, function (error) { return _this.errorMessage = error; });
-    };
-    CharactersGrid.prototype.changeBgOnHover = function (idx, elm) {
+    CharactersGrid.prototype.changeTitleColorOnHover = function (idx, elm) {
         var img = elm.currentTarget.getElementsByTagName("img")[0];
         var imageColor = get_average_rgb_helper_1.GetAverageRgb.getAverageRGB(img);
         var rgbImageColor = "rgb(" + imageColor.r + "," + imageColor.g + "," + imageColor.b + ")";
@@ -34,6 +26,7 @@ var CharactersGrid = (function () {
     CharactersGrid = __decorate([
         core_1.Component({
             selector: 'characters-grid',
+            inputs: ['characters'],
             providers: [characters_service_1.CharactersService],
             directives: [router_1.ROUTER_DIRECTIVES],
             templateUrl: "marvel-app/modules/characters-grid/characters-grid.component.html"

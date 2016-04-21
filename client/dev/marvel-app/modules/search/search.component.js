@@ -13,6 +13,7 @@ var common_1 = require("angular2/common");
 var SearchComponent = (function () {
     function SearchComponent(fb) {
         var _this = this;
+        this.isActive = false;
         this.searchTerm = new core_1.EventEmitter();
         this.searchForm = fb.group({
             search: []
@@ -20,8 +21,6 @@ var SearchComponent = (function () {
         var search = this.searchForm.find('search');
         search.valueChanges.debounceTime(400)
             .map(function (str) { return str.replace(' ', '-'); }).subscribe(function (x) {
-            console.log(x);
-            console.log(_this.searchTerm);
             _this.searchTerm.emit(x);
         });
     }
@@ -32,7 +31,8 @@ var SearchComponent = (function () {
     SearchComponent = __decorate([
         core_1.Component({
             selector: 'search-component',
-            template: "\n   <form [ngFormModel]=\"searchForm\">\n    <input ngControl=\"search\" id=\"search\" class=\"search-box\" type=\"text\" placeholder=\"Search...\">\n    <span class=\"flaticon flaticon-iron-man loader-icon\"></span>\n    </form>\n  "
+            inputs: ['isActive'],
+            template: "\n   <form [ngFormModel]=\"searchForm\">\n    <input ngControl=\"search\" id=\"search\" class=\"search-box\" type=\"text\" placeholder=\"Search...\">\n    <span class=\"flaticon flaticon-iron-man loader-icon\" [class.active]=\"isActive\"></span>\n    </form>\n  "
         }), 
         __metadata('design:paramtypes', [common_1.FormBuilder])
     ], SearchComponent);

@@ -1,0 +1,8 @@
+<ul class="filter-view-container">
+  <li *ngFor="#category of categories;#idx = index">
+    <button  class="filter-button" type="button">
+      <span class="flaticon flaticon-{{category.name | lowercase}}"></span>
+      {{category.name}}
+    </button>
+  </li>
+</ul>

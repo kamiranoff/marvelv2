@@ -7,6 +7,7 @@ import {GetAverageRgb} from "../../helpers/get-average-rgb.helper";
 
 @Component({
   selector:'characters-grid',
+  inputs:['characters'],
   providers:[CharactersService],
   directives:[ROUTER_DIRECTIVES],
   templateUrl:"marvel-app/modules/characters-grid/characters-grid.component.html"
@@ -14,25 +15,14 @@ import {GetAverageRgb} from "../../helpers/get-average-rgb.helper";
 
 export class CharactersGrid{
   private characters = [];
-  private errorMessage: string;
+
 
   constructor(private _characterService:CharactersService) {
-    this.getCharacters();
 
   }
 
-  getCharacters(){
-    this._characterService.getCharacters()
-      .subscribe(
-        characters => {
-          this.characters = characters;
-        },
-        error =>  this.errorMessage = <any>error
-      );
 
-  }
-
-  changeBgOnHover(idx,elm){
+  changeTitleColorOnHover(idx,elm){
     var img = elm.currentTarget.getElementsByTagName("img")[0];
     var imageColor = GetAverageRgb.getAverageRGB(img);
     var rgbImageColor = "rgb("+imageColor.r+","+imageColor.g+","+imageColor.b+")";

@@ -12,7 +12,6 @@ characterSchema.statics.getAll = () => {
 
     Marvel
       .find(_query,fields)
-      .limit(300)
       .exec((err, characters) => {
         if(err){ reject(err)}else{
           resolve(characters);

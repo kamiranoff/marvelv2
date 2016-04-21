@@ -1075,7 +1075,7 @@ hr {
   width: 80px;
 }
 
-.search-view-container {
+.search-view-container form {
   position: relative;
 }
 
@@ -1098,7 +1098,9 @@ hr {
   right: 2%;
   color: #4E8BB3;
 }
-
+.search-view-container .loader-icon.active{
+  display: block;
+}
 .search-view-container .loader-icon.loading {
   display: block;
 }

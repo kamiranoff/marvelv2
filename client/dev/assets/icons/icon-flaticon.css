@@ -1,0 +1,44 @@
+@font-face {
+  font-family: "flaticon";
+  src: url('flaticon.eot');
+  src: url('flaticon.eot?#iefix') format('eot'),
+    url('flaticon.woff') format('woff'),
+    url('flaticon.ttf') format('truetype'),
+    url('flaticon.svg#flaticon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.flaticon:before {
+  display: inline-block;
+  font-family: "flaticon";
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  vertical-align: text-bottom;
+}
+
+
+.flaticon-lg {
+  font-size: 1.3333333333333333em;
+  line-height: 0.75em;
+  vertical-align: -15%;
+}
+.flaticon-2x { font-size: 2em; }
+.flaticon-3x { font-size: 3em; }
+.flaticon-4x { font-size: 4em; }
+.flaticon-5x { font-size: 5em; }
+.flaticon-fw {
+  width: 1.2857142857142858em;
+  text-align: center;
+}
+
+.flaticon-avengers:before { content: "\EA01" }
+.flaticon-plus:before { content: "\EA02" }
+.flaticon-heroes:before { content: "\EA03" }
+.flaticon-iron-man:before { content: "\EA04" }
+.flaticon-men:before { content: "\EA05" }
+.flaticon-villains:before { content: "\EA06" }
+.flaticon-women:before { content: "\EA07" }
