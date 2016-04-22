@@ -8,7 +8,6 @@ import {GetAverageRgb} from "../../helpers/get-average-rgb.helper";
 @Component({
   selector:'characters-grid',
   inputs:['characters'],
-  providers:[CharactersService],
   directives:[ROUTER_DIRECTIVES],
   templateUrl:"marvel-app/modules/characters-grid/characters-grid.component.html"
 })
@@ -17,7 +16,7 @@ export class CharactersGrid{
   private characters = [];
 
 
-  constructor(private _characterService:CharactersService) {
+  constructor() {
 
   }
 

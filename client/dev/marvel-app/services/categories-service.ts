@@ -4,27 +4,15 @@ import {Injectable} from 'angular2/core';
 import {Http,Response} from "angular2/http";
 
 @Injectable()
-export class CharactersService {
+export class CategoriesService {
 
   constructor(public http:Http) {
   }
-  private _heroesUrl = '/api/marvelapi/characters';
+  private _categoriesUrl = '/api/marvelapi/categories';
 
 
-  getCharacters(): Observable<any>{
-    return this.http.get(this._heroesUrl)
-      .map(this.extractData)
-      .catch(this.handleError);
-  }
-
-  searchCharactersByName(userInput):Observable<any>{
-    return this.http.get(this._heroesUrl + "?name=" + userInput )
-      .map(this.extractData)
-      .catch(this.handleError);
-  }
-
-  getCharcterByCategory(categoryName):Observable<any>{
-    return this.http.get(this._heroesUrl + "?categories=" + categoryName )
+  getCategories(): Observable<any>{
+    return this.http.get(this._categoriesUrl)
       .map(this.extractData)
       .catch(this.handleError);
   }

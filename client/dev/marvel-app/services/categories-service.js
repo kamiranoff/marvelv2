@@ -12,43 +12,33 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var Rx_1 = require("rxjs/Rx");
 var core_1 = require('angular2/core');
 var http_1 = require("angular2/http");
-var CharactersService = (function () {
-    function CharactersService(http) {
+var CategoriesService = (function () {
+    function CategoriesService(http) {
         this.http = http;
-        this._heroesUrl = '/api/marvelapi/characters';
+        this._categoriesUrl = '/api/marvelapi/categories';
     }
-    CharactersService.prototype.getCharacters = function () {
-        return this.http.get(this._heroesUrl)
+    CategoriesService.prototype.getCategories = function () {
+        return this.http.get(this._categoriesUrl)
             .map(this.extractData)
             .catch(this.handleError);
     };
-    CharactersService.prototype.searchCharactersByName = function (userInput) {
-        return this.http.get(this._heroesUrl + "?name=" + userInput)
-            .map(this.extractData)
-            .catch(this.handleError);
-    };
-    CharactersService.prototype.getCharcterByCategory = function (categoryName) {
-        return this.http.get(this._heroesUrl + "?categories=" + categoryName)
-            .map(this.extractData)
-            .catch(this.handleError);
-    };
-    CharactersService.prototype.extractData = function (res) {
+    CategoriesService.prototype.extractData = function (res) {
         if (res.status < 200 || res.status >= 300) {
             throw new Error('Bad response status: ' + res.status);
         }
         var body = res.json();
         return body || {};
     };
-    CharactersService.prototype.handleError = function (error) {
+    CategoriesService.prototype.handleError = function (error) {
         // In a real world app, we might send the error to remote logging infrastructure
         var errMsg = error.message || 'Server error';
         console.error(errMsg); // log to console instead
         return Rx_1.Observable.throw(errMsg);
     };
-    CharactersService = __decorate([
+    CategoriesService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [http_1.Http])
-    ], CharactersService);
-    return CharactersService;
+    ], CategoriesService);
+    return CategoriesService;
 }());
-exports.CharactersService = CharactersService;
+exports.CategoriesService = CategoriesService;

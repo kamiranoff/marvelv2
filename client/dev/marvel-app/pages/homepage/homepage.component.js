@@ -14,11 +14,15 @@ var characters_grid_component_1 = require("../../modules/characters-grid/charact
 var search_component_1 = require("../../modules/search/search.component");
 var characters_service_1 = require("../../services/characters.service");
 var filter_component_1 = require("../../modules/filter/filter.component");
+var categories_service_1 = require("../../services/categories-service");
 var Homepage = (function () {
-    function Homepage(_characterService) {
+    function Homepage(_characterService, _categoriesService) {
         this._characterService = _characterService;
+        this._categoriesService = _categoriesService;
         this.characters = [];
+        this.categories = [];
         this.getCharacters();
+        this.getCategories();
     }
     Homepage.prototype.getCharacters = function () {
         var _this = this;
@@ -26,6 +30,23 @@ var Homepage = (function () {
             .subscribe(function (characters) {
             _this.characters = characters;
             _this.allCharactersLoaded = characters;
+        }, function (error) { return _this.errorMessage = error; });
+    };
+    Homepage.prototype.getCategories = function () {
+        var _this = this;
+        this._categoriesService.getCategories()
+            .subscribe(function (categories) {
+            _this.categories = categories;
+        }, function (error) { return _this.errorMessage = error; });
+    };
+    Homepage.prototype.onCategoryClicked = function (categories) {
+        var _this = this;
+        console.log(categories);
+        this.isActive = true;
+        this._characterService.getCharcterByCategory(categories)
+            .subscribe(function (characters) {
+            _this.characters = characters;
+            _this.isActive = false;
         }, function (error) { return _this.errorMessage = error; });
     };
     Homepage.prototype.onSearchChanged = function (searchInput) {
@@ -49,11 +70,11 @@ var Homepage = (function () {
     Homepage = __decorate([
         core_1.Component({
             selector: 'homepage',
-            providers: [characters_service_1.CharactersService],
+            providers: [characters_service_1.CharactersService, categories_service_1.CategoriesService],
             directives: [characters_grid_component_1.CharactersGrid, search_component_1.SearchComponent, filter_component_1.FilterComponent],
-            template: "\n\n    <search-component [isActive]=\"isActive\" class=\"search-view-container\"\n    (searchTerm)=\"onSearchChanged($event)\"></search-component>\n    <filter></filter>\n    <characters-grid [characters]=\"characters\"></characters-grid>\n  "
+            template: "\n\n    <search-component [isActive]=\"isActive\" class=\"search-view-container\"\n    (searchTerm)=\"onSearchChanged($event)\"></search-component>\n    <filter [categories]=\"categories\" (onFilterChanged)=\"onCategoryClicked($event)\"></filter>\n    <characters-grid [characters]=\"characters\"></characters-grid>\n  "
         }), 
-        __metadata('design:paramtypes', [characters_service_1.CharactersService])
+        __metadata('design:paramtypes', [characters_service_1.CharactersService, categories_service_1.CategoriesService])
     ], Homepage);
     return Homepage;
 }());

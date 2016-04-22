@@ -10,7 +10,7 @@ export class CharacterDetailService {
   }
 
 
-  getCharacterById(id): Observable{
+  getCharacterById(id): Observable<any>{
     return this.http.get(this._heroDetailUrl + id)
       .map(this.extractData)
       .catch(this.handleError);
