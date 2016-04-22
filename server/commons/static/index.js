@@ -11,4 +11,12 @@ module.exports = class StaticDispatcher {
       fs.createReadStream(_root + '/client/dev/index.html')
         .pipe(res);
     }
-}
+
+    static uniq(a) {
+      return Array.from(new Set(a));
+    }
+
+    static capitalizeFirstLetter(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+    }
+};
