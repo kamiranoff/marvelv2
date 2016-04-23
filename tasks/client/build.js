@@ -2,7 +2,8 @@ import gulp from 'gulp';
 import {tasks} from './const';
 
 gulp.task(tasks.CLIENT_BUILD_DEV, [
-  tasks.CLIENT_BUILD_TS_DEV
+  tasks.CLIENT_BUILD_TS_DEV,
+  tasks.CLIENT_BUILD_SCSS_DEV
 ]);
 
 gulp.task(tasks.CLIENT_BUILD_DIST, [
