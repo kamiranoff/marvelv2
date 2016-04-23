@@ -15,6 +15,7 @@ var search_component_1 = require("../../modules/search/search.component");
 var characters_service_1 = require("../../services/characters.service");
 var filter_component_1 = require("../../modules/filter/filter.component");
 var categories_service_1 = require("../../services/categories-service");
+var go_back_up_component_1 = require("../../modules/go-back-up/go-back-up.component");
 var Homepage = (function () {
     function Homepage(_characterService, _categoriesService) {
         this._characterService = _characterService;
@@ -71,8 +72,8 @@ var Homepage = (function () {
         core_1.Component({
             selector: 'homepage',
             providers: [characters_service_1.CharactersService, categories_service_1.CategoriesService],
-            directives: [characters_grid_component_1.CharactersGrid, search_component_1.SearchComponent, filter_component_1.FilterComponent],
-            template: "\n\n    <search-component [isActive]=\"isActive\" class=\"search-view-container\"\n    (searchTerm)=\"onSearchChanged($event)\"></search-component>\n    <filter [categories]=\"categories\" (onFilterChanged)=\"onCategoryClicked($event)\"></filter>\n    <characters-grid [characters]=\"characters\"></characters-grid>\n  "
+            directives: [characters_grid_component_1.CharactersGrid, search_component_1.SearchComponent, filter_component_1.FilterComponent, go_back_up_component_1.GoBackUpComponent],
+            template: "\n\n    <search-component [isActive]=\"isActive\" class=\"search-view-container\"\n    (searchTerm)=\"onSearchChanged($event)\"></search-component>\n    <filter [categories]=\"categories\" (onFilterChanged)=\"onCategoryClicked($event)\"></filter>\n    <characters-grid [characters]=\"characters\"></characters-grid>\n    <go-back-up></go-back-up>\n  "
         }), 
         __metadata('design:paramtypes', [characters_service_1.CharactersService, categories_service_1.CategoriesService])
     ], Homepage);

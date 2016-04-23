@@ -14,7 +14,7 @@ characterSchema.statics.getAll = () => {
 
     Characters
       .find(_query,fields)
-      .limit(100)
+      //.limit(100)
       .exec((err, characters) => {
         if(err){ reject(err)}else{
           resolve(characters);

@@ -15,10 +15,15 @@ import {ReplacePipe} from "../../pipes/replace.pipe";
 export class FilterComponent{
   private categories = [];
   private filter:Array<any> = [];
+  private isVisible = false;
 
   constructor(private _categoriesService:CategoriesService){};
 
   @Output() private onFilterChanged:EventEmitter<any> = new EventEmitter();
+
+  toggleFilter(){
+    this.isVisible = !this.isVisible;
+  };
 
   onFilterClicked(category){
     var categoryName = category.name;

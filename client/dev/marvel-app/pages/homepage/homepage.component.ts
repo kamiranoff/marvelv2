@@ -6,17 +6,19 @@ import {SearchComponent} from "../../modules/search/search.component";
 import {CharactersService} from "../../services/characters.service";
 import {FilterComponent} from "../../modules/filter/filter.component";
 import {CategoriesService} from "../../services/categories-service";
+import {GoBackUpComponent} from "../../modules/go-back-up/go-back-up.component";
 
 @Component({
   selector: 'homepage',
   providers: [CharactersService,CategoriesService],
-  directives: [CharactersGrid, SearchComponent, FilterComponent],
+  directives: [CharactersGrid, SearchComponent, FilterComponent,GoBackUpComponent],
   template: `
 
     <search-component [isActive]="isActive" class="search-view-container"
     (searchTerm)="onSearchChanged($event)"></search-component>
     <filter [categories]="categories" (onFilterChanged)="onCategoryClicked($event)"></filter>
     <characters-grid [characters]="characters"></characters-grid>
+    <go-back-up></go-back-up>
   `
 })
 

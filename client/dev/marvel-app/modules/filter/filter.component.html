@@ -1,4 +1,8 @@
-<ul class="filter-view-container">
+<h3 (click)="toggleFilter()" class="filter-title"  [class.open]="isVisible">
+  Filter
+<span class="icon icon-wolverine-claws"></span>
+</h3>
+<ul class="filter-view-container" [class.visible]="isVisible">
   <li *ngFor="#category of categories;#idx = index" (click)="onFilterClicked(category)">
     <button  class="filter-button" type="button" [class.selected]="category.selected">
       <span class="icon icon-{{category.name | lowercase | replace:' ':'-'}}"></span>

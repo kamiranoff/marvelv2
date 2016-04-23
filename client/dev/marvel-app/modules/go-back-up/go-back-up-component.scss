@@ -1,0 +1,21 @@
+.go-back-up{
+  width:50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: $darkblue;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 10;
+  color: white;
+  cursor: pointer;
+  padding: 11px;
+  padding-left: 17px;
+  transition:0.3s all ease;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.5);
+  &:hover{
+    background-color: $mediumblue;
+    color:$text-alt;
+    padding-top: 0;
+  }
+}

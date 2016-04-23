@@ -16,8 +16,13 @@ var FilterComponent = (function () {
         this._categoriesService = _categoriesService;
         this.categories = [];
         this.filter = [];
+        this.isVisible = false;
         this.onFilterChanged = new core_1.EventEmitter();
     }
+    ;
+    FilterComponent.prototype.toggleFilter = function () {
+        this.isVisible = !this.isVisible;
+    };
     ;
     FilterComponent.prototype.onFilterClicked = function (category) {
         var categoryName = category.name;
