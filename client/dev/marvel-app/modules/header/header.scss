@@ -25,6 +25,7 @@ $background-secondary: rgb(0,0,0);
     width: 100%;
     letter-spacing: .5rem;
     background-color: rgba(0, 0, 0, 0.8);
+    height: 100%;
   }
   a {
     color: $text-alt;
@@ -58,7 +59,7 @@ $background-secondary: rgb(0,0,0);
     display: inline-block;
     width: 94px;
     text-indent: -9999px;
-    background-image: url('./images/marvel-logo.jpg');
+    background-image: url('assets/images/marvel-logo.jpg');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: 50%;

@@ -32,7 +32,7 @@ var SearchComponent = (function () {
         core_1.Component({
             selector: 'search-component',
             inputs: ['isActive'],
-            template: "\n   <form [ngFormModel]=\"searchForm\">\n    <input ngControl=\"search\" id=\"search\" class=\"search-box\" type=\"text\" placeholder=\"Search...\">\n    <span class=\"flaticon flaticon-iron-man loader-icon\" [class.active]=\"isActive\"></span>\n    </form>\n  "
+            template: "\n   <form [ngFormModel]=\"searchForm\">\n    <input ngControl=\"search\" id=\"search\" class=\"search-box\" type=\"text\" placeholder=\"Search...\">\n    <span class=\"icon icon-iron-man loader-icon\" [class.active]=\"isActive\"></span>\n    </form>\n  "
         }), 
         __metadata('design:paramtypes', [common_1.FormBuilder])
     ], SearchComponent);

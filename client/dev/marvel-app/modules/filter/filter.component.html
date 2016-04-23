@@ -1,7 +1,7 @@
 <ul class="filter-view-container">
   <li *ngFor="#category of categories;#idx = index" (click)="onFilterClicked(category)">
     <button  class="filter-button" type="button" [class.selected]="category.selected">
-      <span class="flaticon flaticon-{{category.name | lowercase}}"></span>
+      <span class="icon icon-{{category.name | lowercase | replace:' ':'-'}}"></span>
       {{category.name}}
     </button>
   </li>

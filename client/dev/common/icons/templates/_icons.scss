@@ -1,0 +1,34 @@
+@font-face {
+  font-family: "custom";
+  font-weight: normal;
+  font-style: normal;
+  src: url('../fonts/custom/custom.eot');
+  src: url('../fonts/custom/custom.woff') format('woff'),
+  url('../fonts/custom/custom.ttf') format('truetype'),
+  url('../fonts/custom/custom.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/custom/custom.svg#custom') format('svg');
+}
+
+.icon[class^="icon-"],
+.icon[class*=" icon-"] {
+  display: inline-block;
+  font-family: 'custom';
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+$icons: (
+        antenna: "\E001",
+        heart: "\E002"
+);
+
+@each $name, $icon in $icons {
+  .icon-#{$name}:before {
+    content: $icon;
+  }
+}

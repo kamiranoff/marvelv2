@@ -1,0 +1,35 @@
+.search-view-container {
+  font-size:16px;
+  form{
+    position: relative;
+  }
+  .search-box {
+    display: block;
+    width: 100%;
+    padding: 1.5rem;
+    background-color: $background-fifth;
+    border: none;
+    box-shadow: 0px 3px 3px rgba(0, 10, 20, 0.3) inset;
+    color: $lightgrey;
+    outline: none;
+
+  }
+  .loader-icon{
+    display:none;
+    position:absolute;
+    top:1em;
+    right: 2%;
+    color:$mediumblue;
+    &.active{
+      display:block;
+    }
+    &:after{
+      padding-left: 1em;
+      content:'loading...'
+    }
+  }
+}
+
+
+
+

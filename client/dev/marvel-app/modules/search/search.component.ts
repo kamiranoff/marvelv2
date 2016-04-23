@@ -7,7 +7,7 @@ import {ControlGroup,FormBuilder} from "angular2/common";
   template:`
    <form [ngFormModel]="searchForm">
     <input ngControl="search" id="search" class="search-box" type="text" placeholder="Search...">
-    <span class="flaticon flaticon-iron-man loader-icon" [class.active]="isActive"></span>
+    <span class="icon icon-iron-man loader-icon" [class.active]="isActive"></span>
     </form>
   `
 })

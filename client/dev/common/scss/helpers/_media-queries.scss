@@ -1,0 +1,17 @@
+/* ~~~~~~~~~~~~~~~~~ */
+/* RESPONSIVE MIXINS */
+/* ~~~~~~~~~~~~~~~~~ */
+
+@mixin small-only  { @media (min-width: ($tiny-plus-screen + 1)) and (max-width: $small-screen) { @content; }}
+@mixin medium-only { @media (min-width: ($small-screen + 1)) { @content; }}
+@mixin large-only  { @media (min-width: ($medium-screen + 1)) { @content; }}
+@mixin very-large-only  { @media (min-width: ($large-screen + 1)) { @content; }}
+
+@mixin tiny        { @media (max-width: $tiny-screen) { @content; }}
+@mixin tiny-plus   { @media (max-width: $tiny-plus-screen) { @content; }}
+@mixin small       { @media (max-width: $small-screen) { @content; }}
+@mixin small-plus  { @media (max-width: $small-plus-screen) { @content; }}
+@mixin medium      { @media (max-width: $medium-screen) { @content; }}
+@mixin medium-plus { @media (max-width: $medium-plus-screen) { @content; }}
+@mixin large       { @media (max-width: $large-screen) { @content; }}
+@mixin large-plus  { @media (max-width: $large-plus-screen) { @content; }}

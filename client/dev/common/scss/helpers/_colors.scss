@@ -1,0 +1,19 @@
+$marvel:#F11F22;
+$darkblue:#3B7092;
+$blue:#006ea0;
+$mediumblue:#4E8BB3;
+$lightgrey:#BAC9D4;
+$text:#333;
+$link:#EB8315;
+
+$text-alt:#F4F5F6;
+@mixin bg-text-alt($opacity){
+  background-color:rgb(244,245,246);
+  background-color : rgba(244,245,246,$opacity);
+}
+
+$background-primary:rgb(244,245,246);
+$background-secondary: rgb(0,0,0);
+$background-tertiary: rgb(112,197,229);
+$background-fourth: rgba(0,0,0,.9);
+$background-fifth: rgba(0, 5, 10,0.9);

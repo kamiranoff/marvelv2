@@ -1,0 +1,82 @@
+@font-face {
+  font-family: "icons";
+  src: url('icons.eot');
+  src: url('icons.eot?#iefix') format('eot'),
+    url('icons.woff') format('woff'),
+    url('icons.ttf') format('truetype'),
+    url('icons.svg#icons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.icon:before {
+  display: inline-block;
+  font-family: "icons";
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  vertical-align: text-bottom;
+}
+
+
+.icon-lg {
+  font-size: 1.3333333333333333em;
+  line-height: 0.75em;
+  vertical-align: -15%;
+}
+.icon-2x { font-size: 2em; }
+.icon-3x { font-size: 3em; }
+.icon-4x { font-size: 4em; }
+.icon-5x { font-size: 5em; }
+.icon-fw {
+  width: 1.2857142857142858em;
+  text-align: center;
+}
+
+.icon-avengers:before { content: "\EA01" }
+.icon-plus:before { content: "\EA02" }
+.icon-age-of-apocalypse:before { content: "\EA03" }
+.icon-annihilation:before { content: "\EA04" }
+.icon-canadians:before { content: "\EA05" }
+.icon-civil-war:before { content: "\EA06" }
+.icon-cosmic:before { content: "\EA07" }
+.icon-dark-reign:before { content: "\EA08" }
+.icon-deceased:before { content: "\EA09" }
+.icon-exiles:before { content: "\EA0A" }
+.icon-fantastic-four:before { content: "\EA0B" }
+.icon-gods:before { content: "\EA0C" }
+.icon-golden-age:before { content: "\EA0D" }
+.icon-heroes:before { content: "\EA0E" }
+.icon-horror:before { content: "\EA0F" }
+.icon-house-of-m:before { content: "\EA10" }
+.icon-hulk:before { content: "\EA11" }
+.icon-initiative:before { content: "\EA12" }
+.icon-international:before { content: "\EA13" }
+.icon-iron-man:before { content: "\EA14" }
+.icon-magic:before { content: "\EA15" }
+.icon-marvel-1602:before { content: "\EA16" }
+.icon-marvel-2099:before { content: "\EA17" }
+.icon-marvel-knights:before { content: "\EA18" }
+.icon-marvel-zombies:before { content: "\EA19" }
+.icon-marvel:before { content: "\EA1A" }
+.icon-mc2:before { content: "\EA1B" }
+.icon-men:before { content: "\EA1C" }
+.icon-mutants:before { content: "\EA1D" }
+.icon-people-who-uses-to-be-dead-but-arent-anymore:before { content: "\EA1E" }
+.icon-people:before { content: "\EA1F" }
+.icon-realities:before { content: "\EA20" }
+.icon-reformed-villains:before { content: "\EA21" }
+.icon-species:before { content: "\EA22" }
+.icon-spider-man-villains:before { content: "\EA23" }
+.icon-spider-man:before { content: "\EA24" }
+.icon-squadron-supreme:before { content: "\EA25" }
+.icon-stubs:before { content: "\EA26" }
+.icon-teams:before { content: "\EA27" }
+.icon-thor:before { content: "\EA28" }
+.icon-thunderbolts:before { content: "\EA29" }
+.icon-ultimate-marvel:before { content: "\EA2A" }
+.icon-villains:before { content: "\EA2B" }
+.icon-women:before { content: "\EA2C" }
+.icon-x-men:before { content: "\EA2D" }

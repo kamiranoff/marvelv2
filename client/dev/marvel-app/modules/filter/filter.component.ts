@@ -1,9 +1,12 @@
 import {Component,Input,Output,EventEmitter} from "angular2/core";
 import {CategoriesService} from "../../services/categories-service";
+import {ReplacePipe} from "../../pipes/replace.pipe";
+
 
 @Component({
   selector:'filter',
   inputs:['categories'],
+  pipes:[ReplacePipe],
   providers:[CategoriesService],
   templateUrl:"marvel-app/modules/filter/filter.component.html"
 

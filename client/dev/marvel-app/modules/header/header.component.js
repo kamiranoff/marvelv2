@@ -17,7 +17,6 @@ var HeaderComponent = (function () {
     HeaderComponent = __decorate([
         core_1.Component({
             selector: 'header-component',
-            styleUrls: ['header.css'],
             templateUrl: "marvel-app/modules/header/header.component.html"
         }), 
         __metadata('design:paramtypes', [])

@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("angular2/core");
 var categories_service_1 = require("../../services/categories-service");
+var replace_pipe_1 = require("../../pipes/replace.pipe");
 var FilterComponent = (function () {
     function FilterComponent(_categoriesService) {
         this._categoriesService = _categoriesService;
@@ -39,6 +40,7 @@ var FilterComponent = (function () {
         core_1.Component({
             selector: 'filter',
             inputs: ['categories'],
+            pipes: [replace_pipe_1.ReplacePipe],
             providers: [categories_service_1.CategoriesService],
             templateUrl: "marvel-app/modules/filter/filter.component.html"
         }), 

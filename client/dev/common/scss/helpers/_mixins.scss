@@ -1,0 +1,10 @@
+%clearfix {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+%card-style {
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+}

@@ -2,7 +2,6 @@ import {Component} from 'angular2/core'
 
 @Component({
   selector:'header-component',
-  styleUrls:['header.css'],
   templateUrl:"marvel-app/modules/header/header.component.html"
 })
 
