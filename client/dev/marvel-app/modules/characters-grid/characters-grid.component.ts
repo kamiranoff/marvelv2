@@ -5,6 +5,9 @@ import {CharactersService} from "../../services/characters.service";
 import {GetAverageRgb} from "../../helpers/get-average-rgb.helper";
 
 
+
+
+
 @Component({
   selector:'characters-grid',
   inputs:['characters'],
@@ -15,11 +18,12 @@ import {GetAverageRgb} from "../../helpers/get-average-rgb.helper";
 export class CharactersGrid{
   private characters = [];
 
+  constructor() {}
 
-  constructor() {
 
-  }
-
+    onScroll () {
+      console.log('scrolled!!')
+    }
 
   changeTitleColorOnHover(idx,elm){
     var img = elm.currentTarget.getElementsByTagName("img")[0];

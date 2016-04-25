@@ -15,6 +15,9 @@ var CharactersGrid = (function () {
     function CharactersGrid() {
         this.characters = [];
     }
+    CharactersGrid.prototype.onScroll = function () {
+        console.log('scrolled!!');
+    };
     CharactersGrid.prototype.changeTitleColorOnHover = function (idx, elm) {
         var img = elm.currentTarget.getElementsByTagName("img")[0];
         var imageColor = get_average_rgb_helper_1.GetAverageRgb.getAverageRGB(img);

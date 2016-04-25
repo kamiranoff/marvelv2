@@ -14,7 +14,26 @@ characterSchema.statics.getAll = () => {
 
     Characters
       .find(_query,fields)
-      //.limit(100)
+      .sort({ "_id": 1 })
+      .limit(100)
+      .exec((err, characters) => {
+        if(err){ reject(err)}else{
+          resolve(characters);
+        }
+      });
+  });
+};
+
+characterSchema.statics.getMoreCharacters = (lastid,qty) => {
+  console.log('getting more');
+  return new Promise((resolve, reject) => {
+    let _query = { "_id": { "$gt": lastid }};
+    let fields = 'character.id character.thumbnail character.name character.wiki.categories character.wiki.groups character.wiki.bio';
+
+    Characters
+      .find(_query,fields)
+      .sort({ "_id": 1 })
+      .limit(qty)
       .exec((err, characters) => {
         if(err){ reject(err)}else{
           resolve(characters);
