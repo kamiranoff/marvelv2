@@ -17,17 +17,19 @@ import {GoBackUpComponent} from "../../modules/go-back-up/go-back-up.component";
     <search-component [isActive]="isActive" class="search-view-container"
     (searchTerm)="onSearchChanged($event)"></search-component>
     <filter [categories]="categories" (onFilterChanged)="onCategoryClicked($event)"></filter>
-    <characters-grid [characters]="characters"></characters-grid>
+    <characters-grid [counter]="counter" [characters]="characters" (onBottomOfPage)="onBottomOfPage($event)"></characters-grid>
     <go-back-up></go-back-up>
   `
 })
 
 export class Homepage {
   private characters:Array<any> = [];
+  private counter:Number = 0;
   private categories:Array<String> = [];
   private allCharactersLoaded;
   private errorMessage:string;
   private isActive:Boolean;
+  private lastId;
 
   constructor(private _characterService:CharactersService,private _categoriesService:CategoriesService) {
     this.getCharacters();
@@ -40,10 +42,26 @@ export class Homepage {
         characters => {
           this.characters = characters;
           this.allCharactersLoaded = characters;
+          this.lastId = characters[characters.length -1]._id;
+          console.log(this.lastId);
         },
         error => this.errorMessage = <any>error
       );
 
+  }
+
+  getMoreCharacters(lastId,qty){
+    this._characterService.getMoreCharacters(lastId,qty)
+      .subscribe(
+        characters => {
+          this.characters = this.characters.concat(characters);
+          this.allCharactersLoaded = this.characters;
+          console.log(this.characters);
+          this.lastId = characters[characters.length -1]._id;
+          this.counter = 0;
+        },
+        error => this.errorMessage = <any>error
+      );
   }
 
   getCategories(){
@@ -87,6 +105,13 @@ export class Homepage {
       this.characters = data;
       this.isActive = false;
     });
+
+  }
+
+  onBottomOfPage($event){
+    console.log($event);
+    this.counter++;
+    this.getMoreCharacters(this.lastId,100);
 
   }
 }

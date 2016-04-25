@@ -1,28 +1,33 @@
-import {Component,ElementRef} from "angular2/core";
+import {Component,ElementRef,EventEmitter,Output,Input} from "angular2/core";
 import {ROUTER_DIRECTIVES} from 'angular2/router';
-
 import {CharactersService} from "../../services/characters.service";
 import {GetAverageRgb} from "../../helpers/get-average-rgb.helper";
-
-
+import {} from "angular2/core";
 
 
 
 @Component({
   selector:'characters-grid',
-  inputs:['characters'],
+  inputs:['characters','counter'],
   directives:[ROUTER_DIRECTIVES],
   templateUrl:"marvel-app/modules/characters-grid/characters-grid.component.html"
 })
 
 export class CharactersGrid{
   private characters = [];
-
+  @Input() private counter:Number = 0;
+ @Output() onBottomOfPage:EventEmitter<any> = new EventEmitter();
   constructor() {}
-
-
     onScroll () {
-      console.log('scrolled!!')
+      if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
+        console.log(this.counter);
+        if(this.counter === 0){
+          this.onBottomOfPage.emit("on the bottom");
+
+        }
+
+      }
+
     }
 
   changeTitleColorOnHover(idx,elm){

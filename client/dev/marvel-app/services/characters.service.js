@@ -22,6 +22,12 @@ var CharactersService = (function () {
             .map(this.extractData)
             .catch(this.handleError);
     };
+    CharactersService.prototype.getMoreCharacters = function (lastId, qty) {
+        console.log("here");
+        return this.http.get(this._heroesUrl + "?lastid=" + lastId + "&qty=" + qty)
+            .map(this.extractData)
+            .catch(this.handleError);
+    };
     CharactersService.prototype.searchCharactersByName = function (userInput) {
         return this.http.get(this._heroesUrl + "?name=" + userInput)
             .map(this.extractData)

@@ -21,6 +21,7 @@ var Homepage = (function () {
         this._characterService = _characterService;
         this._categoriesService = _categoriesService;
         this.characters = [];
+        this.counter = 0;
         this.categories = [];
         this.getCharacters();
         this.getCategories();
@@ -31,6 +32,19 @@ var Homepage = (function () {
             .subscribe(function (characters) {
             _this.characters = characters;
             _this.allCharactersLoaded = characters;
+            _this.lastId = characters[characters.length - 1]._id;
+            console.log(_this.lastId);
+        }, function (error) { return _this.errorMessage = error; });
+    };
+    Homepage.prototype.getMoreCharacters = function (lastId, qty) {
+        var _this = this;
+        this._characterService.getMoreCharacters(lastId, qty)
+            .subscribe(function (characters) {
+            _this.characters = _this.characters.concat(characters);
+            _this.allCharactersLoaded = _this.characters;
+            console.log(_this.characters);
+            _this.lastId = characters[characters.length - 1]._id;
+            _this.counter = 0;
         }, function (error) { return _this.errorMessage = error; });
     };
     Homepage.prototype.getCategories = function () {
@@ -68,12 +82,17 @@ var Homepage = (function () {
             _this.isActive = false;
         });
     };
+    Homepage.prototype.onBottomOfPage = function ($event) {
+        console.log($event);
+        this.counter++;
+        this.getMoreCharacters(this.lastId, 100);
+    };
     Homepage = __decorate([
         core_1.Component({
             selector: 'homepage',
             providers: [characters_service_1.CharactersService, categories_service_1.CategoriesService],
             directives: [characters_grid_component_1.CharactersGrid, search_component_1.SearchComponent, filter_component_1.FilterComponent, go_back_up_component_1.GoBackUpComponent],
-            template: "\n\n    <search-component [isActive]=\"isActive\" class=\"search-view-container\"\n    (searchTerm)=\"onSearchChanged($event)\"></search-component>\n    <filter [categories]=\"categories\" (onFilterChanged)=\"onCategoryClicked($event)\"></filter>\n    <characters-grid [characters]=\"characters\"></characters-grid>\n    <go-back-up></go-back-up>\n  "
+            template: "\n\n    <search-component [isActive]=\"isActive\" class=\"search-view-container\"\n    (searchTerm)=\"onSearchChanged($event)\"></search-component>\n    <filter [categories]=\"categories\" (onFilterChanged)=\"onCategoryClicked($event)\"></filter>\n    <characters-grid [counter]=\"counter\" [characters]=\"characters\" (onBottomOfPage)=\"onBottomOfPage($event)\"></characters-grid>\n    <go-back-up></go-back-up>\n  "
         }), 
         __metadata('design:paramtypes', [characters_service_1.CharactersService, categories_service_1.CategoriesService])
     ], Homepage);

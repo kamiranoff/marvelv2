@@ -17,6 +17,13 @@ export class CharactersService {
       .catch(this.handleError);
   }
 
+  getMoreCharacters(lastId,qty): Observable<any>{
+    console.log("here");
+    return this.http.get(this._heroesUrl + "?lastid=" + lastId + "&qty=" + qty)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
   searchCharactersByName(userInput):Observable<any>{
     return this.http.get(this._heroesUrl + "?name=" + userInput )
       .map(this.extractData)

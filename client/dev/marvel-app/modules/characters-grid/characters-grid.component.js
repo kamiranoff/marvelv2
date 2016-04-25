@@ -14,9 +14,16 @@ var get_average_rgb_helper_1 = require("../../helpers/get-average-rgb.helper");
 var CharactersGrid = (function () {
     function CharactersGrid() {
         this.characters = [];
+        this.counter = 0;
+        this.onBottomOfPage = new core_1.EventEmitter();
     }
     CharactersGrid.prototype.onScroll = function () {
-        console.log('scrolled!!');
+        if ($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
+            console.log(this.counter);
+            if (this.counter === 0) {
+                this.onBottomOfPage.emit("on the bottom");
+            }
+        }
     };
     CharactersGrid.prototype.changeTitleColorOnHover = function (idx, elm) {
         var img = elm.currentTarget.getElementsByTagName("img")[0];
@@ -24,10 +31,18 @@ var CharactersGrid = (function () {
         var rgbImageColor = "rgb(" + imageColor.r + "," + imageColor.g + "," + imageColor.b + ")";
         this.characters[idx].dominantColor = rgbImageColor;
     };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Number)
+    ], CharactersGrid.prototype, "counter", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', core_1.EventEmitter)
+    ], CharactersGrid.prototype, "onBottomOfPage", void 0);
     CharactersGrid = __decorate([
         core_1.Component({
             selector: 'characters-grid',
-            inputs: ['characters'],
+            inputs: ['characters', 'counter'],
             directives: [router_1.ROUTER_DIRECTIVES],
             templateUrl: "marvel-app/modules/characters-grid/characters-grid.component.html"
         }), 
