@@ -13,6 +13,7 @@ var router_1 = require('angular2/router');
 var homepage_component_1 = require("./pages/homepage/homepage.component");
 var header_component_1 = require("./modules/header/header.component");
 var character_detail_component_1 = require("./modules/character-detail/character-detail.component");
+var comics_page_component_1 = require("./pages/comics-page/comics-page.component");
 var AppComponent = (function () {
     function AppComponent(router) {
         this.router = router;
@@ -24,6 +25,11 @@ var AppComponent = (function () {
                 name: 'Homepage',
                 component: homepage_component_1.Homepage,
                 useAsDefault: true
+            },
+            {
+                path: '/comics',
+                name: 'ComicsPage',
+                component: comics_page_component_1.ComicsPage
             },
             {
                 path: '/characters/:id',

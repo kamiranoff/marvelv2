@@ -2,9 +2,9 @@
 
 const mongoose = require('mongoose');
 const Promise = require('bluebird');
-const characterSchema = require('./marvel-model');
+const characterSchema = require('./character-model');
 const _ = require('lodash');
-const StaticDispatcher = require('../../commons/static/index');
+const StaticDispatcher = require('../../../commons/static/index');
 
 
 

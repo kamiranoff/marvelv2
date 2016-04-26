@@ -34,7 +34,7 @@ export class SearchComponent {
   ngOnInit() {
     this.searchTermControl.valueChanges
       .debounceTime(400)
-      .map(str=>(<string>str).replace(' ', '-')).subscribe(x => {
+      .map(str=>(<string>str).trim()).subscribe(x => {
       this.searchTerm = x;
       this._searchAndFilterService.resetFilter();
       this.searchEvent.emit(x);

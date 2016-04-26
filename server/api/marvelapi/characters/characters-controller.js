@@ -15,12 +15,10 @@ module.exports = class CharactersController {
         .catch(error => res.status(400).json(error));
 
     }else if(req.query.lastid && req.query.qty){
-      console.log(req.query.lastid,req.query.qty);
       CharactersDao.getMoreCharacters(req.query.lastid,req.query.qty)
         .then(characters => res.status(200).json(characters))
         .catch(error => res.status(400).json(error));
     }else{
-      console.log(req.query.qty);
       CharactersDao.getAll()
         .then(characters => res.status(200).json(characters))
         .catch(error => res.status(400).json(error));

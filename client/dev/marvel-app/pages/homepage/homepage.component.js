@@ -44,6 +44,9 @@ var Homepage = (function () {
     };
     Homepage.prototype.getMoreCharacters = function (lastId, qty) {
         var _this = this;
+        if (!this._characterService.getMoreCharacters(lastId, qty)) {
+            return;
+        }
         this._characterService.getMoreCharacters(lastId, qty)
             .subscribe(function (characters) {
             if (characters.length === 0) {
@@ -53,7 +56,6 @@ var Homepage = (function () {
             _this.allCharactersLoaded = _this.characters;
             _this.lastId = characters[characters.length - 1]._id;
             _this.loadMoreChar = true;
-            console.log(_this.loadMoreChar);
         }, function (error) { return _this.errorMessage = error; });
     };
     Homepage.prototype.getCategories = function () {

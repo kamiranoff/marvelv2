@@ -720,7 +720,7 @@ button, input {
 }
 
 .filter-view-container.visible {
-  max-height: 800px;
+  max-height: 2800px;
   transition: max-height 0.25s ease-in;
 }
 
@@ -729,7 +729,7 @@ button, input {
 }
 
 .filter-view-container li {
-  width: 100%;
+  width: 50%;
   max-width: 200px;
 }
 
@@ -944,6 +944,114 @@ button, input {
   background-color: #4E8BB3;
   color: #F4F5F6;
   padding-top: 0;
+}
+
+.comics-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: stretch;
+  flex-direction: row;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+
+.comics-list .single-comic-link {
+  position: relative;
+  flex: 0 0 50%;
+  text-align: center;
+  flex-grow: 1;
+  transition: 0.2s all ease-in-out;
+}
+
+.comics-list .single-comic-link.not-visible {
+  display: none;
+}
+
+.comics-list .single-comic-link.visible {
+  display: block;
+}
+
+@media (min-width: 641px) {
+  .comics-list .single-comic-link {
+    flex: 0 0 33.3%;
+  }
+}
+
+@media (min-width: 961px) {
+  .comics-list .single-comic-link {
+    flex: 0 0 20%;
+  }
+}
+
+@media (min-width: 1281px) {
+  .comics-list .single-comic-link {
+    flex: 0 0 10%;
+  }
+}
+
+.comics-list .single-comic-link .comic-link {
+  display: block;
+  overflow: hidden;
+}
+
+.comics-list .single-comic-link img {
+  transition: 0.5s all linear;
+  transition: 0.5s all linear;
+  filter: grayscale(100%);
+  width: 100%;
+  height: 300px;
+  vertical-align: bottom;
+}
+
+.comics-list .single-comic-link h3 {
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
+  transition-property: opacity, background, color;
+  font-size: 14px;
+  position: absolute;
+  z-index: 1;
+  bottom: 0;
+  width: 100%;
+  max-width: 100%;
+  background-color: #f4f5f6;
+  background-color: rgba(244, 245, 246, 0.8);
+  color: #222;
+  margin-bottom: 0;
+  padding: 10px 0;
+}
+
+.comics-list .single-comic-link:hover {
+  z-index: 5;
+  width: 100%;
+}
+
+.comics-list .single-comic-link:hover img {
+  transform: scale(1.1) rotate(1deg);
+  filter: grayscale(0);
+}
+
+.comics-list .single-comic-link:hover h3 {
+  opacity: 1;
+  z-index: 5;
+  background: black;
+  background-color: #f4f5f6;
+  background-color: #f4f5f6;
+  color: #F4F5F6;
+}
+
+.comics-list .single-comic-link:hover h3:hover {
+  color: #3B7092;
+}
+
+.no-hero-container {
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.no-hero-container img {
+  width: 100%;
+  max-width: 400px;
 }
 
 /*# sourceMappingURL=maps/styles.css.map */

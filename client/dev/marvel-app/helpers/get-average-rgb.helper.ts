@@ -23,7 +23,7 @@ export class GetAverageRgb{
     try {
       data = context.getImageData(0, 0, width, height);
     } catch(e) {
-      /* security error, img on diff domain */alert('x');
+      /* security error, img on diff domain */console.log('error');
       return defaultRGB;
     }
 

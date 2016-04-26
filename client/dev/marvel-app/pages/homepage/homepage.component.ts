@@ -58,6 +58,9 @@ export class Homepage {
   }
 
   getMoreCharacters(lastId,qty){
+    if(!this._characterService.getMoreCharacters(lastId,qty)){
+      return;
+    }
     this._characterService.getMoreCharacters(lastId,qty)
       .subscribe(
         characters => {
@@ -66,10 +69,8 @@ export class Homepage {
           }
           this.characters = this.characters.concat(characters);
           this.allCharactersLoaded = this.characters;
-
           this.lastId = characters[characters.length -1]._id;
           this.loadMoreChar = true;
-          console.log(this.loadMoreChar);
         },
         error => this.errorMessage = <any>error
       );

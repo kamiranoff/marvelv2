@@ -10,10 +10,7 @@ export class SearchAndFilterService{
   searchChange$ = this._searchTermSource.asObservable();
   filterChanged$ = this._filterSource.asObservable();
 
-
-
   resetSearch(){
-    console.log('reseting search');
     this._searchTermSource.next('');
 
   }

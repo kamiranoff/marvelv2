@@ -33,7 +33,7 @@
   overflow: hidden;
   transition: max-height 0.25s ease-in;
   &.visible{
-    max-height: 800px;
+    max-height: 2800px;
     transition: max-height 0.25s ease-in;
     li{
       display: block;
@@ -42,7 +42,7 @@
   }
 
   li {
-    width: 100%;
+    width: 50%;
     max-width: 200px;
     .filter-button {
       background-color: transparent;

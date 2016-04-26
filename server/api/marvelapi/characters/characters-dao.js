@@ -2,7 +2,7 @@
 
 const mongoose = require('mongoose');
 const Promise = require('bluebird');
-const characterSchema = require('./marvel-model');
+const characterSchema = require('./character-model');
 const _ = require('lodash');
 
 
@@ -25,7 +25,6 @@ characterSchema.statics.getAll = () => {
 };
 
 characterSchema.statics.getMoreCharacters = (lastid,qty) => {
-  console.log('getting more');
   return new Promise((resolve, reject) => {
     let _query = { "_id": { "$gt": lastid }};
     let fields = 'character.id character.thumbnail character.name character.wiki.categories character.wiki.groups character.wiki.bio';
@@ -68,7 +67,6 @@ characterSchema.statics.getCharactersByCategory = (input) => {
   inputArray.forEach(function(opt){
     inputArrayRegex.push(  new RegExp(opt, "i") );
   });
-  console.log("Marvel-dao - input",inputArrayRegex);
   return new Promise((resolve, reject) => {
     if (!_.isArray(inputArrayRegex)) {
       return reject(new TypeError(' is not a valid array.'));

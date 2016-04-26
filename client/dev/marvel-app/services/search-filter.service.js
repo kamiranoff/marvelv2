@@ -18,7 +18,6 @@ var SearchAndFilterService = (function () {
         this.filterChanged$ = this._filterSource.asObservable();
     }
     SearchAndFilterService.prototype.resetSearch = function () {
-        console.log('reseting search');
         this._searchTermSource.next('');
     };
     SearchAndFilterService.prototype.resetFilter = function () {

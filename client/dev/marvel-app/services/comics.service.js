@@ -12,50 +12,58 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var Rx_1 = require("rxjs/Rx");
 var core_1 = require('angular2/core');
 var http_1 = require("angular2/http");
-var CharactersService = (function () {
-    function CharactersService(http) {
+var ComicsService = (function () {
+    function ComicsService(http) {
         this.http = http;
-        this._heroesUrl = '/api/marvelapi/characters';
+        this._comicsUrl = '/api/marvelapi/comics';
     }
-    CharactersService.prototype.getCharacters = function () {
-        return this.http.get(this._heroesUrl)
+    ComicsService.prototype.getComics = function () {
+        return this.http.get(this._comicsUrl)
             .map(this.extractData)
             .catch(this.handleError);
     };
-    CharactersService.prototype.getMoreCharacters = function (lastId, qty) {
+    ComicsService.prototype.getMoreComics = function (lastId, qty) {
         if (lastId) {
-            return this.http.get(this._heroesUrl + "?lastid=" + lastId + "&qty=" + qty)
+            return this.http.get(this._comicsUrl + "?lastid=" + lastId + "&qty=" + qty)
                 .map(this.extractData)
                 .catch(this.handleError);
         }
     };
-    CharactersService.prototype.searchCharactersByName = function (userInput) {
-        return this.http.get(this._heroesUrl + "?name=" + userInput)
+    ComicsService.prototype.searchComicsByTitle = function (userInput) {
+        return this.http.get(this._comicsUrl + "?title=" + userInput)
             .map(this.extractData)
             .catch(this.handleError);
     };
-    CharactersService.prototype.getCharcterByCategory = function (categoryName) {
-        return this.http.get(this._heroesUrl + "?categories=" + categoryName)
-            .map(this.extractData)
-            .catch(this.handleError);
+    ComicsService.prototype.getMoreComicsFromSearch = function (searchTerm, lastId, qty) {
+        console.log(searchTerm);
+        if (lastId) {
+            return this.http.get(this._comicsUrl + "?title=" + searchTerm + "&lastid=" + lastId + "&qty=" + qty)
+                .map(this.extractData)
+                .catch(this.handleError);
+        }
     };
-    CharactersService.prototype.extractData = function (res) {
+    //getCharcterByCategory(categoryName):Observable<any>{
+    //  return this.http.get(this._comicsUrl + "?categories=" + categoryName )
+    //    .map(this.extractData)
+    //    .catch(this.handleError);
+    //}
+    ComicsService.prototype.extractData = function (res) {
         if (res.status < 200 || res.status >= 300) {
             throw new Error('Bad response status: ' + res.status);
         }
         var body = res.json();
         return body || {};
     };
-    CharactersService.prototype.handleError = function (error) {
+    ComicsService.prototype.handleError = function (error) {
         // In a real world app, we might send the error to remote logging infrastructure
         var errMsg = error.message || 'Server error';
         console.error(errMsg); // log to console instead
         return Rx_1.Observable.throw(errMsg);
     };
-    CharactersService = __decorate([
+    ComicsService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [http_1.Http])
-    ], CharactersService);
-    return CharactersService;
+    ], ComicsService);
+    return ComicsService;
 }());
-exports.CharactersService = CharactersService;
+exports.ComicsService = ComicsService;

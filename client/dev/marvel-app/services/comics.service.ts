@@ -4,38 +4,48 @@ import {Injectable} from 'angular2/core';
 import {Http,Response} from "angular2/http";
 
 @Injectable()
-export class CharactersService {
+export class ComicsService {
 
   constructor(public http:Http) {
   }
-  private _heroesUrl = '/api/marvelapi/characters';
+  private _comicsUrl = '/api/marvelapi/comics';
 
 
-  getCharacters(): Observable<any>{
-    return this.http.get(this._heroesUrl)
+  getComics(): Observable<any>{
+    return this.http.get(this._comicsUrl)
       .map(this.extractData)
       .catch(this.handleError);
   }
 
-  getMoreCharacters(lastId,qty): Observable<any>{
+  getMoreComics(lastId,qty): Observable<any>{
     if(lastId){
-      return this.http.get(this._heroesUrl + "?lastid=" + lastId + "&qty=" + qty)
+      return this.http.get(this._comicsUrl + "?lastid=" + lastId + "&qty=" + qty)
         .map(this.extractData)
         .catch(this.handleError);
     }
   }
 
-  searchCharactersByName(userInput):Observable<any>{
-    return this.http.get(this._heroesUrl + "?name=" + userInput )
+
+  searchComicsByTitle(userInput):Observable<any>{
+    return this.http.get(this._comicsUrl + "?title=" + userInput )
       .map(this.extractData)
       .catch(this.handleError);
   }
 
-  getCharcterByCategory(categoryName):Observable<any>{
-    return this.http.get(this._heroesUrl + "?categories=" + categoryName )
-      .map(this.extractData)
-      .catch(this.handleError);
+  getMoreComicsFromSearch(searchTerm,lastId,qty){
+    console.log(searchTerm);
+    if(lastId){
+      return this.http.get(this._comicsUrl + "?title=" + searchTerm + "&lastid=" + lastId + "&qty=" + qty)
+        .map(this.extractData)
+        .catch(this.handleError);
+    }
   }
+
+  //getCharcterByCategory(categoryName):Observable<any>{
+  //  return this.http.get(this._comicsUrl + "?categories=" + categoryName )
+  //    .map(this.extractData)
+  //    .catch(this.handleError);
+  //}
 
   private extractData(res: Response) {
     if (res.status < 200 || res.status >= 300) {

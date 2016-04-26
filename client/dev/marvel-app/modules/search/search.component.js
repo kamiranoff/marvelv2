@@ -26,7 +26,7 @@ var SearchComponent = (function () {
         var _this = this;
         this.searchTermControl.valueChanges
             .debounceTime(400)
-            .map(function (str) { return str.replace(' ', '-'); }).subscribe(function (x) {
+            .map(function (str) { return str.trim(); }).subscribe(function (x) {
             _this.searchTerm = x;
             _this._searchAndFilterService.resetFilter();
             _this.searchEvent.emit(x);
