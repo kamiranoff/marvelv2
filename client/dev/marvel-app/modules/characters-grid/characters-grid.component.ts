@@ -8,27 +8,26 @@ import {} from "angular2/core";
 
 @Component({
   selector:'characters-grid',
-  inputs:['characters','counter'],
+  inputs:['characters'],
   directives:[ROUTER_DIRECTIVES],
   templateUrl:"marvel-app/modules/characters-grid/characters-grid.component.html"
 })
 
 export class CharactersGrid{
   private characters = [];
-  @Input() private counter:Number = 0;
- @Output() onBottomOfPage:EventEmitter<any> = new EventEmitter();
-  constructor() {}
-    onScroll () {
-      if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
-        console.log(this.counter);
-        if(this.counter === 0){
-          this.onBottomOfPage.emit("on the bottom");
+  @Input() private loadMoreChar:boolean;
+  @Output() onBottomOfPage:EventEmitter<any> = new EventEmitter();
 
-        }
+  constructor() {
 
-      }
+  }
 
+  onScroll () {
+    if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
+      this.onBottomOfPage.emit("on the bottom");
     }
+
+  }
 
   changeTitleColorOnHover(idx,elm){
     var img = elm.currentTarget.getElementsByTagName("img")[0];

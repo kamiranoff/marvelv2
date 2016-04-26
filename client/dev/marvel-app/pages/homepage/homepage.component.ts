@@ -17,23 +17,28 @@ import {GoBackUpComponent} from "../../modules/go-back-up/go-back-up.component";
     <search-component [isActive]="isActive" class="search-view-container"
     (searchTerm)="onSearchChanged($event)"></search-component>
     <filter [categories]="categories" (onFilterChanged)="onCategoryClicked($event)"></filter>
-    <characters-grid [counter]="counter" [characters]="characters" (onBottomOfPage)="onBottomOfPage($event)"></characters-grid>
+    <characters-grid [loadMoreChar]="loadMoreChar" [characters]="characters" (onBottomOfPage)="onBottomOfPage($event)"></characters-grid>
     <go-back-up></go-back-up>
   `
 })
 
 export class Homepage {
   private characters:Array<any> = [];
-  private counter:Number = 0;
   private categories:Array<String> = [];
+  private selectedCategories:Array<String> = [];
   private allCharactersLoaded;
   private errorMessage:string;
-  private isActive:Boolean;
+  private isActive:boolean;
   private lastId;
+  private searchTerm = '';
+  private isSearchedActivated = false;
+  private isFilterActivated = false;
+  private loadMoreChar = true;
 
   constructor(private _characterService:CharactersService,private _categoriesService:CategoriesService) {
     this.getCharacters();
     this.getCategories();
+    this.loadMoreChar = true;
   }
 
   getCharacters() {
@@ -43,7 +48,6 @@ export class Homepage {
           this.characters = characters;
           this.allCharactersLoaded = characters;
           this.lastId = characters[characters.length -1]._id;
-          console.log(this.lastId);
         },
         error => this.errorMessage = <any>error
       );
@@ -54,11 +58,15 @@ export class Homepage {
     this._characterService.getMoreCharacters(lastId,qty)
       .subscribe(
         characters => {
+          if(characters.length === 0){
+            return;
+          }
           this.characters = this.characters.concat(characters);
           this.allCharactersLoaded = this.characters;
-          console.log(this.characters);
+
           this.lastId = characters[characters.length -1]._id;
-          this.counter = 0;
+          this.loadMoreChar = true;
+          console.log(this.loadMoreChar);
         },
         error => this.errorMessage = <any>error
       );
@@ -75,7 +83,13 @@ export class Homepage {
   }
 
   onCategoryClicked(categories){
-    console.log(categories);
+    this.selectedCategories = categories;
+    if(categories.length === 0){
+      this.isFilterActivated = false;
+      this.characters  = this.allCharactersLoaded;
+    }else{
+      this.isFilterActivated = true;
+    }
     this.isActive = true;
     this._characterService.getCharcterByCategory(categories)
       .subscribe(
@@ -89,11 +103,15 @@ export class Homepage {
   }
 
   onSearchChanged(searchInput) {
+    this.searchTerm = searchInput;
     if (searchInput === '') {
       this.characters = this.allCharactersLoaded;
       this.isActive = false;
+      this.isSearchedActivated = false;
+
       return;
     }
+    this.isSearchedActivated = true;
     this.isActive = true;
     var keyups = Observable.of(searchInput)
       .filter(text => text.length >= 1)
@@ -109,9 +127,12 @@ export class Homepage {
   }
 
   onBottomOfPage($event){
-    console.log($event);
-    this.counter++;
+    this.loadMoreChar = false;
+    if(this.isFilterActivated || this.isSearchedActivated){
+     return;
+    }
     this.getMoreCharacters(this.lastId,100);
+
 
   }
 }

@@ -21,10 +21,15 @@ var Homepage = (function () {
         this._characterService = _characterService;
         this._categoriesService = _categoriesService;
         this.characters = [];
-        this.counter = 0;
         this.categories = [];
+        this.selectedCategories = [];
+        this.searchTerm = '';
+        this.isSearchedActivated = false;
+        this.isFilterActivated = false;
+        this.loadMoreChar = true;
         this.getCharacters();
         this.getCategories();
+        this.loadMoreChar = true;
     }
     Homepage.prototype.getCharacters = function () {
         var _this = this;
@@ -33,18 +38,20 @@ var Homepage = (function () {
             _this.characters = characters;
             _this.allCharactersLoaded = characters;
             _this.lastId = characters[characters.length - 1]._id;
-            console.log(_this.lastId);
         }, function (error) { return _this.errorMessage = error; });
     };
     Homepage.prototype.getMoreCharacters = function (lastId, qty) {
         var _this = this;
         this._characterService.getMoreCharacters(lastId, qty)
             .subscribe(function (characters) {
+            if (characters.length === 0) {
+                return;
+            }
             _this.characters = _this.characters.concat(characters);
             _this.allCharactersLoaded = _this.characters;
-            console.log(_this.characters);
             _this.lastId = characters[characters.length - 1]._id;
-            _this.counter = 0;
+            _this.loadMoreChar = true;
+            console.log(_this.loadMoreChar);
         }, function (error) { return _this.errorMessage = error; });
     };
     Homepage.prototype.getCategories = function () {
@@ -56,7 +63,14 @@ var Homepage = (function () {
     };
     Homepage.prototype.onCategoryClicked = function (categories) {
         var _this = this;
-        console.log(categories);
+        this.selectedCategories = categories;
+        if (categories.length === 0) {
+            this.isFilterActivated = false;
+            this.characters = this.allCharactersLoaded;
+        }
+        else {
+            this.isFilterActivated = true;
+        }
         this.isActive = true;
         this._characterService.getCharcterByCategory(categories)
             .subscribe(function (characters) {
@@ -66,11 +80,14 @@ var Homepage = (function () {
     };
     Homepage.prototype.onSearchChanged = function (searchInput) {
         var _this = this;
+        this.searchTerm = searchInput;
         if (searchInput === '') {
             this.characters = this.allCharactersLoaded;
             this.isActive = false;
+            this.isSearchedActivated = false;
             return;
         }
+        this.isSearchedActivated = true;
         this.isActive = true;
         var keyups = Rx_1.Observable.of(searchInput)
             .filter(function (text) { return text.length >= 1; })
@@ -83,8 +100,10 @@ var Homepage = (function () {
         });
     };
     Homepage.prototype.onBottomOfPage = function ($event) {
-        console.log($event);
-        this.counter++;
+        this.loadMoreChar = false;
+        if (this.isFilterActivated || this.isSearchedActivated) {
+            return;
+        }
         this.getMoreCharacters(this.lastId, 100);
     };
     Homepage = __decorate([
@@ -92,7 +111,7 @@ var Homepage = (function () {
             selector: 'homepage',
             providers: [characters_service_1.CharactersService, categories_service_1.CategoriesService],
             directives: [characters_grid_component_1.CharactersGrid, search_component_1.SearchComponent, filter_component_1.FilterComponent, go_back_up_component_1.GoBackUpComponent],
-            template: "\n\n    <search-component [isActive]=\"isActive\" class=\"search-view-container\"\n    (searchTerm)=\"onSearchChanged($event)\"></search-component>\n    <filter [categories]=\"categories\" (onFilterChanged)=\"onCategoryClicked($event)\"></filter>\n    <characters-grid [counter]=\"counter\" [characters]=\"characters\" (onBottomOfPage)=\"onBottomOfPage($event)\"></characters-grid>\n    <go-back-up></go-back-up>\n  "
+            template: "\n\n    <search-component [isActive]=\"isActive\" class=\"search-view-container\"\n    (searchTerm)=\"onSearchChanged($event)\"></search-component>\n    <filter [categories]=\"categories\" (onFilterChanged)=\"onCategoryClicked($event)\"></filter>\n    <characters-grid [loadMoreChar]=\"loadMoreChar\" [characters]=\"characters\" (onBottomOfPage)=\"onBottomOfPage($event)\"></characters-grid>\n    <go-back-up></go-back-up>\n  "
         }), 
         __metadata('design:paramtypes', [characters_service_1.CharactersService, categories_service_1.CategoriesService])
     ], Homepage);

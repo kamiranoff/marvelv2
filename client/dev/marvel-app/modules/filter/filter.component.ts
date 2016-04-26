@@ -27,7 +27,6 @@ export class FilterComponent{
 
   onFilterClicked(category){
     var categoryName = category.name;
-
     var indexOfCategory = this.filter.indexOf(categoryName);
     if( indexOfCategory !== -1){
       this.filter.splice(indexOfCategory,1);
