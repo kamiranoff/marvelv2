@@ -7,15 +7,16 @@ import {CharactersService} from "../../services/characters.service";
 import {FilterComponent} from "../../modules/filter/filter.component";
 import {CategoriesService} from "../../services/categories-service";
 import {GoBackUpComponent} from "../../modules/go-back-up/go-back-up.component";
+import {SearchAndFilterService} from "../../services/search-filter.service";
 
 @Component({
   selector: 'homepage',
-  providers: [CharactersService,CategoriesService],
+  providers: [CharactersService,CategoriesService,SearchAndFilterService],
   directives: [CharactersGrid, SearchComponent, FilterComponent,GoBackUpComponent],
   template: `
 
     <search-component [isActive]="isActive" class="search-view-container"
-    (searchTerm)="onSearchChanged($event)"></search-component>
+    (searchEvent)="onSearchChanged($event)" [(value)]="searchTerm"></search-component>
     <filter [categories]="categories" (onFilterChanged)="onCategoryClicked($event)"></filter>
     <characters-grid [loadMoreChar]="loadMoreChar" [characters]="characters" (onBottomOfPage)="onBottomOfPage($event)"></characters-grid>
     <go-back-up></go-back-up>
@@ -35,10 +36,12 @@ export class Homepage {
   private isFilterActivated = false;
   private loadMoreChar = true;
 
-  constructor(private _characterService:CharactersService,private _categoriesService:CategoriesService) {
+  constructor(private _characterService:CharactersService,private _categoriesService:CategoriesService,private _searchAndFilterService:SearchAndFilterService) {
     this.getCharacters();
     this.getCategories();
     this.loadMoreChar = true;
+
+
   }
 
   getCharacters() {

@@ -16,10 +16,12 @@ var characters_service_1 = require("../../services/characters.service");
 var filter_component_1 = require("../../modules/filter/filter.component");
 var categories_service_1 = require("../../services/categories-service");
 var go_back_up_component_1 = require("../../modules/go-back-up/go-back-up.component");
+var search_filter_service_1 = require("../../services/search-filter.service");
 var Homepage = (function () {
-    function Homepage(_characterService, _categoriesService) {
+    function Homepage(_characterService, _categoriesService, _searchAndFilterService) {
         this._characterService = _characterService;
         this._categoriesService = _categoriesService;
+        this._searchAndFilterService = _searchAndFilterService;
         this.characters = [];
         this.categories = [];
         this.selectedCategories = [];
@@ -109,11 +111,11 @@ var Homepage = (function () {
     Homepage = __decorate([
         core_1.Component({
             selector: 'homepage',
-            providers: [characters_service_1.CharactersService, categories_service_1.CategoriesService],
+            providers: [characters_service_1.CharactersService, categories_service_1.CategoriesService, search_filter_service_1.SearchAndFilterService],
             directives: [characters_grid_component_1.CharactersGrid, search_component_1.SearchComponent, filter_component_1.FilterComponent, go_back_up_component_1.GoBackUpComponent],
-            template: "\n\n    <search-component [isActive]=\"isActive\" class=\"search-view-container\"\n    (searchTerm)=\"onSearchChanged($event)\"></search-component>\n    <filter [categories]=\"categories\" (onFilterChanged)=\"onCategoryClicked($event)\"></filter>\n    <characters-grid [loadMoreChar]=\"loadMoreChar\" [characters]=\"characters\" (onBottomOfPage)=\"onBottomOfPage($event)\"></characters-grid>\n    <go-back-up></go-back-up>\n  "
+            template: "\n\n    <search-component [isActive]=\"isActive\" class=\"search-view-container\"\n    (searchEvent)=\"onSearchChanged($event)\" [(value)]=\"searchTerm\"></search-component>\n    <filter [categories]=\"categories\" (onFilterChanged)=\"onCategoryClicked($event)\"></filter>\n    <characters-grid [loadMoreChar]=\"loadMoreChar\" [characters]=\"characters\" (onBottomOfPage)=\"onBottomOfPage($event)\"></characters-grid>\n    <go-back-up></go-back-up>\n  "
         }), 
-        __metadata('design:paramtypes', [characters_service_1.CharactersService, categories_service_1.CategoriesService])
+        __metadata('design:paramtypes', [characters_service_1.CharactersService, categories_service_1.CategoriesService, search_filter_service_1.SearchAndFilterService])
     ], Homepage);
     return Homepage;
 }());

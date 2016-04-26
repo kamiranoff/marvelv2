@@ -1,6 +1,8 @@
 import {Component,Input,Output,EventEmitter} from "angular2/core";
 import {CategoriesService} from "../../services/categories-service";
 import {ReplacePipe} from "../../pipes/replace.pipe";
+import {SearchAndFilterService} from "../../services/search-filter.service";
+import {Subscription} from "rxjs/Subscription";
 
 
 @Component({
@@ -16,8 +18,18 @@ export class FilterComponent{
   private categories = [];
   private filter:Array<any> = [];
   private isVisible = false;
+  private subscription:Subscription;
 
-  constructor(private _categoriesService:CategoriesService){};
+  constructor(private _categoriesService:CategoriesService,private _searchAndFilterService:SearchAndFilterService){
+    this.subscription = _searchAndFilterService.filterChanged$.subscribe(() =>{
+      this.filter = [];
+
+      for(var i = 0;i< this.categories.length;i++){
+        this.categories[i].selected = false;
+      }
+      this.isVisible = false;
+    })
+  };
 
   @Output() private onFilterChanged:EventEmitter<any> = new EventEmitter();
 
@@ -28,6 +40,7 @@ export class FilterComponent{
   onFilterClicked(category){
     var categoryName = category.name;
     var indexOfCategory = this.filter.indexOf(categoryName);
+
     if( indexOfCategory !== -1){
       this.filter.splice(indexOfCategory,1);
       category.selected=false;
@@ -36,7 +49,7 @@ export class FilterComponent{
       category.selected=true;
     }
 
-
+    this._searchAndFilterService.resetSearch();
     this.onFilterChanged.emit(this.filter);
 
   }

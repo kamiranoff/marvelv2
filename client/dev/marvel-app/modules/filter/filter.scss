@@ -18,20 +18,27 @@
   }
 }
 .filter-view-container {
-  display: none;
+  max-height:0;
   position: relative;
   background-color: $text-alt;
   border: none;
   box-shadow: 0px -3px 3px rgba(0, 10, 20, 0.1) inset;
   outline: none;
   font-size: 1.3rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: center;
+  flex-wrap: wrap;
+  overflow: hidden;
+  transition: max-height 0.25s ease-in;
   &.visible{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-content: center;
+    max-height: 800px;
+    transition: max-height 0.25s ease-in;
+    li{
+      display: block;
+    }
 
-    flex-wrap: wrap;
   }
 
   li {

@@ -11,13 +11,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("angular2/core");
 var categories_service_1 = require("../../services/categories-service");
 var replace_pipe_1 = require("../../pipes/replace.pipe");
+var search_filter_service_1 = require("../../services/search-filter.service");
 var FilterComponent = (function () {
-    function FilterComponent(_categoriesService) {
+    function FilterComponent(_categoriesService, _searchAndFilterService) {
+        var _this = this;
         this._categoriesService = _categoriesService;
+        this._searchAndFilterService = _searchAndFilterService;
         this.categories = [];
         this.filter = [];
         this.isVisible = false;
         this.onFilterChanged = new core_1.EventEmitter();
+        this.subscription = _searchAndFilterService.filterChanged$.subscribe(function () {
+            _this.filter = [];
+            for (var i = 0; i < _this.categories.length; i++) {
+                _this.categories[i].selected = false;
+            }
+            _this.isVisible = false;
+        });
     }
     ;
     FilterComponent.prototype.toggleFilter = function () {
@@ -35,6 +45,7 @@ var FilterComponent = (function () {
             this.filter.push(categoryName);
             category.selected = true;
         }
+        this._searchAndFilterService.resetSearch();
         this.onFilterChanged.emit(this.filter);
     };
     __decorate([
@@ -49,7 +60,7 @@ var FilterComponent = (function () {
             providers: [categories_service_1.CategoriesService],
             templateUrl: "marvel-app/modules/filter/filter.component.html"
         }), 
-        __metadata('design:paramtypes', [categories_service_1.CategoriesService])
+        __metadata('design:paramtypes', [categories_service_1.CategoriesService, search_filter_service_1.SearchAndFilterService])
     ], FilterComponent);
     return FilterComponent;
 }());
