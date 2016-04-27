@@ -15,9 +15,15 @@ var CharacterDetailService = (function () {
     function CharacterDetailService(http) {
         this.http = http;
         this._heroDetailUrl = '/api/marvelapi/character/';
+        this._saveHeroUrl = '/api/marvelapi/characters-details/';
     }
     CharacterDetailService.prototype.getCharacterById = function (id) {
         return this.http.get(this._heroDetailUrl + id)
+            .map(this.extractData)
+            .catch(this.handleError);
+    };
+    CharacterDetailService.prototype.saveCharWithName = function (name) {
+        return this.http.get(this._saveHeroUrl + name)
             .map(this.extractData)
             .catch(this.handleError);
     };

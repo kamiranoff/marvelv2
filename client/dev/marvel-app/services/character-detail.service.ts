@@ -5,6 +5,7 @@ import {Http,Response} from "angular2/http";
 @Injectable()
 export class CharacterDetailService {
   private _heroDetailUrl = '/api/marvelapi/character/';
+  private _saveHeroUrl = '/api/marvelapi/characters-details/';
 
   constructor(public http:Http) {
   }
@@ -12,6 +13,12 @@ export class CharacterDetailService {
 
   getCharacterById(id): Observable<any>{
     return this.http.get(this._heroDetailUrl + id)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  saveCharWithName(name):Observable<any>{
+    return this.http.get(this._saveHeroUrl + name)
       .map(this.extractData)
       .catch(this.handleError);
   }

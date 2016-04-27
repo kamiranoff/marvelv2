@@ -17,9 +17,21 @@ var CharacterDetail = (function () {
         this._characterDetailService = _characterDetailService;
         this.character = {};
         this.id = params.get('id');
+        this.name = params.get('name');
         this.getCharacterDetail(this.id);
+        this.saveCharacterDetail(this.name);
         document.body.scrollTop = document.documentElement.scrollTop = 0;
     }
+    CharacterDetail.prototype.saveCharacterDetail = function (name) {
+        var _this = this;
+        this._characterDetailService.saveCharWithName(name)
+            .subscribe(function () {
+            console.log('success');
+        }, function (error) {
+            _this.errorMessage = error;
+            console.log('error', error);
+        });
+    };
     CharacterDetail.prototype.getCharacterDetail = function (id) {
         var _this = this;
         this._characterDetailService.getCharacterById(id)
