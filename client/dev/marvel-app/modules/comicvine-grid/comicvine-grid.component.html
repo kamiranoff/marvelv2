@@ -1,0 +1,9 @@
+<div class="characters-list" (window:scroll)="onScroll($event)" >
+  <div class="single-hero-link" *ngFor="#character of characters;#idx = index"  #heroInGrid  (mouseenter)="changeTitleColorOnHover(idx,$event)">
+    <a  class="character-link" [routerLink]="['CharacterDetail',{id:character.id,name:character.name}]">
+      <img  crossOrigin="anonymous" src=""/>
+
+      <h3 class="name" style="background-color:{{character.dominantColor}}" >{{character.name}} </h3>
+    </a>
+  </div>
+</div>

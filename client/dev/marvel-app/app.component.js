@@ -14,6 +14,7 @@ var homepage_component_1 = require("./pages/homepage/homepage.component");
 var header_component_1 = require("./modules/header/header.component");
 var character_detail_component_1 = require("./modules/character-detail/character-detail.component");
 var comics_page_component_1 = require("./pages/comics-page/comics-page.component");
+var comicvine_page_component_1 = require("./pages/comicvine/comicvine-page.component");
 var AppComponent = (function () {
     function AppComponent(router) {
         this.router = router;
@@ -25,6 +26,11 @@ var AppComponent = (function () {
                 name: 'Homepage',
                 component: homepage_component_1.Homepage,
                 useAsDefault: true
+            },
+            {
+                path: '/comicvine',
+                name: 'ComicvineChars',
+                component: comicvine_page_component_1.ComicvineCharPage
             },
             {
                 path: '/comics',
