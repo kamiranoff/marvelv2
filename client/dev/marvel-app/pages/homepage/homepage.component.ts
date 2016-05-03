@@ -123,6 +123,7 @@ export class Homepage {
       .distinctUntilChanged()
       .flatMap(searchTerm => this._characterService.searchCharactersByName(searchTerm));
 
+
     keyups.subscribe(data => {
       this.characters = data;
       this.isActive = false;

@@ -9,9 +9,10 @@ const _ = require('lodash');
 
 
 characterDetailSchema.statics.saveCharacterDetail = (data) => {
-  console.log(data.length);
+  console.log(data);
     data.forEach(function(n) {
-      CharacterDetail.findOneAndUpdate( {id:n.id}, n, { upsert: true }, function(err,doc) {
+      console.log(n.character.id);
+      CharacterDetail.findOneAndUpdate( {"character.id": n.character.id}, n, { upsert: true }, function(err,doc) {
         if(err) {
           console.log(err);
         }else{

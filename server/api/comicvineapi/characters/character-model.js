@@ -29,44 +29,47 @@
 const mongoose = require('mongoose');
 
 const _comicvineCharSchema = {
-  "aliases": String,
-  "api_detail_url": String,
-  "birth": Date,
-  "count_of_issue_appearances": Number,
-  "date_added": Date,
-  "date_last_updated": Date,
-  "deck": String,
-  "description": String,
-  "first_appeared_in_issue": {
+  character:{
+    "aliases": String,
     "api_detail_url": String,
+    "birth": Date,
+    "count_of_issue_appearances": Number,
+    "date_added": Date,
+    "date_last_updated": Date,
+    "deck": String,
+    "description": String,
+    "first_appeared_in_issue": {
+      "api_detail_url": String,
+      "id": Number,
+      "name": String,
+      "issue_number": String
+    },
+    "gender": Number,
     "id": Number,
+    "image": {
+      "icon_url": String,
+      "medium_url": String,
+      "screen_url": String,
+      "small_url": String,
+      "super_url": String,
+      "thumb_url": String,
+      "tiny_url": String
+    },
     "name": String,
-    "issue_number": String
-  },
-  "gender": Number,
-  "id": Number,
-  "image": {
-    "icon_url": String,
-    "medium_url": String,
-    "screen_url": String,
-    "small_url": String,
-    "super_url": String,
-    "thumb_url": String,
-    "tiny_url": String
-  },
-  "name": String,
-  "origin": {
-    "api_detail_url": String,
-    "id": Number,
-    "name": String
-  },
-  "publisher": {
-    "api_detail_url": String,
-    "id": Number,
-    "name": String
-  },
-  "real_name": String,
-  "site_detail_url": String
-};
+    "origin": {
+      "api_detail_url": String,
+      "id": Number,
+      "name": String
+    },
+    "publisher": {
+      "api_detail_url": String,
+      "id": Number,
+      "name": String
+    },
+    "real_name": String,
+    "site_detail_url": String
+  }
+  };
+
 
 module.exports = mongoose.Schema(_comicvineCharSchema);

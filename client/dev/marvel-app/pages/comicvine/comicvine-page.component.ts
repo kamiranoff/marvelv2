@@ -92,7 +92,7 @@ export class ComicvineCharPage {
       .distinctUntilChanged()
       .flatMap(searchTerm => this._comicvineCharacterService.searchCharactersByName(searchTerm));
 
-    keyups.subscribe(data => {
+    keyups.subscribe(function(data:Array<any>){
       this.characters = data;
       this.isActive = false;
     });
@@ -100,11 +100,14 @@ export class ComicvineCharPage {
   }
 
   onBottomOfPage($event){
-    this.loadMoreChar = false;
+
     if(this.isSearchedActivated){
       return;
     }
-    this.getMoreCharacters(this.lastId,100);
+    if(this.loadMoreChar){
+      this.getMoreCharacters(this.lastId,100);
+    }
+    this.loadMoreChar = false;
 
 
   }

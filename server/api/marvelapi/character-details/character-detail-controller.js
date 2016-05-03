@@ -15,10 +15,13 @@ function callback(error, response, body) {
   if (!error && response.statusCode == 200) {
     var result = JSON.parse(body);
     var listOfHerosDetail = [];
-
+    var characterObject = {};
     for(var i = 0; i <  result.results.length;i++ ){
-      console.log(result.results[i]);
-     listOfHerosDetail.push(result.results[i]);
+     characterObject.character = result.results[i];
+      console.log(characterObject.character.id);
+
+     listOfHerosDetail.push(characterObject);
+      characterObject = {};
     }
 
     CharacterDetailDao.saveCharacterDetail(listOfHerosDetail);

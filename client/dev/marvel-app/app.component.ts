@@ -8,6 +8,7 @@ import {HeaderComponent} from "./modules/header/header.component";
 import {CharacterDetail} from "./modules/character-detail/character-detail.component";
 import {ComicsPage} from "./pages/comics-page/comics-page.component";
 import {ComicvineCharPage} from "./pages/comicvine/comicvine-page.component";
+import {ComicvineCharacterDetail} from "./modules/comicvine-character-detail/comicvine-character-detail.component";
 
 @RouteConfig([
   {
@@ -20,6 +21,11 @@ import {ComicvineCharPage} from "./pages/comicvine/comicvine-page.component";
     path: '/comicvine',
     name: 'ComicvineChars',
     component: ComicvineCharPage
+  },
+  {
+    path: '/comicvine-characters/:id',
+    name: 'ComicvineCharacterDetail',
+    component: ComicvineCharacterDetail
   },
   {
     path: '/comics',

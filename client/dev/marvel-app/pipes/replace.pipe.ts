@@ -9,6 +9,6 @@ export class ReplacePipe implements PipeTransform{
     if(value && args[0] && args[1]){
       return value.split(args[0]).join(args[1]);
     }
-
   }
 }
+

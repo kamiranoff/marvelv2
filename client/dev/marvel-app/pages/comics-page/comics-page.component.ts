@@ -147,7 +147,7 @@ export class ComicsPage {
       .distinctUntilChanged()
       .flatMap(searchTerm => this._comicsService.searchComicsByTitle(searchTerm));
 
-    keyups.subscribe(data => {
+    keyups.subscribe(function(data:Array<any>){
       this.comics = data;
       this.lastId = data[data.length -1]._id;
       this.isActive = false;
@@ -155,8 +155,8 @@ export class ComicsPage {
       if(data.length === this.limit){
         this.loadMoreComics = true;
       }
-
     });
+
 
   }
 

@@ -122,12 +122,12 @@ var ComicsPage = (function () {
             .distinctUntilChanged()
             .flatMap(function (searchTerm) { return _this._comicsService.searchComicsByTitle(searchTerm); });
         keyups.subscribe(function (data) {
-            _this.comics = data;
-            _this.lastId = data[data.length - 1]._id;
-            _this.isActive = false;
-            _this.loadMoreComics = false;
-            if (data.length === _this.limit) {
-                _this.loadMoreComics = true;
+            this.comics = data;
+            this.lastId = data[data.length - 1]._id;
+            this.isActive = false;
+            this.loadMoreComics = false;
+            if (data.length === this.limit) {
+                this.loadMoreComics = true;
             }
         });
     };

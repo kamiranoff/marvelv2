@@ -59,6 +59,7 @@ comicvineCharacterSchema.statics.getCharactersByName = (input) => {
         }
       });
   });
+
 };
 
 

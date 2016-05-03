@@ -1,0 +1,37 @@
+<div class="single-hero-page">
+<h1 class="hero-name"
+    parallax [config]="{parallaxInitVal: 0, parallaxRatio: -.15,parallaxCss: 'backgroundPositionY'}"
+    style=" background-image:url('{{character.image?.super_url}}');">
+  <span class="hero-name-text">{{character.name}}</span>
+</h1>
+<section class="hero-description">
+  <section class="hero-description-wiki">
+    <div class="main-hero-image"><img src="{{character.image?.super_url}}"></div>
+    <div class="hero-description-wiki-text">
+      <p><strong>Real Name: </strong>{{character.real_name}}</p>
+      <p><strong>Relatives: </strong>{{character.wiki?.relatives}}</p>
+      <p><strong>Eyes: </strong>{{character.wiki?.eyes}}</p>
+      <p><strong>Hair: </strong>{{character.wiki?.hair}}</p>
+      <p><strong>Height: </strong>{{character.wiki?.height}}</p>
+      <p><strong>Weight: </strong>{{character.wiki?.weight}}</p>
+
+      <hr class="divider">
+      <p><strong>Aliases: </strong>{{character.aliases}}</p>
+      <p><strong>Abilities: </strong>{{character.wiki?.abilities}}</p>
+      <p><strong>Education: </strong>{{character.wiki?.education}}</p>
+      <p><strong>Powers: </strong>{{character.wiki?.powers}}</p>
+    </div>
+  </section>
+  <h2 class="description-summary">
+    <hr class="divider">
+{{character.deck}}
+    <hr class="divider">
+  </h2>
+
+  <section class="layout-single-column">
+    <div [innerHTML]="character.description"></div>
+
+  </section>
+
+</section>
+</div>

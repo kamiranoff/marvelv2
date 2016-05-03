@@ -68,16 +68,18 @@ var ComicvineCharPage = (function () {
             .distinctUntilChanged()
             .flatMap(function (searchTerm) { return _this._comicvineCharacterService.searchCharactersByName(searchTerm); });
         keyups.subscribe(function (data) {
-            _this.characters = data;
-            _this.isActive = false;
+            this.characters = data;
+            this.isActive = false;
         });
     };
     ComicvineCharPage.prototype.onBottomOfPage = function ($event) {
-        this.loadMoreChar = false;
         if (this.isSearchedActivated) {
             return;
         }
-        this.getMoreCharacters(this.lastId, 100);
+        if (this.loadMoreChar) {
+            this.getMoreCharacters(this.lastId, 100);
+        }
+        this.loadMoreChar = false;
     };
     ComicvineCharPage = __decorate([
         core_1.Component({

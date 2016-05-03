@@ -1,0 +1,56 @@
+.single-hero-page {
+  .hero-name {
+    @extend %card-style;
+    position:relative;
+    text-align: left;
+    padding: 31rem 2rem 31rem 0;
+    margin: 0 auto 2rem auto;
+    font-size: 5rem;
+    box-shadow: 1px 1px 1px #ccc;
+    letter-spacing: 2px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: rgba(255, 223, 196, .6);
+    background-color: #000;
+    text-stroke: 1px solid #000;
+    background-position: 0 0;
+    @include large-plus {
+      // background-position: center center !important;
+    }
+    .hero-name-text {
+      //background-color: #000;
+      width: 100%;
+      display: block;
+      color: $text-alt;
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding-left: 2rem;
+    }
+  }
+  .hero-description-wiki {
+    width: calc(100%/12 * 10);
+    margin: 0 auto;
+    &:after {
+      @extend %clearfix;
+    }
+  }
+  .main-hero-image {
+    width: 33.3%;
+    padding: 0 10px 0 0;
+    float: left;
+    text-align: center;
+    img {
+      width: 100%;
+    }
+  }
+  .hero-description-wiki-text {
+    @extend %card-style;
+    padding: 1em;
+    width: 66.6%;
+    float: left;
+  }
+  .description-summary {
+    padding: 2rem;
+  }
+}
