@@ -1,5 +1,8 @@
 import {Component,Input,Output,EventEmitter} from "angular2/core";
 import {GetAverageRgb} from "../../helpers/get-average-rgb.helper";
+
+declare var $: any;
+
 @Component({
   selector:'comics-grid',
   inputs:['comics'],

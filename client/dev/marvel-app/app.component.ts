@@ -9,6 +9,7 @@ import {CharacterDetail} from "./modules/character-detail/character-detail.compo
 import {ComicsPage} from "./pages/comics-page/comics-page.component";
 import {ComicvineCharPage} from "./pages/comicvine/comicvine-page.component";
 import {ComicvineCharacterDetail} from "./modules/comicvine-character-detail/comicvine-character-detail.component";
+import {NavbarComponent} from "./modules/navbar/navbar.component";
 
 @RouteConfig([
   {
@@ -42,9 +43,11 @@ import {ComicvineCharacterDetail} from "./modules/comicvine-character-detail/com
 
 @Component({
   selector: 'my-app',
-  directives:[HeaderComponent,ROUTER_DIRECTIVES],
+  directives:[NavbarComponent,HeaderComponent,ROUTER_DIRECTIVES],
   template:`
+  <navbar></navbar>
   <header-component [class.small-header]="!router.isRouteActive(router.generate(['/Homepage']))">"></header-component>
+
   <router-outlet></router-outlet>
   `,
   styleUrls: ['app/app.component.css'],

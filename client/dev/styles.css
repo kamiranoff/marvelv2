@@ -645,6 +645,29 @@ button, input {
   width: 80px;
 }
 
+.navigation {
+  background-color: rgba(0, 5, 10, 0.9);
+}
+
+.navigation ul {
+  padding: 24px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.navigation ul li a {
+  display: block;
+  color: #BAC9D4;
+}
+
+.navigation ul li a .icon {
+  margin-right: 10px;
+}
+
+.navigation ul li a .icon:before {
+  font-size: 20px;
+}
+
 .search-view-container {
   font-size: 16px;
 }

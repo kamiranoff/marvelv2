@@ -99,8 +99,8 @@ var Homepage = (function () {
             .distinctUntilChanged()
             .flatMap(function (searchTerm) { return _this._characterService.searchCharactersByName(searchTerm); });
         keyups.subscribe(function (data) {
-            _this.characters = data;
-            _this.isActive = false;
+            this.characters = data;
+            this.isActive = false;
         });
     };
     Homepage.prototype.onBottomOfPage = function ($event) {

@@ -16,6 +16,7 @@ var character_detail_component_1 = require("./modules/character-detail/character
 var comics_page_component_1 = require("./pages/comics-page/comics-page.component");
 var comicvine_page_component_1 = require("./pages/comicvine/comicvine-page.component");
 var comicvine_character_detail_component_1 = require("./modules/comicvine-character-detail/comicvine-character-detail.component");
+var navbar_component_1 = require("./modules/navbar/navbar.component");
 var AppComponent = (function () {
     function AppComponent(router) {
         this.router = router;
@@ -51,8 +52,8 @@ var AppComponent = (function () {
         ]),
         core_1.Component({
             selector: 'my-app',
-            directives: [header_component_1.HeaderComponent, router_1.ROUTER_DIRECTIVES],
-            template: "\n  <header-component [class.small-header]=\"!router.isRouteActive(router.generate(['/Homepage']))\">\"></header-component>\n  <router-outlet></router-outlet>\n  ",
+            directives: [navbar_component_1.NavbarComponent, header_component_1.HeaderComponent, router_1.ROUTER_DIRECTIVES],
+            template: "\n  <navbar></navbar>\n  <header-component [class.small-header]=\"!router.isRouteActive(router.generate(['/Homepage']))\">\"></header-component>\n\n  <router-outlet></router-outlet>\n  ",
             styleUrls: ['app/app.component.css'],
         }), 
         __metadata('design:paramtypes', [router_1.Router])

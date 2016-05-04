@@ -4,7 +4,7 @@ import {CharactersService} from "../../services/characters.service";
 import {GetAverageRgb} from "../../helpers/get-average-rgb.helper";
 import {} from "angular2/core";
 
-
+declare var $: any;
 
 @Component({
   selector:'comicvine-grid',

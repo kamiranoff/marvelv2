@@ -124,7 +124,7 @@ export class Homepage {
       .flatMap(searchTerm => this._characterService.searchCharactersByName(searchTerm));
 
 
-    keyups.subscribe(data => {
+    keyups.subscribe(function(data:Array<any>){
       this.characters = data;
       this.isActive = false;
     });
