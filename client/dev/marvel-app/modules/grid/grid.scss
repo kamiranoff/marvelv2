@@ -1,13 +1,13 @@
-.comics-list {
+.characters-list,.comics-list {
   display: flex;
   flex-wrap: wrap;
   align-content: stretch;
   flex-direction: row;
   flex-flow: row wrap;
   justify-content: space-around;
-  .single-comic-link {
+  .single-hero-link,.single-comic-link {
     position: relative;
-    flex: 0 0 50%;
+    flex: 0 0 100%;
     text-align: center;
     flex-grow: 1;
     transition: 0.2s all ease-in-out;
@@ -18,15 +18,15 @@
       display: block;
     }
     @include medium-only {
-      flex: 0 0 33.3%;
+      flex: 0 0 50%;
     }
     @include large-only {
-      flex: 0 0 20%;
+      flex: 0 0 25%;
     }
     @include very-large-only {
-      flex: 0 0 10%;
+      flex: 0 0 16.666%;
     }
-    .comic-link {
+    .character-link,.comic-link {
       display: block;
       overflow: hidden;
     }
@@ -71,6 +71,23 @@
         }
       }
     }
+  }
+}
+
+
+.comics-list {
+  .single-comic-link {
+    flex: 0 0 50%;
+    @include medium-only {
+      flex: 0 0 33.3%;
+    }
+    @include large-only {
+      flex: 0 0 20%;
+    }
+    @include very-large-only {
+      flex: 0 0 10%;
+    }
+
   }
 }
 

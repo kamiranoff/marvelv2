@@ -11,39 +11,43 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("angular2/core");
 var router_1 = require('angular2/router');
 var get_average_rgb_helper_1 = require("../../helpers/get-average-rgb.helper");
-var ComicvineCharGrid = (function () {
-    function ComicvineCharGrid() {
-        this.characters = [];
+var Grid = (function () {
+    function Grid() {
+        this.elems = [];
         this.onBottomOfPage = new core_1.EventEmitter();
     }
-    ComicvineCharGrid.prototype.onScroll = function () {
+    Grid.prototype.onScroll = function () {
         if ($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
             this.onBottomOfPage.emit("on the bottom");
         }
     };
-    ComicvineCharGrid.prototype.changeTitleColorOnHover = function (idx, elm) {
+    Grid.prototype.changeTitleColorOnHover = function (idx, elm) {
         var img = elm.currentTarget.getElementsByTagName("img")[0];
         var imageColor = get_average_rgb_helper_1.GetAverageRgb.getAverageRGB(img);
         var rgbImageColor = "rgb(" + imageColor.r + "," + imageColor.g + "," + imageColor.b + ")";
-        this.characters[idx].dominantColor = rgbImageColor;
+        this.elems[idx].dominantColor = rgbImageColor;
     };
     __decorate([
         core_1.Input(), 
+        __metadata('design:type', Object)
+    ], Grid.prototype, "page", void 0);
+    __decorate([
+        core_1.Input(), 
         __metadata('design:type', Boolean)
-    ], ComicvineCharGrid.prototype, "loadMoreChar", void 0);
+    ], Grid.prototype, "loadMoreElem", void 0);
     __decorate([
         core_1.Output(), 
         __metadata('design:type', core_1.EventEmitter)
-    ], ComicvineCharGrid.prototype, "onBottomOfPage", void 0);
-    ComicvineCharGrid = __decorate([
+    ], Grid.prototype, "onBottomOfPage", void 0);
+    Grid = __decorate([
         core_1.Component({
-            selector: 'comicvine-grid',
-            inputs: ['characters'],
+            selector: 'grid',
+            inputs: ['elems'],
             directives: [router_1.ROUTER_DIRECTIVES],
-            templateUrl: "marvel-app/modules/comicvine-grid/comicvine-grid.component.html"
+            templateUrl: "marvel-app/modules/grid/grid.component.html"
         }), 
         __metadata('design:paramtypes', [])
-    ], ComicvineCharGrid);
-    return ComicvineCharGrid;
+    ], Grid);
+    return Grid;
 }());
-exports.ComicvineCharGrid = ComicvineCharGrid;
+exports.Grid = Grid;

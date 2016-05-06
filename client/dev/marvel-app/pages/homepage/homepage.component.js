@@ -10,34 +10,35 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("angular2/core");
 var Rx_1 = require("rxjs/Rx"); //full api
-var characters_grid_component_1 = require("../../modules/characters-grid/characters-grid.component");
 var search_component_1 = require("../../modules/search/search.component");
 var characters_service_1 = require("../../services/characters.service");
 var filter_component_1 = require("../../modules/filter/filter.component");
 var categories_service_1 = require("../../services/categories-service");
 var go_back_up_component_1 = require("../../modules/go-back-up/go-back-up.component");
 var search_filter_service_1 = require("../../services/search-filter.service");
+var grid_component_1 = require("../../modules/grid/grid.component");
 var Homepage = (function () {
     function Homepage(_characterService, _categoriesService, _searchAndFilterService) {
         this._characterService = _characterService;
         this._categoriesService = _categoriesService;
         this._searchAndFilterService = _searchAndFilterService;
-        this.characters = [];
+        this.elems = [];
         this.categories = [];
         this.selectedCategories = [];
         this.searchTerm = '';
         this.isSearchedActivated = false;
         this.isFilterActivated = false;
-        this.loadMoreChar = true;
+        this.loadMoreElem = true;
+        this.page = "marvelApi";
         this.getCharacters();
         this.getCategories();
-        this.loadMoreChar = true;
+        this.loadMoreElem = true;
     }
     Homepage.prototype.getCharacters = function () {
         var _this = this;
         this._characterService.getCharacters()
             .subscribe(function (characters) {
-            _this.characters = characters;
+            _this.elems = characters;
             _this.allCharactersLoaded = characters;
             _this.lastId = characters[characters.length - 1]._id;
         }, function (error) { return _this.errorMessage = error; });
@@ -52,10 +53,10 @@ var Homepage = (function () {
             if (characters.length === 0) {
                 return;
             }
-            _this.characters = _this.characters.concat(characters);
-            _this.allCharactersLoaded = _this.characters;
+            _this.elems = _this.elems.concat(characters);
+            _this.allCharactersLoaded = _this.elems;
             _this.lastId = characters[characters.length - 1]._id;
-            _this.loadMoreChar = true;
+            _this.loadMoreElem = true;
         }, function (error) { return _this.errorMessage = error; });
     };
     Homepage.prototype.getCategories = function () {
@@ -70,7 +71,7 @@ var Homepage = (function () {
         this.selectedCategories = categories;
         if (categories.length === 0) {
             this.isFilterActivated = false;
-            this.characters = this.allCharactersLoaded;
+            this.elems = this.allCharactersLoaded;
         }
         else {
             this.isFilterActivated = true;
@@ -78,7 +79,7 @@ var Homepage = (function () {
         this.isActive = true;
         this._characterService.getCharcterByCategory(categories)
             .subscribe(function (characters) {
-            _this.characters = characters;
+            _this.elems = characters;
             _this.isActive = false;
         }, function (error) { return _this.errorMessage = error; });
     };
@@ -86,7 +87,7 @@ var Homepage = (function () {
         var _this = this;
         this.searchTerm = searchInput;
         if (searchInput === '') {
-            this.characters = this.allCharactersLoaded;
+            this.elems = this.allCharactersLoaded;
             this.isActive = false;
             this.isSearchedActivated = false;
             return;
@@ -99,12 +100,12 @@ var Homepage = (function () {
             .distinctUntilChanged()
             .flatMap(function (searchTerm) { return _this._characterService.searchCharactersByName(searchTerm); });
         keyups.subscribe(function (data) {
-            this.characters = data;
-            this.isActive = false;
+            _this.elems = data;
+            _this.isActive = false;
         });
     };
     Homepage.prototype.onBottomOfPage = function ($event) {
-        this.loadMoreChar = false;
+        this.loadMoreElem = false;
         if (this.isFilterActivated || this.isSearchedActivated) {
             return;
         }
@@ -114,8 +115,8 @@ var Homepage = (function () {
         core_1.Component({
             selector: 'homepage',
             providers: [characters_service_1.CharactersService, categories_service_1.CategoriesService, search_filter_service_1.SearchAndFilterService],
-            directives: [characters_grid_component_1.CharactersGrid, search_component_1.SearchComponent, filter_component_1.FilterComponent, go_back_up_component_1.GoBackUpComponent],
-            template: "\n\n    <search-component [isActive]=\"isActive\" class=\"search-view-container\"\n    (searchEvent)=\"onSearchChanged($event)\" [(value)]=\"searchTerm\"></search-component>\n    <filter [categories]=\"categories\" (onFilterChanged)=\"onCategoryClicked($event)\"></filter>\n    <characters-grid [loadMoreChar]=\"loadMoreChar\" [characters]=\"characters\" (onBottomOfPage)=\"onBottomOfPage($event)\"></characters-grid>\n    <go-back-up></go-back-up>\n  "
+            directives: [grid_component_1.Grid, search_component_1.SearchComponent, filter_component_1.FilterComponent, go_back_up_component_1.GoBackUpComponent],
+            template: "\n\n    <search-component [isActive]=\"isActive\" class=\"search-view-container\"\n    (searchEvent)=\"onSearchChanged($event)\" [(value)]=\"searchTerm\"></search-component>\n    <filter [categories]=\"categories\" (onFilterChanged)=\"onCategoryClicked($event)\"></filter>\n    <grid [page]=\"page\" [loadMoreElem]=\"loadMoreElem\" [elems]=\"elems\" (onBottomOfPage)=\"onBottomOfPage($event)\"></grid>\n    <go-back-up></go-back-up>\n  "
         }), 
         __metadata('design:paramtypes', [characters_service_1.CharactersService, categories_service_1.CategoriesService, search_filter_service_1.SearchAndFilterService])
     ], Homepage);

@@ -13,24 +13,25 @@ var Rx_1 = require("rxjs/Rx"); //full api
 var search_component_1 = require("../../modules/search/search.component");
 var go_back_up_component_1 = require("../../modules/go-back-up/go-back-up.component");
 var comicvine_service_1 = require("../../services/comicvine-service");
-var comicvine_grid_component_1 = require("../../modules/comicvine-grid/comicvine-grid.component");
 var search_filter_service_1 = require("../../services/search-filter.service");
+var grid_component_1 = require("../../modules/grid/grid.component");
 var ComicvineCharPage = (function () {
     function ComicvineCharPage(_comicvineCharacterService) {
         this._comicvineCharacterService = _comicvineCharacterService;
-        this.characters = [];
+        this.elems = [];
         this.searchTerm = '';
         this.isSearchedActivated = false;
-        this.loadMoreChar = true;
+        this.loadMoreElem = true;
+        this.page = "comicvineChars";
         this.getCharacters();
-        this.loadMoreChar = true;
+        this.loadMoreElem = true;
     }
     ComicvineCharPage.prototype.getCharacters = function () {
         var _this = this;
         this._comicvineCharacterService.getCharacters()
             .subscribe(function (characters) {
-            _this.characters = characters;
-            console.log(_this.characters);
+            _this.elems = characters;
+            console.log(_this.elems);
             _this.allCharactersLoaded = characters;
             _this.lastId = characters[characters.length - 1]._id;
         }, function (error) { return _this.errorMessage = error; });
@@ -45,17 +46,17 @@ var ComicvineCharPage = (function () {
             if (characters.length === 0) {
                 return;
             }
-            _this.characters = _this.characters.concat(characters);
-            _this.allCharactersLoaded = _this.characters;
+            _this.elems = _this.elems.concat(characters);
+            _this.allCharactersLoaded = _this.elems;
             _this.lastId = characters[characters.length - 1]._id;
-            _this.loadMoreChar = true;
+            _this.loadMoreElem = true;
         }, function (error) { return _this.errorMessage = error; });
     };
     ComicvineCharPage.prototype.onSearchChanged = function (searchInput) {
         var _this = this;
         this.searchTerm = searchInput;
         if (searchInput === '') {
-            this.characters = this.allCharactersLoaded;
+            this.elems = this.allCharactersLoaded;
             this.isActive = false;
             this.isSearchedActivated = false;
             return;
@@ -68,25 +69,25 @@ var ComicvineCharPage = (function () {
             .distinctUntilChanged()
             .flatMap(function (searchTerm) { return _this._comicvineCharacterService.searchCharactersByName(searchTerm); });
         keyups.subscribe(function (data) {
-            this.characters = data;
-            this.isActive = false;
+            _this.elems = data;
+            _this.isActive = false;
         });
     };
     ComicvineCharPage.prototype.onBottomOfPage = function ($event) {
         if (this.isSearchedActivated) {
             return;
         }
-        if (this.loadMoreChar) {
+        if (this.loadMoreElem) {
             this.getMoreCharacters(this.lastId, 100);
         }
-        this.loadMoreChar = false;
+        this.loadMoreElem = false;
     };
     ComicvineCharPage = __decorate([
         core_1.Component({
             selector: 'ComicvinePage',
             providers: [comicvine_service_1.ComicvineCharactersService, search_filter_service_1.SearchAndFilterService],
-            directives: [comicvine_grid_component_1.ComicvineCharGrid, search_component_1.SearchComponent, go_back_up_component_1.GoBackUpComponent],
-            template: "\n\n    <search-component [isActive]=\"isActive\" class=\"search-view-container\"\n    (searchEvent)=\"onSearchChanged($event)\" [(value)]=\"searchTerm\"></search-component>\n    <comicvine-grid [loadMoreChar]=\"loadMoreChar\" [characters]=\"characters\" (onBottomOfPage)=\"onBottomOfPage($event)\"></comicvine-grid>\n    <go-back-up></go-back-up>\n  "
+            directives: [grid_component_1.Grid, search_component_1.SearchComponent, go_back_up_component_1.GoBackUpComponent],
+            template: "\n\n    <search-component [isActive]=\"isActive\" class=\"search-view-container\"\n    (searchEvent)=\"onSearchChanged($event)\" [(value)]=\"searchTerm\"></search-component>\n    <grid [page]=\"page\" [loadMoreElem]=\"loadMoreElem\" [elems]=\"elems\" (onBottomOfPage)=\"onBottomOfPage($event)\"></grid>\n    <go-back-up></go-back-up>\n  "
         }), 
         __metadata('design:paramtypes', [comicvine_service_1.ComicvineCharactersService])
     ], ComicvineCharPage);

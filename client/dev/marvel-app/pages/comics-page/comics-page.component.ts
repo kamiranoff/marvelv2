@@ -5,25 +5,25 @@ import {SearchComponent} from "../../modules/search/search.component";
 import {FilterComponent} from "../../modules/filter/filter.component";
 import {GoBackUpComponent} from "../../modules/go-back-up/go-back-up.component";
 import {SearchAndFilterService} from "../../services/search-filter.service";
-import {ComicsGrid} from "../../modules/comics-grid/comics-grid.component";
+import {Grid} from "../../modules/grid/grid.component";
 import {ComicsService} from "../../services/comics.service";
 
 @Component({
   selector: 'comics-page',
   providers: [ComicsService,SearchAndFilterService],
-  directives: [ComicsGrid, SearchComponent, FilterComponent,GoBackUpComponent],
+  directives: [Grid, SearchComponent, FilterComponent,GoBackUpComponent],
   template: `
     <search-component [isActive]="isActive" class="search-view-container"
     (searchEvent)="onSearchChanged($event)" [(value)]="searchTerm"></search-component>
     <filter [categories]="categories" (onFilterChanged)="onCategoryClicked($event)"></filter>
-    <comics-grid [loadMoreComics]="loadMoreComics" [comics]="comics"  (onBottomOfPage)="onBottomOfPage($event)"></comics-grid>
+    <grid  [page]="page" [loadMoreElem]="loadMoreElem" [elems]="elems" (onBottomOfPage)="onBottomOfPage($event)"></grid>
     <go-back-up></go-back-up>
   `
 })
 
 
 export class ComicsPage {
-  private comics:Array<any> = [];
+  private elems:Array<any> = [];
   private categories:Array<String> = [];
   private selectedCategories:Array<String> = [];
   private allComicsLoaded;
@@ -33,13 +33,14 @@ export class ComicsPage {
   private searchTerm = '';
   private isSearchedActivated = false;
   private isFilterActivated = false;
-  private loadMoreComics = true;
+  private loadMoreElem = true;
   private limit:number = 100;
+  private page = 'marvelApiComics';
 
   constructor(private _comicsService:ComicsService,private _searchAndFilterService:SearchAndFilterService) {
     this.getComics();
 
-    this.loadMoreComics = true;
+    this.loadMoreElem = true;
 
 
   }
@@ -48,7 +49,7 @@ export class ComicsPage {
     this._comicsService.getComics()
       .subscribe(
         comics => {
-          this.comics = comics;
+          this.elems = comics;
           this.allComicsLoaded = comics;
           this.lastId = comics[comics.length -1]._id;
           console.log(comics);
@@ -68,10 +69,10 @@ export class ComicsPage {
           if(comics.length === 0){
             return;
           }
-          this.comics= this.comics.concat(comics);
-          this.allComicsLoaded = this.comics;
+          this.elems= this.elems.concat(comics);
+          this.allComicsLoaded = this.elems;
           this.lastId = comics[comics.length -1]._id;
-          this.loadMoreComics = true;
+          this.loadMoreElem = true;
         },
         error => this.errorMessage = <any>error
       );
@@ -87,58 +88,28 @@ export class ComicsPage {
           if(comics.length === 0){
             return;
           }
-          this.comics= this.comics.concat(comics);
-          this.allComicsLoaded = this.comics;
+          this.elems= this.elems.concat(comics);
+          this.allComicsLoaded = this.elems;
           this.lastId = comics[comics.length -1]._id;
-          this.loadMoreComics = false;
+          this.loadMoreElem = false;
           if(comics.length === this.limit){
-            this.loadMoreComics = true;
+            this.loadMoreElem = true;
           }
         },
         error => this.errorMessage = <any>error
       );
   }
 
-  //getCategories(){
-  //  this._comicsService.getCategories()
-  //    .subscribe(
-  //      categories => {
-  //        this.categories = categories;
-  //      },
-  //      error => this.errorMessage = <any>error
-  //    );
-  //}
-
-  //onCategoryClicked(categories){
-  //  this.selectedCategories = categories;
-  //  if(categories.length === 0){
-  //    this.isFilterActivated = false;
-  //    this.comics  = this.allComicsLoaded;
-  //  }else{
-  //    this.isFilterActivated = true;
-  //  }
-  //  this.isActive = true;
-  //  this._comicsService.getCharcterByCategory(categories)
-  //    .subscribe(
-  //     comics=> {
-  //        this.comics= comics
-  //        this.isActive=false;
-  //      },
-  //      error => this.errorMessage = <any>error
-  //    );
-  //
-  //}
-
   onSearchChanged(searchInput) {
     this.searchTerm = searchInput;
     if (searchInput === '') {
-      this.comics= this.allComicsLoaded;
+      this.elems= this.allComicsLoaded;
       this.isActive = false;
       this.isSearchedActivated = false;
 
       return;
     }
-    this.loadMoreComics = false;
+    this.loadMoreElem = false;
     this.isSearchedActivated = true;
     this.isActive = true;
     var keyups = Observable.of(searchInput)
@@ -147,13 +118,13 @@ export class ComicsPage {
       .distinctUntilChanged()
       .flatMap(searchTerm => this._comicsService.searchComicsByTitle(searchTerm));
 
-    keyups.subscribe(function(data:Array<any>){
-      this.comics = data;
+    keyups.subscribe( (data:Array<any>) =>{
+      this.elems = data;
       this.lastId = data[data.length -1]._id;
       this.isActive = false;
-      this.loadMoreComics = false;
+      this.loadMoreElem = false;
       if(data.length === this.limit){
-        this.loadMoreComics = true;
+        this.loadMoreElem = true;
       }
     });
 
@@ -164,15 +135,14 @@ export class ComicsPage {
     if(this.isFilterActivated){
       return;
     }
-    console.log("this.isSearchedActivated",this.isSearchedActivated);
-    console.log("this.loadMoreComics",this.loadMoreComics);
-    if(this.isSearchedActivated && this.loadMoreComics){
+
+    if(this.isSearchedActivated && this.loadMoreElem){
 
       this.getMoreComicsFromSearch(this.searchTerm,this.lastId,this.limit);
       return;
     }else if(!this.isSearchedActivated){
       this.getMoreComics(this.lastId,this.limit);
-      this.loadMoreComics = false;
+      this.loadMoreElem = false;
     }
 
   }

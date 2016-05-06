@@ -6,24 +6,24 @@ import {SearchComponent} from "../../modules/search/search.component";
 
 import {GoBackUpComponent} from "../../modules/go-back-up/go-back-up.component";
 import {ComicvineCharactersService} from "../../services/comicvine-service";
-import {ComicvineCharGrid} from "../../modules/comicvine-grid/comicvine-grid.component";
 import {SearchAndFilterService} from "../../services/search-filter.service";
+import {Grid} from "../../modules/grid/grid.component";
 
 @Component({
   selector: 'ComicvinePage',
   providers: [ComicvineCharactersService,SearchAndFilterService],
-  directives: [ComicvineCharGrid, SearchComponent,GoBackUpComponent],
+  directives: [Grid, SearchComponent,GoBackUpComponent],
   template: `
 
     <search-component [isActive]="isActive" class="search-view-container"
     (searchEvent)="onSearchChanged($event)" [(value)]="searchTerm"></search-component>
-    <comicvine-grid [loadMoreChar]="loadMoreChar" [characters]="characters" (onBottomOfPage)="onBottomOfPage($event)"></comicvine-grid>
+    <grid [page]="page" [loadMoreElem]="loadMoreElem" [elems]="elems" (onBottomOfPage)="onBottomOfPage($event)"></grid>
     <go-back-up></go-back-up>
   `
 })
 
 export class ComicvineCharPage {
-  private characters:Array<any> = [];
+  private elems:Array<any> = [];
 
   private allCharactersLoaded;
   private errorMessage:string;
@@ -31,12 +31,13 @@ export class ComicvineCharPage {
   private lastId;
   private searchTerm = '';
   private isSearchedActivated = false;
-  private loadMoreChar = true;
+  private loadMoreElem = true;
+  private page = "comicvineChars";
 
   constructor(private _comicvineCharacterService:ComicvineCharactersService) {
     this.getCharacters();
 
-    this.loadMoreChar = true;
+    this.loadMoreElem = true;
 
 
   }
@@ -45,8 +46,8 @@ export class ComicvineCharPage {
     this._comicvineCharacterService.getCharacters()
       .subscribe(
         characters => {
-          this.characters = characters;
-          console.log(this.characters);
+          this.elems = characters;
+          console.log(this.elems);
           this.allCharactersLoaded = characters;
           this.lastId = characters[characters.length -1]._id;
         },
@@ -65,10 +66,10 @@ export class ComicvineCharPage {
           if(characters.length === 0){
             return;
           }
-          this.characters = this.characters.concat(characters);
-          this.allCharactersLoaded = this.characters;
+          this.elems = this.elems.concat(characters);
+          this.allCharactersLoaded = this.elems;
           this.lastId = characters[characters.length -1]._id;
-          this.loadMoreChar = true;
+          this.loadMoreElem = true;
         },
         error => this.errorMessage = <any>error
       );
@@ -78,7 +79,7 @@ export class ComicvineCharPage {
   onSearchChanged(searchInput) {
     this.searchTerm = searchInput;
     if (searchInput === '') {
-      this.characters = this.allCharactersLoaded;
+      this.elems = this.allCharactersLoaded;
       this.isActive = false;
       this.isSearchedActivated = false;
 
@@ -92,8 +93,8 @@ export class ComicvineCharPage {
       .distinctUntilChanged()
       .flatMap(searchTerm => this._comicvineCharacterService.searchCharactersByName(searchTerm));
 
-    keyups.subscribe(function(data:Array<any>){
-      this.characters = data;
+    keyups.subscribe((data:Array<any>) => {
+      this.elems = data;
       this.isActive = false;
     });
 
@@ -104,10 +105,10 @@ export class ComicvineCharPage {
     if(this.isSearchedActivated){
       return;
     }
-    if(this.loadMoreChar){
+    if(this.loadMoreElem){
       this.getMoreCharacters(this.lastId,100);
     }
-    this.loadMoreChar = false;
+    this.loadMoreElem = false;
 
 
   }

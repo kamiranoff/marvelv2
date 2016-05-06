@@ -1,30 +1,30 @@
 import {Component,Input,EventEmitter} from "angular2/core";
 import {Observable} from "rxjs/Rx"; //full api
 
-import {CharactersGrid} from "../../modules/characters-grid/characters-grid.component";
 import {SearchComponent} from "../../modules/search/search.component";
 import {CharactersService} from "../../services/characters.service";
 import {FilterComponent} from "../../modules/filter/filter.component";
 import {CategoriesService} from "../../services/categories-service";
 import {GoBackUpComponent} from "../../modules/go-back-up/go-back-up.component";
 import {SearchAndFilterService} from "../../services/search-filter.service";
+import {Grid} from "../../modules/grid/grid.component";
 
 @Component({
   selector: 'homepage',
   providers: [CharactersService,CategoriesService,SearchAndFilterService],
-  directives: [CharactersGrid, SearchComponent, FilterComponent,GoBackUpComponent],
+  directives: [Grid, SearchComponent, FilterComponent,GoBackUpComponent],
   template: `
 
     <search-component [isActive]="isActive" class="search-view-container"
     (searchEvent)="onSearchChanged($event)" [(value)]="searchTerm"></search-component>
     <filter [categories]="categories" (onFilterChanged)="onCategoryClicked($event)"></filter>
-    <characters-grid [loadMoreChar]="loadMoreChar" [characters]="characters" (onBottomOfPage)="onBottomOfPage($event)"></characters-grid>
+    <grid [page]="page" [loadMoreElem]="loadMoreElem" [elems]="elems" (onBottomOfPage)="onBottomOfPage($event)"></grid>
     <go-back-up></go-back-up>
   `
 })
 
 export class Homepage {
-  private characters:Array<any> = [];
+  private elems:Array<any> = [];
   private categories:Array<String> = [];
   private selectedCategories:Array<String> = [];
   private allCharactersLoaded;
@@ -34,12 +34,13 @@ export class Homepage {
   private searchTerm = '';
   private isSearchedActivated = false;
   private isFilterActivated = false;
-  private loadMoreChar = true;
+  private loadMoreElem = true;
+  private page = "marvelApi";
 
   constructor(private _characterService:CharactersService,private _categoriesService:CategoriesService,private _searchAndFilterService:SearchAndFilterService) {
     this.getCharacters();
     this.getCategories();
-    this.loadMoreChar = true;
+    this.loadMoreElem = true;
 
 
   }
@@ -48,7 +49,7 @@ export class Homepage {
     this._characterService.getCharacters()
       .subscribe(
         characters => {
-          this.characters = characters;
+          this.elems = characters;
           this.allCharactersLoaded = characters;
           this.lastId = characters[characters.length -1]._id;
         },
@@ -67,10 +68,10 @@ export class Homepage {
           if(characters.length === 0){
             return;
           }
-          this.characters = this.characters.concat(characters);
-          this.allCharactersLoaded = this.characters;
+          this.elems = this.elems.concat(characters);
+          this.allCharactersLoaded = this.elems;
           this.lastId = characters[characters.length -1]._id;
-          this.loadMoreChar = true;
+          this.loadMoreElem = true;
         },
         error => this.errorMessage = <any>error
       );
@@ -90,7 +91,7 @@ export class Homepage {
     this.selectedCategories = categories;
     if(categories.length === 0){
       this.isFilterActivated = false;
-      this.characters  = this.allCharactersLoaded;
+      this.elems  = this.allCharactersLoaded;
     }else{
       this.isFilterActivated = true;
     }
@@ -98,7 +99,7 @@ export class Homepage {
     this._characterService.getCharcterByCategory(categories)
       .subscribe(
         characters => {
-          this.characters = characters;
+          this.elems = characters;
           this.isActive=false;
         },
         error => this.errorMessage = <any>error
@@ -109,7 +110,7 @@ export class Homepage {
   onSearchChanged(searchInput) {
     this.searchTerm = searchInput;
     if (searchInput === '') {
-      this.characters = this.allCharactersLoaded;
+      this.elems = this.allCharactersLoaded;
       this.isActive = false;
       this.isSearchedActivated = false;
 
@@ -124,20 +125,19 @@ export class Homepage {
       .flatMap(searchTerm => this._characterService.searchCharactersByName(searchTerm));
 
 
-    keyups.subscribe(function(data:Array<any>){
-      this.characters = data;
+    keyups.subscribe( (data:Array<any>) => {
+      this.elems = data;
       this.isActive = false;
     });
 
   }
 
   onBottomOfPage($event){
-    this.loadMoreChar = false;
+    this.loadMoreElem = false;
     if(this.isFilterActivated || this.isSearchedActivated){
      return;
     }
     this.getMoreCharacters(this.lastId,100);
-
 
   }
 }
