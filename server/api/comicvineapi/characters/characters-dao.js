@@ -43,11 +43,12 @@ comicvineCharacterSchema.statics.getMoreCharacters = (lastid,qty) => {
 
 
 comicvineCharacterSchema.statics.getCharactersByName = (input) => {
+  console.log("input",input);
   return new Promise((resolve, reject) => {
     if (!_.isString(input)) {
       return reject(new TypeError('is not a valid string.'));
     }
-    let _query = { "name": { "$regex": input, "$options": "i" }};
+    let _query = { "character.name": { "$regex": input, "$options": "i" }};
     let fields = '';
     Characters
       .find( _query ,fields)
