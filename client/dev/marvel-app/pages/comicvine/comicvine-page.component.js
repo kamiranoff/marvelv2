@@ -33,22 +33,22 @@ var ComicvineCharPage = (function () {
             _this.elems = characters;
             console.log(_this.elems);
             _this.allCharactersLoaded = characters;
-            _this.lastId = characters[characters.length - 1]._id;
+            _this.lastName = characters[characters.length - 1].character.name;
         }, function (error) { return _this.errorMessage = error; });
     };
-    ComicvineCharPage.prototype.getMoreCharacters = function (lastId, qty) {
+    ComicvineCharPage.prototype.getMoreCharacters = function (lastName, qty) {
         var _this = this;
-        if (!this._comicvineCharacterService.getMoreCharacters(lastId, qty)) {
+        if (!this._comicvineCharacterService.getMoreCharacters(lastName, qty)) {
             return;
         }
-        this._comicvineCharacterService.getMoreCharacters(lastId, qty)
+        this._comicvineCharacterService.getMoreCharacters(lastName, qty)
             .subscribe(function (characters) {
             if (characters.length === 0) {
                 return;
             }
             _this.elems = _this.elems.concat(characters);
             _this.allCharactersLoaded = _this.elems;
-            _this.lastId = characters[characters.length - 1]._id;
+            _this.lastName = characters[characters.length - 1].character.name;
             _this.loadMoreElem = true;
         }, function (error) { return _this.errorMessage = error; });
     };
@@ -78,7 +78,8 @@ var ComicvineCharPage = (function () {
             return;
         }
         if (this.loadMoreElem) {
-            this.getMoreCharacters(this.lastId, 100);
+            console.log(this.lastName);
+            this.getMoreCharacters(this.lastName, 100);
         }
         this.loadMoreElem = false;
     };

@@ -22,9 +22,9 @@ var ComicvineCharactersService = (function () {
             .map(this.extractData)
             .catch(this.handleError);
     };
-    ComicvineCharactersService.prototype.getMoreCharacters = function (lastId, qty) {
-        if (lastId) {
-            return this.http.get(this._heroesUrl + "?lastid=" + lastId + "&qty=" + qty)
+    ComicvineCharactersService.prototype.getMoreCharacters = function (lastName, qty) {
+        if (lastName) {
+            return this.http.get(this._heroesUrl + "?lastName=" + lastName + "&qty=" + qty)
                 .map(this.extractData)
                 .catch(this.handleError);
         }

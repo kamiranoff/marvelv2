@@ -17,9 +17,9 @@ export class ComicvineCharactersService {
       .catch(this.handleError);
   }
 
-  getMoreCharacters(lastId,qty): Observable<any>{
-    if(lastId){
-      return this.http.get(this._heroesUrl + "?lastid=" + lastId + "&qty=" + qty)
+  getMoreCharacters(lastName,qty): Observable<any>{
+    if(lastName){
+      return this.http.get(this._heroesUrl + "?lastName=" + lastName + "&qty=" + qty)
         .map(this.extractData)
         .catch(this.handleError);
     }

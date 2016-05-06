@@ -28,7 +28,7 @@ export class ComicvineCharPage {
   private allCharactersLoaded;
   private errorMessage:string;
   private isActive:boolean;
-  private lastId;
+  private lastName;
   private searchTerm = '';
   private isSearchedActivated = false;
   private loadMoreElem = true;
@@ -49,18 +49,18 @@ export class ComicvineCharPage {
           this.elems = characters;
           console.log(this.elems);
           this.allCharactersLoaded = characters;
-          this.lastId = characters[characters.length -1]._id;
+          this.lastName = characters[characters.length -1].character.name;
         },
         error => this.errorMessage = <any>error
       );
 
   }
 
-  getMoreCharacters(lastId,qty){
-    if(!this._comicvineCharacterService.getMoreCharacters(lastId,qty)){
+  getMoreCharacters(lastName,qty){
+    if(!this._comicvineCharacterService.getMoreCharacters(lastName,qty)){
       return;
     }
-    this._comicvineCharacterService.getMoreCharacters(lastId,qty)
+    this._comicvineCharacterService.getMoreCharacters(lastName,qty)
       .subscribe(
         characters => {
           if(characters.length === 0){
@@ -68,7 +68,7 @@ export class ComicvineCharPage {
           }
           this.elems = this.elems.concat(characters);
           this.allCharactersLoaded = this.elems;
-          this.lastId = characters[characters.length -1]._id;
+          this.lastName = characters[characters.length -1].character.name;
           this.loadMoreElem = true;
         },
         error => this.errorMessage = <any>error
@@ -106,7 +106,8 @@ export class ComicvineCharPage {
       return;
     }
     if(this.loadMoreElem){
-      this.getMoreCharacters(this.lastId,100);
+      console.log(this.lastName);
+      this.getMoreCharacters(this.lastName,100);
     }
     this.loadMoreElem = false;
 

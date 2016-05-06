@@ -786,7 +786,7 @@ button, input {
   font-size: 2em;
 }
 
-.characters-list {
+.characters-list, .comics-list {
   display: flex;
   flex-wrap: wrap;
   align-content: stretch;
@@ -795,7 +795,7 @@ button, input {
   justify-content: space-around;
 }
 
-.characters-list .single-hero-link {
+.characters-list .single-hero-link, .characters-list .single-comic-link, .comics-list .single-hero-link, .comics-list .single-comic-link {
   position: relative;
   flex: 0 0 100%;
   text-align: center;
@@ -803,38 +803,38 @@ button, input {
   transition: 0.2s all ease-in-out;
 }
 
-.characters-list .single-hero-link.not-visible {
+.characters-list .single-hero-link.not-visible, .characters-list .single-comic-link.not-visible, .comics-list .single-hero-link.not-visible, .comics-list .single-comic-link.not-visible {
   display: none;
 }
 
-.characters-list .single-hero-link.visible {
+.characters-list .single-hero-link.visible, .characters-list .single-comic-link.visible, .comics-list .single-hero-link.visible, .comics-list .single-comic-link.visible {
   display: block;
 }
 
 @media (min-width: 641px) {
-  .characters-list .single-hero-link {
+  .characters-list .single-hero-link, .characters-list .single-comic-link, .comics-list .single-hero-link, .comics-list .single-comic-link {
     flex: 0 0 50%;
   }
 }
 
 @media (min-width: 961px) {
-  .characters-list .single-hero-link {
+  .characters-list .single-hero-link, .characters-list .single-comic-link, .comics-list .single-hero-link, .comics-list .single-comic-link {
     flex: 0 0 25%;
   }
 }
 
 @media (min-width: 1281px) {
-  .characters-list .single-hero-link {
+  .characters-list .single-hero-link, .characters-list .single-comic-link, .comics-list .single-hero-link, .comics-list .single-comic-link {
     flex: 0 0 16.666%;
   }
 }
 
-.characters-list .single-hero-link .character-link {
+.characters-list .single-hero-link .character-link, .characters-list .single-hero-link .comic-link, .characters-list .single-comic-link .character-link, .characters-list .single-comic-link .comic-link, .comics-list .single-hero-link .character-link, .comics-list .single-hero-link .comic-link, .comics-list .single-comic-link .character-link, .comics-list .single-comic-link .comic-link {
   display: block;
   overflow: hidden;
 }
 
-.characters-list .single-hero-link img {
+.characters-list .single-hero-link img, .characters-list .single-comic-link img, .comics-list .single-hero-link img, .comics-list .single-comic-link img {
   transition: 0.5s all linear;
   transition: 0.5s all linear;
   filter: grayscale(100%);
@@ -843,7 +843,7 @@ button, input {
   vertical-align: bottom;
 }
 
-.characters-list .single-hero-link h3 {
+.characters-list .single-hero-link h3, .characters-list .single-comic-link h3, .comics-list .single-hero-link h3, .comics-list .single-comic-link h3 {
   transition-duration: 0.3s;
   transition-timing-function: ease;
   transition-property: opacity, background, color;
@@ -860,17 +860,17 @@ button, input {
   padding: 10px 0;
 }
 
-.characters-list .single-hero-link:hover {
+.characters-list .single-hero-link:hover, .characters-list .single-comic-link:hover, .comics-list .single-hero-link:hover, .comics-list .single-comic-link:hover {
   z-index: 5;
   width: 100%;
 }
 
-.characters-list .single-hero-link:hover img {
+.characters-list .single-hero-link:hover img, .characters-list .single-comic-link:hover img, .comics-list .single-hero-link:hover img, .comics-list .single-comic-link:hover img {
   transform: scale(1.1) rotate(1deg);
   filter: grayscale(0);
 }
 
-.characters-list .single-hero-link:hover h3 {
+.characters-list .single-hero-link:hover h3, .characters-list .single-comic-link:hover h3, .comics-list .single-hero-link:hover h3, .comics-list .single-comic-link:hover h3 {
   opacity: 1;
   z-index: 5;
   background: black;
@@ -879,33 +879,12 @@ button, input {
   color: #F4F5F6;
 }
 
-.characters-list .single-hero-link:hover h3:hover {
+.characters-list .single-hero-link:hover h3:hover, .characters-list .single-comic-link:hover h3:hover, .comics-list .single-hero-link:hover h3:hover, .comics-list .single-comic-link:hover h3:hover {
   color: #3B7092;
 }
 
-.comics-list {
-  display: flex;
-  flex-wrap: wrap;
-  align-content: stretch;
-  flex-direction: row;
-  flex-flow: row wrap;
-  justify-content: space-around;
-}
-
 .comics-list .single-comic-link {
-  position: relative;
   flex: 0 0 50%;
-  text-align: center;
-  flex-grow: 1;
-  transition: 0.2s all ease-in-out;
-}
-
-.comics-list .single-comic-link.not-visible {
-  display: none;
-}
-
-.comics-list .single-comic-link.visible {
-  display: block;
 }
 
 @media (min-width: 641px) {
@@ -924,60 +903,6 @@ button, input {
   .comics-list .single-comic-link {
     flex: 0 0 10%;
   }
-}
-
-.comics-list .single-comic-link .comic-link {
-  display: block;
-  overflow: hidden;
-}
-
-.comics-list .single-comic-link img {
-  transition: 0.5s all linear;
-  transition: 0.5s all linear;
-  filter: grayscale(100%);
-  width: 100%;
-  height: 300px;
-  vertical-align: bottom;
-}
-
-.comics-list .single-comic-link h3 {
-  transition-duration: 0.3s;
-  transition-timing-function: ease;
-  transition-property: opacity, background, color;
-  font-size: 14px;
-  position: absolute;
-  z-index: 1;
-  bottom: 0;
-  width: 100%;
-  max-width: 100%;
-  background-color: #f4f5f6;
-  background-color: rgba(244, 245, 246, 0.8);
-  color: #222;
-  margin-bottom: 0;
-  padding: 10px 0;
-}
-
-.comics-list .single-comic-link:hover {
-  z-index: 5;
-  width: 100%;
-}
-
-.comics-list .single-comic-link:hover img {
-  transform: scale(1.1) rotate(1deg);
-  filter: grayscale(0);
-}
-
-.comics-list .single-comic-link:hover h3 {
-  opacity: 1;
-  z-index: 5;
-  background: black;
-  background-color: #f4f5f6;
-  background-color: #f4f5f6;
-  color: #F4F5F6;
-}
-
-.comics-list .single-comic-link:hover h3:hover {
-  color: #3B7092;
 }
 
 .no-hero-container {
