@@ -1,19 +1,37 @@
 "use strict";
 
-const CharactersController = require('./characters/characters-controller');
-const ComicvineCharacterDetailController = require('./character-detail/character-detail-controller');
+const CharactersController = require('./characters/marvel/characters-controller');
+const CharactersDCController = require('./characters/dc/characters-dc-controller');
+const CharactersTopCowController = require('./characters/top-cow/characters-top-cow-controller');
+const CharacterDetailController = require('./character-detail/character-detail-controller');
 
 
 
 module.exports = class ComicvineRoutes {
 
   static init(router) {
-    router.route('/api/comicvine/characters')
+    //Marvel
+    router.route('/api/comicvine/marvel/characters')
       .get(CharactersController.getCharacters);
+
+
+
+    //DC
+    router.route('/api/comicvine/dc/characters')
+      .get(CharactersDCController.getCharacters);
+
+
+
+    //TopCow
+    router.route('/api/comicvine/top-cow/characters')
+      .get(CharactersTopCowController.getCharacters);
 
     router
       .route('/api/comicvine/character/:characterId')
-      .get(ComicvineCharacterDetailController.getCharacterDetail);
+      .get(CharacterDetailController.getCharacterDetail);
+
   }
+
+
 
 };

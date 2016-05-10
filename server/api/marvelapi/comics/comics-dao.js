@@ -14,7 +14,7 @@ comicsSchema.statics.getAll = () => {
 
     Comics
       .find(_query,fields)
-      .sort({ "_id": 1 })
+      .sort({ "comic.title": 1 })
       .limit(100)
       .exec((err, comics) => {
         if(err){

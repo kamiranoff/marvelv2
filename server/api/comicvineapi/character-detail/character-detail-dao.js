@@ -13,6 +13,7 @@ characterSchema.statics.getCharacterDetail = (id) => {
     if (!_.isNumber(id)) {
       return reject(new TypeError('Id is not a valid number.'));
     }
+
     ComicvineCharacterDetail
       .find({'character.id':id})
       .exec((err, characterDetail) => {
