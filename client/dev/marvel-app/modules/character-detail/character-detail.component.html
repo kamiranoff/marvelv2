@@ -29,7 +29,7 @@
   </h2>
 
   <section class="layout-single-column">
-    <p [innerHTML]="character.wiki?.bio | makeLinks:this | breakLines | makeTitles "></p>
+    <div class="bio" [innerHTML]="character.wiki?.bio | makeLinks:this | breakLines | makeTitles "></div>
 
   </section>
 
