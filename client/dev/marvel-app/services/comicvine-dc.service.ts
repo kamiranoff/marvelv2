@@ -4,20 +4,20 @@ import {Injectable} from 'angular2/core';
 import {Http,Response} from "angular2/http";
 
 @Injectable()
-export class ComicvineCharactersService {
+export class ComicvineDCCharactersService {
 
   constructor(public http:Http) {
   }
-  private _heroesUrl = '/api/comicvine/characters';
+  private _heroesUrl = '/api/comicvine/dc/characters';
 
 
-  getCharacters(): Observable<any>{
+  getCharactersFromDC(): Observable<any>{
     return this.http.get(this._heroesUrl)
       .map(this.extractData)
       .catch(this.handleError);
   }
 
-  getMoreCharacters(lastName,qty): Observable<any>{
+  getMoreCharactersFromDC(lastName,qty): Observable<any>{
     if(lastName){
       return this.http.get(this._heroesUrl + "?lastName=" + lastName + "&qty=" + qty)
         .map(this.extractData)
@@ -25,7 +25,7 @@ export class ComicvineCharactersService {
     }
   }
 
-  searchCharactersByName(userInput):Observable<any>{
+  searchCharactersByNameFromDC(userInput):Observable<any>{
     return this.http.get(this._heroesUrl + "?name=" + userInput )
       .map(this.extractData)
       .catch(this.handleError);
