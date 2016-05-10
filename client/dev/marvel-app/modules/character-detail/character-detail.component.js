@@ -12,6 +12,9 @@ var core_1 = require("angular2/core");
 var router_1 = require('angular2/router');
 var character_detail_service_1 = require("../../services/character-detail.service");
 var parallax_directive_1 = require("../../helpers/parallax.directive");
+var make_links_pipe_1 = require("../../pipes/make-links.pipe");
+var break_lines_pipe_1 = require("../../pipes/break-lines.pipe");
+var makeTitles_pipe_1 = require("../../pipes/makeTitles.pipe");
 var CharacterDetail = (function () {
     function CharacterDetail(_characterDetailService, params) {
         this._characterDetailService = _characterDetailService;
@@ -42,6 +45,7 @@ var CharacterDetail = (function () {
     CharacterDetail = __decorate([
         core_1.Component({
             selector: 'character-detail',
+            pipes: [make_links_pipe_1.MakeLinksPipe, break_lines_pipe_1.BreakLinesPipe, makeTitles_pipe_1.MakeTitlesPipe],
             directives: [parallax_directive_1.Parallax],
             providers: [character_detail_service_1.CharacterDetailService],
             templateUrl: 'marvel-app/modules/character-detail/character-detail.component.html'

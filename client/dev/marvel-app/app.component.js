@@ -17,6 +17,8 @@ var comics_page_component_1 = require("./pages/comics-page/comics-page.component
 var comicvine_page_component_1 = require("./pages/comicvine/comicvine-page.component");
 var comicvine_character_detail_component_1 = require("./modules/comicvine-character-detail/comicvine-character-detail.component");
 var navbar_component_1 = require("./modules/navbar/navbar.component");
+var comicvine_dc_page_component_1 = require("./pages/comicvine-dc/comicvine-dc-page.component");
+var comicvine_top_cow_page_component_1 = require("./pages/comicvine-top-cow/comicvine-top-cow-page.component");
 var AppComponent = (function () {
     function AppComponent(router) {
         this.router = router;
@@ -30,9 +32,19 @@ var AppComponent = (function () {
                 useAsDefault: true
             },
             {
-                path: '/comicvine',
-                name: 'ComicvineChars',
-                component: comicvine_page_component_1.ComicvineCharPage
+                path: '/comicvine-marvel',
+                name: 'ComicvineCharsMarvel',
+                component: comicvine_page_component_1.ComicvineCharPageMarvel
+            },
+            {
+                path: '/comicvine-dc',
+                name: 'ComicvineCharsDC',
+                component: comicvine_dc_page_component_1.ComicvineCharPageDC
+            },
+            {
+                path: '/comicvine-top-cow',
+                name: 'ComicvineCharsTopCow',
+                component: comicvine_top_cow_page_component_1.ComicvineCharPageTopCow
             },
             {
                 path: '/comicvine-characters/:id',

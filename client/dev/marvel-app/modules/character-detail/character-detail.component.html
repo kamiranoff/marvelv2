@@ -9,7 +9,7 @@
     <div class="main-hero-image"><img src="{{character.thumbnail?.path}}.{{character.thumbnail?.extension}}"></div>
     <div class="hero-description-wiki-text">
       <p><strong>Real Name: </strong>{{character.wiki?.real_name}}</p>
-      <p><strong>Relatives: </strong>{{character.wiki?.relatives}}</p>
+      <p><strong>Relatives: </strong><span [innerHTML]="character.wiki?.relatives  | makeLinks:this | breakLines"></span></p>
       <p><strong>Eyes: </strong>{{character.wiki?.eyes}}</p>
       <p><strong>Hair: </strong>{{character.wiki?.hair}}</p>
       <p><strong>Height: </strong>{{character.wiki?.height}}</p>
@@ -19,16 +19,17 @@
       <p><strong>Aliases: </strong>{{character.wiki?.aliases}}</p>
       <p><strong>Abilities: </strong>{{character.wiki?.abilities}}</p>
       <p><strong>Education: </strong>{{character.wiki?.education}}</p>
-      <p><strong>Powers: </strong>{{character.wiki?.powers}}</p>
+      <p><strong>Powers: </strong><span [innerHTML]="character.wiki?.powers | makeLinks:this"></span></p>
     </div>
   </section>
-  <h2 class="description-summary">
-    <hr class="divider">{{character.description}}
+  <h2 *ngIf="character.description !== '' " class="description-summary">
+    <hr class="divider">
+    {{character.description}}
     <hr class="divider">
   </h2>
 
   <section class="layout-single-column">
-    <p><strong>DESC</strong>:{{character.wiki?.bio}}</p>
+    <p [innerHTML]="character.wiki?.bio | makeLinks:this | breakLines | makeTitles "></p>
 
   </section>
 

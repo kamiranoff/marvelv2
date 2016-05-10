@@ -13,11 +13,11 @@ var Rx_1 = require("rxjs/Rx"); //full api
 var search_component_1 = require("../../modules/search/search.component");
 var go_back_up_component_1 = require("../../modules/go-back-up/go-back-up.component");
 var search_filter_service_1 = require("../../services/search-filter.service");
-var comicvine_marvel_service_1 = require("../../services/comicvine-marvel-service");
 var grid_component_1 = require("../../modules/grid/grid.component");
-var ComicvineCharPageMarvel = (function () {
-    function ComicvineCharPageMarvel(_comicvineMarvelCharacterService) {
-        this._comicvineMarvelCharacterService = _comicvineMarvelCharacterService;
+var comicvine_top_cow_service_1 = require("../../services/comicvine-top-cow.service");
+var ComicvineCharPageTopCow = (function () {
+    function ComicvineCharPageTopCow(_comicvineTopCowCharacterService, _searchAndFilterService) {
+        this._comicvineTopCowCharacterService = _comicvineTopCowCharacterService;
         this.elems = [];
         this.searchTerm = '';
         this.isSearchedActivated = false;
@@ -26,9 +26,9 @@ var ComicvineCharPageMarvel = (function () {
         this.getCharacters();
         this.loadMoreElem = true;
     }
-    ComicvineCharPageMarvel.prototype.getCharacters = function () {
+    ComicvineCharPageTopCow.prototype.getCharacters = function () {
         var _this = this;
-        this._comicvineMarvelCharacterService.getCharactersFromMarvel()
+        this._comicvineTopCowCharacterService.getCharactersFromTopCow()
             .subscribe(function (characters) {
             _this.elems = characters;
             console.log(_this.elems);
@@ -36,12 +36,12 @@ var ComicvineCharPageMarvel = (function () {
             _this.lastName = characters[characters.length - 1].character.name;
         }, function (error) { return _this.errorMessage = error; });
     };
-    ComicvineCharPageMarvel.prototype.getMoreCharacters = function (lastName, qty) {
+    ComicvineCharPageTopCow.prototype.getMoreCharacters = function (lastName, qty) {
         var _this = this;
-        if (!this._comicvineMarvelCharacterService.getMoreCharactersFromMarvel(lastName, qty)) {
+        if (!this._comicvineTopCowCharacterService.getMoreCharactersFromTopCow(lastName, qty)) {
             return;
         }
-        this._comicvineMarvelCharacterService.getMoreCharactersFromMarvel(lastName, qty)
+        this._comicvineTopCowCharacterService.getMoreCharactersFromTopCow(lastName, qty)
             .subscribe(function (characters) {
             if (characters.length === 0) {
                 return;
@@ -52,7 +52,7 @@ var ComicvineCharPageMarvel = (function () {
             _this.loadMoreElem = true;
         }, function (error) { return _this.errorMessage = error; });
     };
-    ComicvineCharPageMarvel.prototype.onSearchChanged = function (searchInput) {
+    ComicvineCharPageTopCow.prototype.onSearchChanged = function (searchInput) {
         var _this = this;
         this.searchTerm = searchInput;
         if (searchInput === '') {
@@ -67,35 +67,31 @@ var ComicvineCharPageMarvel = (function () {
             .filter(function (text) { return text.length >= 1; })
             .debounceTime(300)
             .distinctUntilChanged()
-            .flatMap(function (searchTerm) { return _this._comicvineMarvelCharacterService.searchCharactersByNameFromMarvel(searchTerm); });
+            .flatMap(function (searchTerm) { return _this._comicvineTopCowCharacterService.searchCharactersByNameFromTopCow(searchTerm); });
         keyups.subscribe(function (data) {
             _this.elems = data;
             _this.isActive = false;
         });
     };
-    ComicvineCharPageMarvel.prototype.onBottomOfPage = function ($event) {
+    ComicvineCharPageTopCow.prototype.onBottomOfPage = function ($event) {
         if (this.isSearchedActivated) {
             return;
         }
         if (this.loadMoreElem) {
             console.log(this.lastName);
-            if (typeof (this.lastName) !== 'undefined') {
-                this.getMoreCharacters(this.lastName, 100);
-            }
+            this.getMoreCharacters(this.lastName, 100);
         }
-        if (typeof (this.lastName) !== 'undefined') {
-            this.loadMoreElem = false;
-        }
+        this.loadMoreElem = false;
     };
-    ComicvineCharPageMarvel = __decorate([
+    ComicvineCharPageTopCow = __decorate([
         core_1.Component({
-            selector: 'ComicvinePageMarvel',
-            providers: [comicvine_marvel_service_1.ComicvineMarvelCharactersService, search_filter_service_1.SearchAndFilterService],
+            selector: 'ComicvinePageTopCow',
+            providers: [comicvine_top_cow_service_1.ComicvineTopCowCharactersService, search_filter_service_1.SearchAndFilterService],
             directives: [grid_component_1.Grid, search_component_1.SearchComponent, go_back_up_component_1.GoBackUpComponent],
             template: "\n\n    <search-component [isActive]=\"isActive\" class=\"search-view-container\"\n    (searchEvent)=\"onSearchChanged($event)\" [(value)]=\"searchTerm\"></search-component>\n    <grid [page]=\"page\" [loadMoreElem]=\"loadMoreElem\" [elems]=\"elems\" (onBottomOfPage)=\"onBottomOfPage($event)\"></grid>\n    <go-back-up></go-back-up>\n  "
         }), 
-        __metadata('design:paramtypes', [comicvine_marvel_service_1.ComicvineMarvelCharactersService])
-    ], ComicvineCharPageMarvel);
-    return ComicvineCharPageMarvel;
+        __metadata('design:paramtypes', [comicvine_top_cow_service_1.ComicvineTopCowCharactersService, search_filter_service_1.SearchAndFilterService])
+    ], ComicvineCharPageTopCow);
+    return ComicvineCharPageTopCow;
 }());
-exports.ComicvineCharPageMarvel = ComicvineCharPageMarvel;
+exports.ComicvineCharPageTopCow = ComicvineCharPageTopCow;

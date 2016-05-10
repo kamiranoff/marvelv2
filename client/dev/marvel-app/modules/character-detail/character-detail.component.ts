@@ -3,9 +3,14 @@ import {RouteParams} from 'angular2/router';
 
 import {CharacterDetailService} from "../../services/character-detail.service";
 import {Parallax,ParallaxConfig} from "../../helpers/parallax.directive";
+import {MakeLinksPipe} from "../../pipes/make-links.pipe";
+import {BreakLinesPipe} from "../../pipes/break-lines.pipe";
+import {MakeTitlesPipe} from "../../pipes/makeTitles.pipe";
+
 
 @Component({
   selector:'character-detail',
+  pipes:[MakeLinksPipe,BreakLinesPipe,MakeTitlesPipe],
   directives:[Parallax],
   providers:[CharacterDetailService],
   templateUrl:'marvel-app/modules/character-detail/character-detail.component.html'

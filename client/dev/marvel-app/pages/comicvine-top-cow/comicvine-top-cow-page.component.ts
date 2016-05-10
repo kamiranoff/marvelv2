@@ -5,17 +5,15 @@ import {SearchComponent} from "../../modules/search/search.component";
 
 
 import {GoBackUpComponent} from "../../modules/go-back-up/go-back-up.component";
-
 import {SearchAndFilterService} from "../../services/search-filter.service";
-import {ComicvineMarvelCharactersService} from "../../services/comicvine-marvel-service";
 import {Grid} from "../../modules/grid/grid.component";
-
+import {ComicvineTopCowCharactersService} from "../../services/comicvine-top-cow.service";
 
 @Component({
-  selector: 'ComicvinePageMarvel',
-  providers: [ComicvineMarvelCharactersService,SearchAndFilterService],
+  selector: 'ComicvinePageTopCow',
+  providers: [ComicvineTopCowCharactersService,SearchAndFilterService],
   directives: [Grid, SearchComponent,GoBackUpComponent],
-  template: `
+  template:`
 
     <search-component [isActive]="isActive" class="search-view-container"
     (searchEvent)="onSearchChanged($event)" [(value)]="searchTerm"></search-component>
@@ -24,7 +22,7 @@ import {Grid} from "../../modules/grid/grid.component";
   `
 })
 
-export class ComicvineCharPageMarvel {
+export class ComicvineCharPageTopCow {
   private elems:Array<any> = [];
 
   private allCharactersLoaded;
@@ -36,7 +34,7 @@ export class ComicvineCharPageMarvel {
   private loadMoreElem = true;
   private page = "comicvineChars";
 
-  constructor(private _comicvineMarvelCharacterService:ComicvineMarvelCharactersService) {
+  constructor(private _comicvineTopCowCharacterService:ComicvineTopCowCharactersService,_searchAndFilterService:SearchAndFilterService) {
     this.getCharacters();
 
     this.loadMoreElem = true;
@@ -45,7 +43,7 @@ export class ComicvineCharPageMarvel {
   }
 
   getCharacters() {
-    this._comicvineMarvelCharacterService.getCharactersFromMarvel()
+    this._comicvineTopCowCharacterService.getCharactersFromTopCow()
       .subscribe(
         characters => {
           this.elems = characters;
@@ -59,10 +57,10 @@ export class ComicvineCharPageMarvel {
   }
 
   getMoreCharacters(lastName,qty){
-    if(!this._comicvineMarvelCharacterService.getMoreCharactersFromMarvel(lastName,qty)){
+    if(!this._comicvineTopCowCharacterService.getMoreCharactersFromTopCow(lastName,qty)){
       return;
     }
-    this._comicvineMarvelCharacterService.getMoreCharactersFromMarvel(lastName,qty)
+    this._comicvineTopCowCharacterService.getMoreCharactersFromTopCow(lastName,qty)
       .subscribe(
         characters => {
           if(characters.length === 0){
@@ -93,7 +91,7 @@ export class ComicvineCharPageMarvel {
       .filter(text => text.length >= 1)
       .debounceTime(300)
       .distinctUntilChanged()
-      .flatMap(searchTerm => this._comicvineMarvelCharacterService.searchCharactersByNameFromMarvel(searchTerm));
+      .flatMap(searchTerm => this._comicvineTopCowCharacterService.searchCharactersByNameFromTopCow(searchTerm));
 
     keyups.subscribe((data:Array<any>) => {
       this.elems = data;
@@ -109,13 +107,9 @@ export class ComicvineCharPageMarvel {
     }
     if(this.loadMoreElem){
       console.log(this.lastName);
-      if(typeof(this.lastName) !== 'undefined'){
-        this.getMoreCharacters(this.lastName,100);
-      }
+      this.getMoreCharacters(this.lastName,100);
     }
-    if(typeof(this.lastName) !== 'undefined') {
-      this.loadMoreElem = false;
-    }
+    this.loadMoreElem = false;
 
 
   }
