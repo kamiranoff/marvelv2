@@ -1,6 +1,6 @@
 
-import {Component} from 'angular2/core';
-import {RouteConfig,ROUTER_DIRECTIVES,Router} from 'angular2/router';
+import {Component} from '@angular/core';
+import {RouteConfig,ROUTER_DIRECTIVES,Router} from '@angular/router-deprecated';
 
 
 import {Homepage} from "./pages/homepage/homepage.component";
@@ -12,6 +12,7 @@ import {ComicvineCharacterDetail} from "./modules/comicvine-character-detail/com
 import {NavbarComponent} from "./modules/navbar/navbar.component";
 import {ComicvineCharPageDC} from "./pages/comicvine-dc/comicvine-dc-page.component";
 import {ComicvineCharPageTopCow} from "./pages/comicvine-top-cow/comicvine-top-cow-page.component";
+
 
 @RouteConfig([
   {
@@ -68,7 +69,6 @@ import {ComicvineCharPageTopCow} from "./pages/comicvine-top-cow/comicvine-top-c
 
 export class AppComponent {
   constructor(public router: Router) {
-
   }
 
 }

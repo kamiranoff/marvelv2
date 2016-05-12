@@ -1,4 +1,4 @@
-import {Component,Input,Output,EventEmitter} from "angular2/core";
+import {Component,Input,Output,EventEmitter} from "@angular/core";
 import {CategoriesService} from "../../services/categories-service";
 import {ReplacePipe} from "../../pipes/replace.pipe";
 import {SearchAndFilterService} from "../../services/search-filter.service";

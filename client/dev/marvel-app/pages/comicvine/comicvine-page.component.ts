@@ -1,24 +1,24 @@
-import {Component,Input,EventEmitter} from "angular2/core";
+import {Component,Input,EventEmitter} from "@angular/core";
 import {Observable} from "rxjs/Rx"; //full api
 
 import {SearchComponent} from "../../modules/search/search.component";
-
-
 import {GoBackUpComponent} from "../../modules/go-back-up/go-back-up.component";
-
 import {SearchAndFilterService} from "../../services/search-filter.service";
 import {ComicvineMarvelCharactersService} from "../../services/comicvine-marvel-service";
 import {Grid} from "../../modules/grid/grid.component";
+import {ComicvineMarvelAppearancesService} from "../../services/comicvine-marvel-appearance.service";
+import {GraphComponent} from "../../modules/graph/graph.component";
 
 
 @Component({
   selector: 'ComicvinePageMarvel',
-  providers: [ComicvineMarvelCharactersService,SearchAndFilterService],
-  directives: [Grid, SearchComponent,GoBackUpComponent],
+  providers: [ComicvineMarvelCharactersService,SearchAndFilterService,ComicvineMarvelAppearancesService],
+  directives: [Grid, SearchComponent,GoBackUpComponent,GraphComponent],
   template: `
 
     <search-component [isActive]="isActive" class="search-view-container"
     (searchEvent)="onSearchChanged($event)" [(value)]="searchTerm"></search-component>
+    <graph class="graph" [appearances]="appearances"[collectionLength]="collectionLength"></graph>
     <grid [page]="page" [loadMoreElem]="loadMoreElem" [elems]="elems" (onBottomOfPage)="onBottomOfPage($event)"></grid>
     <go-back-up></go-back-up>
   `
@@ -26,7 +26,8 @@ import {Grid} from "../../modules/grid/grid.component";
 
 export class ComicvineCharPageMarvel {
   private elems:Array<any> = [];
-
+  private appearances:Array<any> = [];
+  private collectionLength:number;
   private allCharactersLoaded;
   private errorMessage:string;
   private isActive:boolean;
@@ -36,9 +37,10 @@ export class ComicvineCharPageMarvel {
   private loadMoreElem = true;
   private page = "comicvineChars";
 
-  constructor(private _comicvineMarvelCharacterService:ComicvineMarvelCharactersService) {
-    this.getCharacters();
 
+  constructor(private _comicvineMarvelCharacterService:ComicvineMarvelCharactersService,private _comicvineMarvelAppearancesService:ComicvineMarvelAppearancesService) {
+    this.getCharacters();
+    this.getAppearances();
     this.loadMoreElem = true;
 
 
@@ -49,7 +51,6 @@ export class ComicvineCharPageMarvel {
       .subscribe(
         characters => {
           this.elems = characters;
-          console.log(this.elems);
           this.allCharactersLoaded = characters;
           this.lastName = characters[characters.length -1].character.name;
         },
@@ -77,6 +78,23 @@ export class ComicvineCharPageMarvel {
       );
   }
 
+  getAppearances(){
+    this._comicvineMarvelAppearancesService.getAppearancesFromMarvel()
+      .subscribe(
+        data => {
+          this.collectionLength = data.length;
+          this.appearances = [
+            {
+              key: "Cumulative Return",
+              values: data
+            }
+          ];
+
+        },
+        error => this.errorMessage = <any>error
+      );
+
+  }
 
   onSearchChanged(searchInput) {
     this.searchTerm = searchInput;
@@ -108,7 +126,7 @@ export class ComicvineCharPageMarvel {
       return;
     }
     if(this.loadMoreElem){
-      console.log(this.lastName);
+
       if(typeof(this.lastName) !== 'undefined'){
         this.getMoreCharacters(this.lastName,100);
       }

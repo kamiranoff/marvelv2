@@ -1,5 +1,5 @@
-import {Component,Output,EventEmitter} from "angular2/core";
-import {Control} from "angular2/common";
+import {Component,Output,EventEmitter} from "@angular/core";
+import {Control} from "@angular/common";
 import {SearchAndFilterService} from "../../services/search-filter.service";
 import {Subscription} from "rxjs/Subscription";
 

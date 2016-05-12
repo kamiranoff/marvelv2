@@ -11,12 +11,21 @@ module.exports = class StaticDispatcher {
       fs.createReadStream(_root + '/client/dev/index.html')
         .pipe(res);
     }
+  static sendJs(req, res) {
+    var _root = process.cwd();
 
-    static uniq(a) {
-      return Array.from(new Set(a));
-    }
+    res.type('.js');
 
-    static capitalizeFirstLetter(string) {
-      return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
-    }
+    fs.createReadStream(_root + '/node_modules/jquery/dist/jquery.js')
+      .pipe(res);
+  }
+
+
+  static uniq(a) {
+    return Array.from(new Set(a));
+  }
+
+  static capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+  }
 };

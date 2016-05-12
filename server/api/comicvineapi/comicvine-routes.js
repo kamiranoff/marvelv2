@@ -14,6 +14,8 @@ module.exports = class ComicvineRoutes {
     router.route('/api/comicvine/marvel/characters')
       .get(CharactersController.getCharacters);
 
+    router.route('/api/comicvine/marvel/appearances')
+      .get(CharactersController.getAppearances);
 
 
     //DC

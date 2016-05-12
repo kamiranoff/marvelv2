@@ -6,6 +6,7 @@
     "server": "node",
     "client": "ng2",
     "transpilerServer": "node",
-    "secure": false
+    "secure": true,
+    "differentStaticServer": false
   }
 }

@@ -6,6 +6,7 @@ import {path, tasks} from './const';
 
 const SCSS = path.DEV + 'common/scss/styles.scss';
 const SCSS_DEST = path.DEV;
+console.log(SCSS_DEST);
 gulp.task(tasks.CLIENT_BUILD_SCSS_DEV, function () {
   return gulp.src(SCSS)
     .pipe(sourcemaps.init())

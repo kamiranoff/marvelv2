@@ -10,8 +10,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 ///<reference path="../../../../node_modules/rxjs/Observable.d.ts"/>
 var Rx_1 = require("rxjs/Rx");
-var core_1 = require('angular2/core');
-var http_1 = require("angular2/http");
+var core_1 = require('@angular/core');
+var http_1 = require("@angular/http");
 var ComicvineCharactersService = (function () {
     function ComicvineCharactersService(http) {
         this.http = http;
@@ -48,7 +48,7 @@ var ComicvineCharactersService = (function () {
         return Rx_1.Observable.throw(errMsg);
     };
     ComicvineCharactersService = __decorate([
-        core_1.Injectable(), 
+        core_1.Injectable(),
         __metadata('design:paramtypes', [http_1.Http])
     ], ComicvineCharactersService);
     return ComicvineCharactersService;

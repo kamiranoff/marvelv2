@@ -8,8 +8,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('angular2/core');
-var router_1 = require('angular2/router');
+var core_1 = require('@angular/core');
+var router_deprecated_1 = require('@angular/router-deprecated');
 var homepage_component_1 = require("./pages/homepage/homepage.component");
 var header_component_1 = require("./modules/header/header.component");
 var character_detail_component_1 = require("./modules/character-detail/character-detail.component");
@@ -24,7 +24,7 @@ var AppComponent = (function () {
         this.router = router;
     }
     AppComponent = __decorate([
-        router_1.RouteConfig([
+        router_deprecated_1.RouteConfig([
             {
                 path: '/',
                 name: 'Homepage',
@@ -64,11 +64,11 @@ var AppComponent = (function () {
         ]),
         core_1.Component({
             selector: 'my-app',
-            directives: [navbar_component_1.NavbarComponent, header_component_1.HeaderComponent, router_1.ROUTER_DIRECTIVES],
+            directives: [navbar_component_1.NavbarComponent, header_component_1.HeaderComponent, router_deprecated_1.ROUTER_DIRECTIVES],
             template: "\n  <navbar></navbar>\n  <header-component [class.small-header]=\"!router.isRouteActive(router.generate(['/Homepage']))\">\"></header-component>\n\n  <router-outlet></router-outlet>\n  ",
             styleUrls: ['app/app.component.css'],
         }), 
-        __metadata('design:paramtypes', [router_1.Router])
+        __metadata('design:paramtypes', [router_deprecated_1.Router])
     ], AppComponent);
     return AppComponent;
 }());

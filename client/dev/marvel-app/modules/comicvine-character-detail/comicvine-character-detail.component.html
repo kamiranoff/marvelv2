@@ -1,28 +1,24 @@
-<div class="single-hero-page">
-<h1 class="hero-name"
+<div class="single-hero-page comicvine-hero-page">
+  <div class="hero-presentation">
+<div class="hero-name"
     parallax [config]="{parallaxInitVal: 0, parallaxRatio: -.15,parallaxCss: 'backgroundPositionY'}"
-    style=" background-image:url('{{character.image?.super_url}}');">
-  <span class="hero-name-text">{{character.name}}</span>
-</h1>
-<section class="hero-description">
+     [ngStyle]="{'background-image': 'url(' + character.image?.super_url + ')'}"
+>
+</div>
   <section class="hero-description-wiki">
-    <div class="main-hero-image"><img src="{{character.image?.super_url}}"></div>
-    <div class="hero-description-wiki-text">
-      <p><strong>Publisher: </strong>{{character.publisher?.name}}</p>
-      <p><strong>Real Name: </strong>{{character.real_name}}</p>
-      <p><strong>Relatives: </strong>{{character.wiki?.relatives}}</p>
-      <p><strong>Eyes: </strong>{{character.wiki?.eyes}}</p>
-      <p><strong>Hair: </strong>{{character.wiki?.hair}}</p>
-      <p><strong>Height: </strong>{{character.wiki?.height}}</p>
-      <p><strong>Weight: </strong>{{character.wiki?.weight}}</p>
 
-      <hr class="divider">
+    <div class="hero-description-wiki-text">
+      <span class="hero-name-text">{{character.name}}</span>
+      <p><strong>Publisher: </strong>{{character.publisher?.name}}</p>
+      <p><strong>Comicvine: </strong><a target="_blank" href="{{character.site_detail_url}}">{{character.name}}</a></p>
+      <p><strong>Real Name: </strong>{{character.real_name}}</p>
+      <p><strong>Nb of Appearances: </strong>{{character.count_of_issue_appearances}}</p>
       <p><strong>Aliases: </strong>{{character.aliases}}</p>
-      <p><strong>Abilities: </strong>{{character.wiki?.abilities}}</p>
-      <p><strong>Education: </strong>{{character.wiki?.education}}</p>
-      <p><strong>Powers: </strong>{{character.wiki?.powers}}</p>
     </div>
   </section>
+  </div>
+<section class="hero-description">
+
   <h2 class="description-summary">
     <hr class="divider">
 {{character.deck}}

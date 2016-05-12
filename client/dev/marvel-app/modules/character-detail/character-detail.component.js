@@ -8,8 +8,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require("angular2/core");
-var router_1 = require('angular2/router');
+var core_1 = require("@angular/core");
+var router_deprecated_1 = require('@angular/router-deprecated');
 var character_detail_service_1 = require("../../services/character-detail.service");
 var parallax_directive_1 = require("../../helpers/parallax.directive");
 var make_links_pipe_1 = require("../../pipes/make-links.pipe");
@@ -50,7 +50,7 @@ var CharacterDetail = (function () {
             providers: [character_detail_service_1.CharacterDetailService],
             templateUrl: 'marvel-app/modules/character-detail/character-detail.component.html'
         }), 
-        __metadata('design:paramtypes', [character_detail_service_1.CharacterDetailService, router_1.RouteParams])
+        __metadata('design:paramtypes', [character_detail_service_1.CharacterDetailService, router_deprecated_1.RouteParams])
     ], CharacterDetail);
     return CharacterDetail;
 }());

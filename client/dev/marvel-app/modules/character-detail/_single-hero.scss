@@ -1,9 +1,12 @@
 .single-hero-page {
+  .hero-description{
+    padding-bottom: 100px;
+  }
   .hero-name {
     @extend %card-style;
     position:relative;
     text-align: left;
-    padding: 31rem 2rem 31rem 0;
+    padding: 21rem 2rem 31rem 0;
     margin: 0 auto 2rem auto;
     font-size: 5rem;
     box-shadow: 1px 1px 1px #ccc;
@@ -21,11 +24,6 @@
       //background-color: #000;
       width: 100%;
       display: block;
-      color: $text-alt;
-      position: absolute;
-      top: 0;
-      left: 0;
-      padding-left: 2rem;
     }
   }
   .hero-description-wiki {
@@ -52,6 +50,8 @@
   }
   .description-summary {
     padding: 2rem;
+    text-align: center;
+    text-transform: none;
   }
   .bio{
     letter-spacing: .01rem;

@@ -1,10 +1,7 @@
-import {Component,ElementRef,EventEmitter,Output,Input} from "angular2/core";
-import {ROUTER_DIRECTIVES} from 'angular2/router';
+import {Component,ElementRef,EventEmitter,Output,Input} from "@angular/core";
+import {ROUTER_DIRECTIVES} from '@angular/router-deprecated';
 import {CharactersService} from "../../services/characters.service";
 import {GetAverageRgb} from "../../helpers/get-average-rgb.helper";
-import {} from "angular2/core";
-
-declare var $: any;
 
 @Component({
   selector:'grid',

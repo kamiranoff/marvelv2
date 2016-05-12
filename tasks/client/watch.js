@@ -11,8 +11,10 @@ gulp.task(tasks.CLIENT_RELOAD, () => {
   return browserSync.reload();
 });
 
-gulp.task(tasks.CLIENT_WATCH, [tasks.CLIENT_BUILD_TS_DEV,tasks.CLIENT_BUILD_SCSS_DEV, tasks.CLIENT_RELOAD], () => {
+gulp.task(tasks.CLIENT_WATCH, [tasks.CLIENT_BUILD_TS], () => {
+
   browserSync({proxy: "http://localhost:3333", reloadDelay: 1000});
+
 
   let _watchable = [];
 
@@ -21,5 +23,5 @@ gulp.task(tasks.CLIENT_WATCH, [tasks.CLIENT_BUILD_TS_DEV,tasks.CLIENT_BUILD_SCSS
   _watchable.push(CSS);
   _watchable.push(HTML);
 
-  return gulp.watch(_watchable, [tasks.CLIENT_BUILD_TS_DEV,tasks.CLIENT_BUILD_SCSS_DEV, tasks.CLIENT_RELOAD]);
+  return gulp.watch(_watchable, [tasks.CLIENT_BUILD_TS,tasks.CLIENT_BUILD_SCSS_DEV, tasks.CLIENT_RELOAD]);
 });

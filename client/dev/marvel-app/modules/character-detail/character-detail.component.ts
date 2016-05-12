@@ -1,5 +1,5 @@
-import {Component} from "angular2/core";
-import {RouteParams} from 'angular2/router';
+import {Component} from "@angular/core";
+import {RouteParams} from '@angular/router-deprecated';
 
 import {CharacterDetailService} from "../../services/character-detail.service";
 import {Parallax,ParallaxConfig} from "../../helpers/parallax.directive";

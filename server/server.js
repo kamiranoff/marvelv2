@@ -1,7 +1,7 @@
 'use strict';
 
 if ('production' === process.env.NODE_ENV)
-    require('newrelic');
+  require('newrelic');
 
 const PORT = process.env.PORT || 3333;
 
@@ -19,7 +19,7 @@ DBConfig.init();
 Routes.init(app, express.Router());
 
 http.createServer(app)
-    .listen(PORT, () => {
-      console.log(`up and running @: ${os.hostname()} on port: ${PORT}`);
-      console.log(`enviroment: ${process.env.NODE_ENV}`);
-    });
+  .listen(PORT, () => {
+    console.log(`up and running @: ${os.hostname()} on port: ${PORT}`);
+    console.log(`enviroment: ${process.env.NODE_ENV}`);
+  });

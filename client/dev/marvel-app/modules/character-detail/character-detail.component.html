@@ -1,7 +1,8 @@
 <div class="single-hero-page">
 <h1 class="hero-name"
     parallax [config]="{parallaxInitVal: 0, parallaxRatio: -.15,parallaxCss: 'backgroundPositionY'}"
-    style=" background-image:url('{{character.thumbnail?.path}}.{{character.thumbnail?.extension}}');">
+    [ngStyle]="{'background-image': 'url(' + character.thumbnail?.path  + '.' + character.thumbnail?.extension + ')'}">
+
   <span class="hero-name-text">{{character.name}}</span>
 </h1>
 <section class="hero-description">
@@ -22,8 +23,8 @@
       <p><strong>Powers: </strong><span [innerHTML]="character.wiki?.powers | makeLinks:this"></span></p>
     </div>
   </section>
+  <hr class="divider">
   <h2 *ngIf="character.description !== '' " class="description-summary">
-    <hr class="divider">
     {{character.description}}
     <hr class="divider">
   </h2>

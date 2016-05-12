@@ -1,28 +1,28 @@
 <div *ngIf="page === 'marvelApi'" class="characters-list" (window:scroll)="onScroll($event)" >
-  <div class="single-hero-link" *ngFor="#character of elems;#idx = index"  #heroInGrid  (mouseenter)="changeTitleColorOnHover(idx,$event)">
+  <div class="single-hero-link" *ngFor="let character of elems;let idx = index"  #heroInGrid  (mouseenter)="changeTitleColorOnHover(idx,$event)">
     <a  class="character-link" [routerLink]="['CharacterDetail',{id:character.character.id,name:character.character.name}]">
       <img  crossOrigin="anonymous" src="{{character.character.thumbnail.path}}.{{character.character.thumbnail.extension}}"/>
 
-      <h3 class="name" style="background-color:{{character.dominantColor}}" >{{character.character.name}} </h3>
+      <h3 class="name" [style.backgroundColor]="character.dominantColor" >{{character.character.name}} </h3>
     </a>
   </div>
 </div>
 
 <div *ngIf="page === 'comicvineChars'" class="characters-list" (window:scroll)="onScroll($event)" >
-  <div class="single-hero-link" *ngFor="#character of elems;#idx = index"  #heroInGrid  (mouseenter)="changeTitleColorOnHover(idx,$event)">
+  <div class="single-hero-link" *ngFor="let character of elems;let idx = index"  #heroInGrid  (mouseenter)="changeTitleColorOnHover(idx,$event)">
     <a  class="character-link" [routerLink]="['ComicvineCharacterDetail',{id:character.character.id,name:character.character.name}]">
       <img  crossOrigin="anonymous" src="{{character.character.image?.medium_url}}"/>
 
-      <h3 class="name" style="background-color:{{character.dominantColor}}" >{{character.character.name}} </h3>
+      <h3 class="name" [style.backgroundColor]="character.dominantColor" >{{character.character.name}} </h3>
     </a>
   </div>
 </div>
 
 <div *ngIf="page === 'marvelApiComics'" class="comics-list" (window:scroll)="onScroll($event)" >
-  <div class="single-comic-link" *ngFor="#comic of elems;#idx = index"  #comicInGrid  (mouseenter)="changeTitleColorOnHover(idx,$event)">
+  <div class="single-comic-link" *ngFor="let comic of elems;let idx = index"  #comicInGrid  (mouseenter)="changeTitleColorOnHover(idx,$event)">
     <a  class="comic-link">
       <img  crossOrigin="anonymous" src="{{comic.comic.thumbnail.path}}.{{comic.comic.thumbnail.extension}}"/>
-      <h3 class="name" style="background-color:{{comic.dominantColor}}" > {{comic.comic.title}}</h3>
+      <h3 class="name" [style.backgroundColor]="character.dominantColor" > {{comic.comic.title}}</h3>
     </a>
   </div>
 </div>

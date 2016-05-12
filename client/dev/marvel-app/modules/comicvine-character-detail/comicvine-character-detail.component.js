@@ -8,8 +8,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require("angular2/core");
-var router_1 = require('angular2/router');
+var core_1 = require("@angular/core");
+var router_deprecated_1 = require('@angular/router-deprecated');
 var parallax_directive_1 = require("../../helpers/parallax.directive");
 var comicvine_character_detail_service_1 = require("../../services/comicvine-character-detail.service");
 var ComicvineCharacterDetail = (function () {
@@ -35,7 +35,7 @@ var ComicvineCharacterDetail = (function () {
             providers: [comicvine_character_detail_service_1.ComicvineCharacterDetailService],
             templateUrl: 'marvel-app/modules/comicvine-character-detail/comicvine-character-detail.component.html'
         }), 
-        __metadata('design:paramtypes', [comicvine_character_detail_service_1.ComicvineCharacterDetailService, router_1.RouteParams])
+        __metadata('design:paramtypes', [comicvine_character_detail_service_1.ComicvineCharacterDetailService, router_deprecated_1.RouteParams])
     ], ComicvineCharacterDetail);
     return ComicvineCharacterDetail;
 }());

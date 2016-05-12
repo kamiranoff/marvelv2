@@ -10,8 +10,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 ///<reference path="../../../../node_modules/rxjs/Observable.d.ts"/>
 var Rx_1 = require("rxjs/Rx");
-var core_1 = require('angular2/core');
-var http_1 = require("angular2/http");
+var core_1 = require('@angular/core');
+var http_1 = require("@angular/http");
 var ComicsService = (function () {
     function ComicsService(http) {
         this.http = http;

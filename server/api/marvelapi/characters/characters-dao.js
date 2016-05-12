@@ -5,12 +5,14 @@ const Promise = require('bluebird');
 const characterSchema = require('./character-model');
 const _ = require('lodash');
 
+const fieldsToRetreive = 'character.id character.thumbnail character.name character.wiki.categories character.wiki.groups ';
+
 
 
 characterSchema.statics.getAll = () => {
   return new Promise((resolve, reject) => {
     let _query = {};
-    let fields = 'character.id character.thumbnail character.name character.wiki.categories character.wiki.groups character.wiki.bio';
+    let fields = fieldsToRetreive;
 
     Characters
       .find(_query,fields)
@@ -27,7 +29,7 @@ characterSchema.statics.getAll = () => {
 characterSchema.statics.getMoreCharacters = (lastid,qty) => {
   return new Promise((resolve, reject) => {
     let _query = { "_id": { "$gt": lastid }};
-    let fields = 'character.id character.thumbnail character.name character.wiki.categories character.wiki.groups character.wiki.bio';
+    let fields = fieldsToRetreive;
 
     Characters
       .find(_query,fields)
@@ -48,7 +50,7 @@ characterSchema.statics.getCharactersByName = (input) => {
       return reject(new TypeError('is not a valid string.'));
     }
     let _query = { "character.name": { "$regex": input, "$options": "i" }};
-    let fields = 'character.id character.thumbnail character.name character.wiki.categories character.wiki.groups character.wiki.bio';
+    let fields = fieldsToRetreive;
     Characters
       .find( _query ,fields)
       .exec((err, characters) => {
@@ -72,7 +74,7 @@ characterSchema.statics.getCharactersByCategory = (input) => {
       return reject(new TypeError(' is not a valid array.'));
     }
     let _query = {"character.wiki.categories": { "$all": inputArrayRegex  }};
-    let fields = 'character.id character.thumbnail character.name character.wiki.categories character.wiki.groups character.wiki.bio';
+    let fields = fieldsToRetreive;
     Characters
       .find( _query ,fields )
       .exec((err, characters) => {

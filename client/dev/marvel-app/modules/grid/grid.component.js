@@ -8,8 +8,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require("angular2/core");
-var router_1 = require('angular2/router');
+var core_1 = require("@angular/core");
+var router_deprecated_1 = require('@angular/router-deprecated');
 var get_average_rgb_helper_1 = require("../../helpers/get-average-rgb.helper");
 var Grid = (function () {
     function Grid() {
@@ -43,7 +43,7 @@ var Grid = (function () {
         core_1.Component({
             selector: 'grid',
             inputs: ['elems'],
-            directives: [router_1.ROUTER_DIRECTIVES],
+            directives: [router_deprecated_1.ROUTER_DIRECTIVES],
             templateUrl: "marvel-app/modules/grid/grid.component.html"
         }), 
         __metadata('design:paramtypes', [])

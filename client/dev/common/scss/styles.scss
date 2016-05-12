@@ -29,10 +29,12 @@
 /*============================
 =            Modules        =
 ============================*/
+@import '../../marvel-app/pages/comicvine/comicvine-marvel';
 @import '../../marvel-app/modules/header/header';
 @import '../../marvel-app/modules/navbar/navigation';
 @import '../../marvel-app/modules/search/search';
 @import '../../marvel-app/modules/filter/filter';
 @import '../../marvel-app/modules/grid/grid';
 @import '../../marvel-app/modules/character-detail/single-hero';
+@import '../../marvel-app/modules/comicvine-character-detail/comicvine-detail';
 @import '../../marvel-app/modules/go-back-up/go-back-up-component';

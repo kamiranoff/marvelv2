@@ -3,6 +3,11 @@
 const CharactersDao = require('./characters-dao');
 
 module.exports = class CharactersController {
+  static getAppearances(req,res){
+    CharactersDao.getAllNamesAndAppearancesFromMarvel()
+      .then(characters => res.status(200).json(characters))
+      .catch(error => res.status(400).json(error));
+  }
   static getCharacters(req, res) {
     if(req.query.name){
       CharactersDao.getCharactersByName(req.query.name)

@@ -2,10 +2,11 @@
 
 const MarvelRoutes = require('../api/marvelapi/marvel-routes');
 const ComicvineRoutes = require('../api/comicvineapi/comicvine-routes');
+
 const StaticDispatcher = require('../commons/static/index');
 
-module.exports = class Routes {
 
+module.exports = class Routes {
 
   static init(app, router) {
     MarvelRoutes.init(router);
@@ -17,4 +18,4 @@ module.exports = class Routes {
 
     app.use('/', router);
   }
-}
+};

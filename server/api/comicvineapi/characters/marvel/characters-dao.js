@@ -5,12 +5,28 @@ const Promise = require('bluebird');
 const comicvineCharacterSchema = require('./../character-model');
 const _ = require('lodash');
 
+const fieldsToRetreive = 'character.name character.image character.id character.count_of_issue_appearances';
 
+comicvineCharacterSchema.statics.getAllNamesAndAppearancesFromMarvel = () => {
+  return new Promise((resolve, reject) => {
+    let _query = {'character.publisher.name':'Marvel'};
+    let fields = 'character.name character.id character.count_of_issue_appearances';
+
+    Characters
+      .find(_query,fields)
+      .sort({ "character.count_of_issue_appearances": -1 })
+      .exec((err, characters) => {
+        if(err){ reject(err)}else{
+          resolve(characters);
+        }
+      });
+  });
+};
 
 comicvineCharacterSchema.statics.getAllFromMarvel = () => {
   return new Promise((resolve, reject) => {
     let _query = {'character.publisher.name':'Marvel'};
-    let fields = '';
+    let fields = fieldsToRetreive;
 
     Characters
       .find(_query,fields)
@@ -33,7 +49,7 @@ comicvineCharacterSchema.statics.getMoreCharacters = (lastName,qty) => {
       "character.name": { "$gt": lastName },
       'character.publisher.name':'Marvel'
     };
-    let fields = '';
+    let fields = fieldsToRetreive;
 
     Characters
       .find(_query,fields)
@@ -58,7 +74,7 @@ comicvineCharacterSchema.statics.getCharactersByName = (input) => {
       "character.name": { "$regex": input, "$options": "i" },
       'character.publisher.name':'Marvel'
     };
-    let fields = '';
+    let fields = fieldsToRetreive;
     Characters
       .find( _query ,fields)
       .exec((err, characters) => {

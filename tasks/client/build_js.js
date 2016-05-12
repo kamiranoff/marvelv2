@@ -1,14 +1,11 @@
 import gulp from 'gulp';
-import cssmin from 'gulp-uglify';
-import rev from 'gulp-rev';
-import tsc from 'gulp-typescript';
+import uglify from 'gulp-uglify';
 import {path, tasks} from './const';
 
-const JS = path.DEV + '**/*.js';
+const JS = path.DIST + '**/*.js';
 
 gulp.task(tasks.CLIENT_JS_DIST, () => {
-  return gulp.src(CSS, {base: path.DEV})
+  return gulp.src(JS, {base: path.DIST})
              .pipe(uglify())
-             .pipe(rev())
              .pipe(gulp.dest(path.DIST));
 });

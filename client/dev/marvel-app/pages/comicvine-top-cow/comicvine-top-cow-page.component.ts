@@ -1,4 +1,4 @@
-import {Component,Input,EventEmitter} from "angular2/core";
+import {Component,Input,EventEmitter} from "@angular/core";
 import {Observable} from "rxjs/Rx"; //full api
 
 import {SearchComponent} from "../../modules/search/search.component";

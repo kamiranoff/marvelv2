@@ -325,7 +325,7 @@
   clear: both;
 }
 
-.single-hero-page .hero-name, .single-hero-page .hero-description-wiki-text {
+.single-hero-page .hero-name, .single-hero-page .hero-description-wiki-text, .comicvine-hero-page .hero-description-wiki-text {
   background-color: #fff;
   border-bottom: 1px solid #ccc;
 }
@@ -505,6 +505,11 @@ button, input {
 /*============================
 =            Modules        =
 ============================*/
+.graph {
+  display: block;
+  overflow-y: scroll;
+}
+
 .title {
   text-align: center;
   font-size: 3rem;
@@ -916,10 +921,14 @@ button, input {
   max-width: 400px;
 }
 
+.single-hero-page .hero-description {
+  padding-bottom: 100px;
+}
+
 .single-hero-page .hero-name {
   position: relative;
   text-align: left;
-  padding: 31rem 2rem 31rem 0;
+  padding: 21rem 2rem 31rem 0;
   margin: 0 auto 2rem auto;
   font-size: 5rem;
   box-shadow: 1px 1px 1px #ccc;
@@ -935,11 +944,6 @@ button, input {
 .single-hero-page .hero-name .hero-name-text {
   width: 100%;
   display: block;
-  color: #F4F5F6;
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding-left: 2rem;
 }
 
 .single-hero-page .hero-description-wiki {
@@ -966,6 +970,8 @@ button, input {
 
 .single-hero-page .description-summary {
   padding: 2rem;
+  text-align: center;
+  text-transform: none;
 }
 
 .single-hero-page .bio {
@@ -976,6 +982,36 @@ button, input {
   line-height: 1.58;
   letter-spacing: -.003em;
   color: rgba(0, 0, 0, 0.8);
+}
+
+.comicvine-hero-page .hero-description-wiki {
+  float: left;
+  width: 33.3%;
+}
+
+.comicvine-hero-page .hero-description-wiki-text {
+  padding: 1em;
+  width: 100%;
+  float: none;
+  font-size: 21px;
+  text-transform: none;
+  color: rgba(0, 0, 0, 0.8);
+  height: 100%;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.comicvine-hero-page .hero-name-text {
+  font-size: 50px;
+  text-align: center;
+}
+
+.comicvine-hero-page .hero-name {
+  width: 66.6%;
+  float: right;
+}
+
+.comicvine-hero-page .hero-description {
+  clear: both;
 }
 
 .go-back-up {
