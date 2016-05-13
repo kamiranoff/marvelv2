@@ -9,7 +9,7 @@ const fieldsToRetreive = 'character.name character.image character.id character.
 
 comicvineCharacterSchema.statics.getAllNamesAndAppearancesFromMarvel = () => {
   return new Promise((resolve, reject) => {
-    let _query = {'character.publisher.name':'Marvel'};
+    let _query = {'character.publisher.name':'Marvel','character.count_of_issue_appearances':{ $gt: 0}};
     let fields = 'character.name character.id character.count_of_issue_appearances';
 
     Characters

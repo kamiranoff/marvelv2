@@ -1,0 +1,18 @@
+.graph-container{
+  padding: 15px;
+  text{
+    font-size: 11px;
+  }
+}
+
+.nvtooltip{
+  background-color: #f4f5f6;
+  border-radius: 5px;
+  border: 1px solid rgba(50,50,50,0.4);
+  >div {
+    padding: 20px 20px 20px;
+    h3{
+      margin:0;
+    }
+  }
+}
