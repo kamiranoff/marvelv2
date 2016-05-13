@@ -3,6 +3,11 @@
 const CharactersDCDao = require('./characters-dc-dao');
 
 module.exports = class CharactersDCController {
+  static getAppearances(req,res){
+    CharactersDCDao.getAllNamesAndAppearancesFromDC()
+      .then(characters => res.status(200).json(characters))
+      .catch(error => res.status(400).json(error));
+  }
   static getCharacters(req, res) {
     if(req.query.name){
       CharactersDCDao.getCharactersByNameFromDC(req.query.name)

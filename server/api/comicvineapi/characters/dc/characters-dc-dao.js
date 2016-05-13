@@ -6,10 +6,29 @@ const comicvineCharacterSchema = require('./../character-model');
 const _ = require('lodash');
 
 
+const publisher = 'DC Comics';
+
+comicvineCharacterSchema.statics.getAllNamesAndAppearancesFromDC = () => {
+  return new Promise((resolve, reject) => {
+    let _query = {
+      'character.publisher.name':publisher,
+      'character.count_of_issue_appearances':{ $gt: 0}};
+    let fields = 'character.name character.id character.count_of_issue_appearances';
+
+    CharactersFromDC
+      .find(_query,fields)
+      .sort({ "character.count_of_issue_appearances": -1 })
+      .exec((err, characters) => {
+        if(err){ reject(err)}else{
+          resolve(characters);
+        }
+      });
+  });
+};
 
 comicvineCharacterSchema.statics.getAllFromDC = () => {
   return new Promise((resolve, reject) => {
-    let _query = {'character.publisher.name':'DC Comics'};
+    let _query = {'character.publisher.name':publisher};
     let fields = '';
 
     CharactersFromDC
@@ -31,7 +50,7 @@ comicvineCharacterSchema.statics.getMoreCharactersFromDC = (lastName,qty) => {
   return new Promise((resolve, reject) => {
     let _query = {
       "character.name": { "$gt": lastName },
-      'character.publisher.name':'DC Comics'
+      'character.publisher.name':publisher
     };
     let fields = '';
 
@@ -56,7 +75,7 @@ comicvineCharacterSchema.statics.getCharactersByNameFromDC = (input) => {
     }
     let _query = {
       "character.name": { "$regex": input, "$options": "i" },
-      'character.publisher.name':'DC Comics'
+      'character.publisher.name':publisher
     };
     let fields = '';
     CharactersFromDC

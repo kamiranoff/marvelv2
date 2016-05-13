@@ -22,11 +22,19 @@ module.exports = class ComicvineRoutes {
     router.route('/api/comicvine/dc/characters')
       .get(CharactersDCController.getCharacters);
 
+    router.route('/api/comicvine/dc/appearances')
+      .get(CharactersDCController.getAppearances);
 
 
     //TopCow
     router.route('/api/comicvine/top-cow/characters')
       .get(CharactersTopCowController.getCharacters);
+
+    router.route('/api/comicvine/top-cow/appearances')
+      .get(CharactersTopCowController.getAppearances);
+
+
+    //Details
 
     router
       .route('/api/comicvine/character/:characterId')

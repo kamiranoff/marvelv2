@@ -3,6 +3,11 @@
 const CharactersTopCowDao = require('./characters-top-cow-dao');
 
 module.exports = class CharactersTopCowController {
+  static getAppearances(req,res){
+    CharactersTopCowDao.getAllNamesAndAppearancesFromTopCow()
+      .then(characters => res.status(200).json(characters))
+      .catch(error => res.status(400).json(error));
+  }
   static getCharacters(req, res) {
     if(req.query.name){
       CharactersTopCowDao.getCharactersByNameFromTopCow(req.query.name)

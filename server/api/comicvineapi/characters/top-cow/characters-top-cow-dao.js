@@ -5,6 +5,7 @@ const Promise = require('bluebird');
 const comicvineCharacterSchema = require('./../character-model');
 const _ = require('lodash');
 
+
 const Marvel = 'Marvel';
 const DC = 'DC Comics';
 const Nintendo = 'Nintendo';
@@ -33,6 +34,24 @@ var publishers = [
   {'character.publisher.name':AspenMLT},
   {'character.publisher.name':Dynamite}
 ] ;
+
+comicvineCharacterSchema.statics.getAllNamesAndAppearancesFromTopCow = () => {
+  return new Promise((resolve, reject) => {
+    let _query = {
+      $or:publishers,
+      'character.count_of_issue_appearances':{ $gt: 0}};
+    let fields = 'character.name character.id character.count_of_issue_appearances';
+
+    CharactersFromTopCow
+      .find(_query,fields)
+      .sort({ "character.count_of_issue_appearances": -1 })
+      .exec((err, characters) => {
+        if(err){ reject(err)}else{
+          resolve(characters);
+        }
+      });
+  });
+};
 
 comicvineCharacterSchema.statics.getAllFromTopCow = () => {
   return new Promise((resolve, reject) => {
