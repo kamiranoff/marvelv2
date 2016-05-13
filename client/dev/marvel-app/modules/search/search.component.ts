@@ -17,7 +17,7 @@ import {Subscription} from "rxjs/Subscription";
 export class SearchComponent {
   private searchTermControl;
   private isActive = false;
-  private searchTerm:string;
+  private searchTerm:string ='';
 
   subscription:Subscription;
 

@@ -16,6 +16,7 @@ var SearchComponent = (function () {
         var _this = this;
         this._searchAndFilterService = _searchAndFilterService;
         this.isActive = false;
+        this.searchTerm = '';
         this.searchEvent = new core_1.EventEmitter();
         this.searchTermControl = new common_1.Control();
         this.subscription = _searchAndFilterService.searchChange$.subscribe(function () {

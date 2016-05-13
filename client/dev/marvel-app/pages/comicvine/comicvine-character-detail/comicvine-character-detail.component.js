@@ -12,6 +12,8 @@ var core_1 = require("@angular/core");
 var router_deprecated_1 = require('@angular/router-deprecated');
 var parallax_directive_1 = require("../../../helpers/parallax.directive");
 var comicvine_character_detail_service_1 = require("../../../services/comicvine/comicvine-character-detail.service");
+var load_images_pipe_1 = require("../../../pipes/load-images.pipe");
+var go_back_up_component_1 = require("../../../modules/go-back-up/go-back-up.component");
 var ComicvineCharacterDetail = (function () {
     function ComicvineCharacterDetail(_characterDetailService, params) {
         this._characterDetailService = _characterDetailService;
@@ -28,10 +30,13 @@ var ComicvineCharacterDetail = (function () {
             _this.character = character[0].character;
         }, function (error) { return _this.errorMessage = error; });
     };
+    ComicvineCharacterDetail.prototype.getAllImages = function () {
+    };
     ComicvineCharacterDetail = __decorate([
         core_1.Component({
             selector: 'character-detail',
-            directives: [parallax_directive_1.Parallax],
+            directives: [parallax_directive_1.Parallax, go_back_up_component_1.GoBackUpComponent],
+            pipes: [load_images_pipe_1.LoadImagesPipe],
             providers: [comicvine_character_detail_service_1.ComicvineCharacterDetailService],
             templateUrl: 'marvel-app/pages/comicvine/comicvine-character-detail/comicvine-character-detail.component.html'
         }), 

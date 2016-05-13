@@ -1014,6 +1014,17 @@ button, input {
   clear: both;
 }
 
+.comicvine-hero-page .bio figure {
+  margin: 15px auto;
+  text-align: center;
+  width: auto !important;
+  max-width: 100%;
+}
+
+.comicvine-hero-page .bio figure img {
+  max-width: 100%;
+}
+
 .go-back-up {
   width: 50px;
   height: 50px;

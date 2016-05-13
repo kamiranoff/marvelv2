@@ -26,9 +26,10 @@
   </h2>
 
   <section class="layout-single-column">
-    <div class="bio" [innerHTML]="character.description"></div>
+    <div class="bio" [innerHTML]="character.description | loadImages"></div>
 
   </section>
 
 </section>
 </div>
+<go-back-up></go-back-up>

@@ -4,10 +4,13 @@ import {RouteParams} from '@angular/router-deprecated';
 
 import {Parallax,ParallaxConfig} from "../../../helpers/parallax.directive";
 import {ComicvineCharacterDetailService} from "../../../services/comicvine/comicvine-character-detail.service";
+import {LoadImagesPipe} from "../../../pipes/load-images.pipe";
+import {GoBackUpComponent} from "../../../modules/go-back-up/go-back-up.component";
 
 @Component({
   selector:'character-detail',
-  directives:[Parallax],
+  directives:[Parallax,GoBackUpComponent],
+  pipes:[LoadImagesPipe],
   providers:[ComicvineCharacterDetailService],
   templateUrl:'marvel-app/pages/comicvine/comicvine-character-detail/comicvine-character-detail.component.html'
 })
@@ -35,6 +38,10 @@ export class ComicvineCharacterDetail{
         },
         error =>  this.errorMessage = <any>error
       );
+
+  }
+
+  getAllImages(){
 
   }
 

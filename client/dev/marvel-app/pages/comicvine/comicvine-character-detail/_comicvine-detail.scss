@@ -27,5 +27,16 @@
   .hero-description{
     clear: both;
   }
+  .bio{
+    figure{
+      margin: 15px auto;
+      text-align: center;
+      width: auto !important;
+      max-width: 100%;
+      img{
+        max-width: 100%;
+      }
+    }
+  }
 }
 
