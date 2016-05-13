@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core'
 import {Subject}    from 'rxjs/Subject';
 
 @Injectable()
-
 export class SearchAndFilterService{
   private _searchTermSource = new Subject<string>();
   private  _filterSource = new Subject<string[]>();
@@ -14,7 +13,6 @@ export class SearchAndFilterService{
     this._searchTermSource.next('');
 
   }
-
   resetFilter(){
     this._filterSource.next([]);
   }

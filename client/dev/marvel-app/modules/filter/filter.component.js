@@ -9,13 +9,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-var categories_service_1 = require("../../services/categories-service");
 var replace_pipe_1 = require("../../pipes/replace.pipe");
 var search_filter_service_1 = require("../../services/search-filter.service");
 var FilterComponent = (function () {
-    function FilterComponent(_categoriesService, _searchAndFilterService) {
+    function FilterComponent(_searchAndFilterService) {
         var _this = this;
-        this._categoriesService = _categoriesService;
         this._searchAndFilterService = _searchAndFilterService;
         this.categories = [];
         this.filter = [];
@@ -57,10 +55,9 @@ var FilterComponent = (function () {
             selector: 'filter',
             inputs: ['categories'],
             pipes: [replace_pipe_1.ReplacePipe],
-            providers: [categories_service_1.CategoriesService],
             templateUrl: "marvel-app/modules/filter/filter.component.html"
         }), 
-        __metadata('design:paramtypes', [categories_service_1.CategoriesService, search_filter_service_1.SearchAndFilterService])
+        __metadata('design:paramtypes', [search_filter_service_1.SearchAndFilterService])
     ], FilterComponent);
     return FilterComponent;
 }());

@@ -1,5 +1,4 @@
 import {Component,Input,Output,EventEmitter} from "@angular/core";
-import {CategoriesService} from "../../services/categories-service";
 import {ReplacePipe} from "../../pipes/replace.pipe";
 import {SearchAndFilterService} from "../../services/search-filter.service";
 import {Subscription} from "rxjs/Subscription";
@@ -9,7 +8,6 @@ import {Subscription} from "rxjs/Subscription";
   selector:'filter',
   inputs:['categories'],
   pipes:[ReplacePipe],
-  providers:[CategoriesService],
   templateUrl:"marvel-app/modules/filter/filter.component.html"
 
 })
@@ -20,7 +18,7 @@ export class FilterComponent{
   private isVisible = false;
   private subscription:Subscription;
 
-  constructor(private _categoriesService:CategoriesService,private _searchAndFilterService:SearchAndFilterService){
+  constructor(private _searchAndFilterService:SearchAndFilterService){
     this.subscription = _searchAndFilterService.filterChanged$.subscribe(() =>{
       this.filter = [];
 

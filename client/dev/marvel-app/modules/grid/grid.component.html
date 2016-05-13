@@ -22,7 +22,7 @@
   <div class="single-comic-link" *ngFor="let comic of elems;let idx = index"  #comicInGrid  (mouseenter)="changeTitleColorOnHover(idx,$event)">
     <a  class="comic-link">
       <img  crossOrigin="anonymous" src="{{comic.comic.thumbnail.path}}.{{comic.comic.thumbnail.extension}}"/>
-      <h3 class="name" [style.backgroundColor]="character.dominantColor" > {{comic.comic.title}}</h3>
+      <h3 class="name" [style.backgroundColor]="comic.dominantColor" > {{comic.comic.title}}</h3>
     </a>
   </div>
 </div>

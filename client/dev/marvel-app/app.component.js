@@ -12,13 +12,13 @@ var core_1 = require('@angular/core');
 var router_deprecated_1 = require('@angular/router-deprecated');
 var homepage_component_1 = require("./pages/homepage/homepage.component");
 var header_component_1 = require("./modules/header/header.component");
-var character_detail_component_1 = require("./modules/character-detail/character-detail.component");
-var comics_page_component_1 = require("./pages/comics-page/comics-page.component");
-var comicvine_page_component_1 = require("./pages/comicvine/comicvine-page.component");
-var comicvine_character_detail_component_1 = require("./modules/comicvine-character-detail/comicvine-character-detail.component");
+var character_detail_component_1 = require("./pages/marvel/character-detail/character-detail.component");
+var comics_page_component_1 = require("./pages/marvel/comics-page/comics-page.component");
+var comicvine_page_component_1 = require("./pages/comicvine/comicvine-marvel/comicvine-page.component");
+var comicvine_character_detail_component_1 = require("./pages/comicvine/comicvine-character-detail/comicvine-character-detail.component");
 var navbar_component_1 = require("./modules/navbar/navbar.component");
-var comicvine_dc_page_component_1 = require("./pages/comicvine-dc/comicvine-dc-page.component");
-var comicvine_top_cow_page_component_1 = require("./pages/comicvine-top-cow/comicvine-top-cow-page.component");
+var comicvine_dc_page_component_1 = require("./pages/comicvine/comicvine-dc/comicvine-dc-page.component");
+var comicvine_top_cow_page_component_1 = require("./pages/comicvine/comicvine-top-cow/comicvine-top-cow-page.component");
 var AppComponent = (function () {
     function AppComponent(router) {
         this.router = router;
@@ -65,8 +65,8 @@ var AppComponent = (function () {
         core_1.Component({
             selector: 'my-app',
             directives: [navbar_component_1.NavbarComponent, header_component_1.HeaderComponent, router_deprecated_1.ROUTER_DIRECTIVES],
-            template: "\n  <navbar></navbar>\n  <header-component [class.small-header]=\"!router.isRouteActive(router.generate(['/Homepage']))\">\"></header-component>\n\n  <router-outlet></router-outlet>\n  ",
             styleUrls: ['app/app.component.css'],
+            template: "\n  <navbar></navbar>\n  <header-component [class.small-header]=\"!router.isRouteActive(router.generate(['/Homepage']))\">\"></header-component>\n  <router-outlet></router-outlet>\n  "
         }), 
         __metadata('design:paramtypes', [router_deprecated_1.Router])
     ], AppComponent);

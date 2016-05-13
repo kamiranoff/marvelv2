@@ -5,13 +5,13 @@ import {RouteConfig,ROUTER_DIRECTIVES,Router} from '@angular/router-deprecated';
 
 import {Homepage} from "./pages/homepage/homepage.component";
 import {HeaderComponent} from "./modules/header/header.component";
-import {CharacterDetail} from "./modules/character-detail/character-detail.component";
-import {ComicsPage} from "./pages/comics-page/comics-page.component";
-import {ComicvineCharPageMarvel} from "./pages/comicvine/comicvine-page.component";
-import {ComicvineCharacterDetail} from "./modules/comicvine-character-detail/comicvine-character-detail.component";
+import {CharacterDetail} from "./pages/marvel/character-detail/character-detail.component";
+import {ComicsPage} from "./pages/marvel/comics-page/comics-page.component";
+import {ComicvineCharPageMarvel} from "./pages/comicvine/comicvine-marvel/comicvine-page.component";
+import {ComicvineCharacterDetail} from "./pages/comicvine/comicvine-character-detail/comicvine-character-detail.component";
 import {NavbarComponent} from "./modules/navbar/navbar.component";
-import {ComicvineCharPageDC} from "./pages/comicvine-dc/comicvine-dc-page.component";
-import {ComicvineCharPageTopCow} from "./pages/comicvine-top-cow/comicvine-top-cow-page.component";
+import {ComicvineCharPageDC} from "./pages/comicvine/comicvine-dc/comicvine-dc-page.component";
+import {ComicvineCharPageTopCow} from "./pages/comicvine/comicvine-top-cow/comicvine-top-cow-page.component";
 
 
 @RouteConfig([
@@ -57,13 +57,12 @@ import {ComicvineCharPageTopCow} from "./pages/comicvine-top-cow/comicvine-top-c
 @Component({
   selector: 'my-app',
   directives:[NavbarComponent,HeaderComponent,ROUTER_DIRECTIVES],
+  styleUrls: ['app/app.component.css'],
   template:`
   <navbar></navbar>
   <header-component [class.small-header]="!router.isRouteActive(router.generate(['/Homepage']))">"></header-component>
-
   <router-outlet></router-outlet>
-  `,
-  styleUrls: ['app/app.component.css'],
+  `
 
 })
 

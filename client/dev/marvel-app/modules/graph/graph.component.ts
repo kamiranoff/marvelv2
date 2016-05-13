@@ -24,7 +24,6 @@ export class GraphComponent{
   colorFunction = function() {
     return function(d,i) {
       var opacity = i / 1000;
-      console.log(opacity);
       if(opacity <= 0.2){
         opacity = 1;
       }

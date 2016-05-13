@@ -2,9 +2,9 @@ import {Component,Input,EventEmitter} from "@angular/core";
 import {Observable} from "rxjs/Rx"; //full api
 
 import {SearchComponent} from "../../modules/search/search.component";
-import {CharactersService} from "../../services/characters.service";
+import {CharactersService} from "../../services/marvel/characters.service";
 import {FilterComponent} from "../../modules/filter/filter.component";
-import {CategoriesService} from "../../services/categories-service";
+import {CategoriesService} from "../../services/marvel/categories-service";
 import {GoBackUpComponent} from "../../modules/go-back-up/go-back-up.component";
 import {SearchAndFilterService} from "../../services/search-filter.service";
 import {Grid} from "../../modules/grid/grid.component";
