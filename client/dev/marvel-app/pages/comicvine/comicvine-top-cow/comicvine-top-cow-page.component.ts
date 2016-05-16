@@ -1,137 +1,35 @@
-import {Component,Input,EventEmitter} from "@angular/core";
+import {Component} from "@angular/core";
 import {Observable} from "rxjs/Rx"; //full api
 
 import {SearchComponent} from "../../../modules/search/search.component";
-import {GoBackUpComponent} from "../../../modules/go-back-up/go-back-up.component";
-import {SearchAndFilterService} from "../../../services/search-filter.service";
-import {Grid} from "../../../modules/grid/grid.component";
-import {ComicvineTopCowCharactersService} from "../../../services/comicvine/top-cow/comicvine-top-cow.service";
-import {ComicvineTopCowAppearancesService} from "../../../services/comicvine/top-cow/comicvine-top-cow-appearance.service";
 import {GraphComponent} from "../../../modules/graph/graph.component";
+import {Grid} from "../../../modules/grid/grid.component";
+import {GoBackUpComponent} from "../../../modules/go-back-up/go-back-up.component";
+
+
+import {SearchAndFilterService} from "../../../services/search-filter.service";
+
+
+import {ComicvineCharPage} from "../comicvine-master/comicvine-characters-page.component";
+import {ComicvineCharactersService} from "../../../services/comicvine/comicvine-character.service";
+import {ComicvineAppearancesService} from "../../../services/comicvine/comicvine-appearance.service";
 
 @Component({
   selector: 'ComicvinePageTopCow',
-  providers: [ComicvineTopCowCharactersService,ComicvineTopCowAppearancesService,SearchAndFilterService],
+  providers: [ComicvineCharactersService,ComicvineAppearancesService,SearchAndFilterService],
   directives: [Grid, SearchComponent,GoBackUpComponent,GraphComponent],
-  template:`
-
-    <search-component [isActive]="isActive" class="search-view-container"
-    (searchEvent)="onSearchChanged($event)" [(value)]="searchTerm"></search-component>
-    <graph class="graph" [appearances]="appearances"[collectionLength]="collectionLength"></graph>
-    <grid [page]="page" [loadMoreElem]="loadMoreElem" [elems]="elems" (onBottomOfPage)="onBottomOfPage($event)"></grid>
-    <go-back-up></go-back-up>
-  `
+  templateUrl:'marvel-app/pages/comicvine/comicvine-master/comicvine-characters-page.component.html'
 })
 
-export class ComicvineCharPageTopCow {
-  private elems:Array<any> = [];
-
-  private allCharactersLoaded;
-  private errorMessage:string;
-  private isActive:boolean;
-  private lastName;
-  private searchTerm = '';
-  private isSearchedActivated = false;
-  private loadMoreElem = true;
-  private page = "comicvineChars";
-  private appearances:Array<any> = [];
-  private collectionLength:number;
+export class ComicvineCharPageTopCow extends ComicvineCharPage{
+  protected page = "comicvineChars";
+  protected characterServiceUrl = '/api/comicvine/dc/characters';
+  protected appearancesServiceUrl = 'api/comicvine/dc/appearances';
 
 
-  constructor(private _comicvineTopCowCharacterService:ComicvineTopCowCharactersService,private _comicvineTopCowAppearancesService:ComicvineTopCowAppearancesService) {
-    this.getCharacters();
-    this.getAppearances();
-    this.loadMoreElem = true;
-
+  constructor(private _comicvineCharacterService:ComicvineCharactersService,private _comicvineAppearancesService:ComicvineAppearancesService) {
+      super(_comicvineCharacterService,_comicvineAppearancesService)
 
   }
 
-  getCharacters() {
-    this._comicvineTopCowCharacterService.getCharactersFromTopCow()
-      .subscribe(
-        characters => {
-          this.elems = characters;
-          console.log(this.elems);
-          this.allCharactersLoaded = characters;
-          this.lastName = characters[characters.length -1].character.name;
-        },
-        error => this.errorMessage = <any>error
-      );
-
-  }
-
-  getMoreCharacters(lastName,qty){
-    if(!this._comicvineTopCowCharacterService.getMoreCharactersFromTopCow(lastName,qty)){
-      return;
-    }
-    this._comicvineTopCowCharacterService.getMoreCharactersFromTopCow(lastName,qty)
-      .subscribe(
-        characters => {
-          if(characters.length === 0){
-            return;
-          }
-          this.elems = this.elems.concat(characters);
-          this.allCharactersLoaded = this.elems;
-          this.lastName = characters[characters.length -1].character.name;
-          this.loadMoreElem = true;
-        },
-        error => this.errorMessage = <any>error
-      );
-  }
-
-  getAppearances(){
-    this._comicvineTopCowAppearancesService.getAppearancesFromTopCow()
-      .subscribe(
-        data => {
-          this.collectionLength = data.length;
-          this.appearances = [
-            {
-              key: "Characters'Appearances",
-              values: data
-            }
-          ];
-
-        },
-        error => this.errorMessage = <any>error
-      );
-
-  }
-
-  onSearchChanged(searchInput) {
-    this.searchTerm = searchInput;
-    if (searchInput === '') {
-      this.elems = this.allCharactersLoaded;
-      this.isActive = false;
-      this.isSearchedActivated = false;
-
-      return;
-    }
-    this.isSearchedActivated = true;
-    this.isActive = true;
-    var keyups = Observable.of(searchInput)
-      .filter(text => text.length >= 1)
-      .debounceTime(300)
-      .distinctUntilChanged()
-      .flatMap(searchTerm => this._comicvineTopCowCharacterService.searchCharactersByNameFromTopCow(searchTerm));
-
-    keyups.subscribe((data:Array<any>) => {
-      this.elems = data;
-      this.isActive = false;
-    });
-
-  }
-
-  onBottomOfPage($event){
-
-    if(this.isSearchedActivated){
-      return;
-    }
-    if(this.loadMoreElem){
-      console.log(this.lastName);
-      this.getMoreCharacters(this.lastName,100);
-    }
-    this.loadMoreElem = false;
-
-
-  }
 }

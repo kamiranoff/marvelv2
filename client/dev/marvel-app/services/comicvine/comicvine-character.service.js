@@ -11,33 +11,44 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var Rx_1 = require("rxjs/Rx");
 var core_1 = require('@angular/core');
 var http_1 = require("@angular/http");
-var ComicvineTopCowAppearancesService = (function () {
-    function ComicvineTopCowAppearancesService(http) {
+var ComicvineCharactersService = (function () {
+    function ComicvineCharactersService(http) {
         this.http = http;
-        this._heroesUrl = '/api/comicvine/top-cow/appearances';
     }
-    ComicvineTopCowAppearancesService.prototype.getAppearancesFromTopCow = function () {
-        return this.http.get(this._heroesUrl)
+    ComicvineCharactersService.prototype.getCharacters = function (characterUrl) {
+        return this.http.get(characterUrl)
             .map(this.extractData)
             .catch(this.handleError);
     };
-    ComicvineTopCowAppearancesService.prototype.extractData = function (res) {
+    ComicvineCharactersService.prototype.getMoreCharacters = function (characterUrl, lastName, qty) {
+        if (lastName) {
+            return this.http.get(characterUrl + "?lastName=" + lastName + "&qty=" + qty)
+                .map(this.extractData)
+                .catch(this.handleError);
+        }
+    };
+    ComicvineCharactersService.prototype.searchCharactersByName = function (characterUrl, userInput) {
+        return this.http.get(characterUrl + "?name=" + userInput)
+            .map(this.extractData)
+            .catch(this.handleError);
+    };
+    ComicvineCharactersService.prototype.extractData = function (res) {
         if (res.status < 200 || res.status >= 300) {
             throw new Error('Bad response status: ' + res.status);
         }
         var body = res.json();
         return body || {};
     };
-    ComicvineTopCowAppearancesService.prototype.handleError = function (error) {
+    ComicvineCharactersService.prototype.handleError = function (error) {
         // In a real world app, we might send the error to remote logging infrastructure
         var errMsg = error.message || 'Server error';
         console.error(errMsg); // log to console instead
         return Rx_1.Observable.throw(errMsg);
     };
-    ComicvineTopCowAppearancesService = __decorate([
+    ComicvineCharactersService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [http_1.Http])
-    ], ComicvineTopCowAppearancesService);
-    return ComicvineTopCowAppearancesService;
+    ], ComicvineCharactersService);
+    return ComicvineCharactersService;
 }());
-exports.ComicvineTopCowAppearancesService = ComicvineTopCowAppearancesService;
+exports.ComicvineCharactersService = ComicvineCharactersService;

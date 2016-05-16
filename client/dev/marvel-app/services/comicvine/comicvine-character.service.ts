@@ -3,28 +3,27 @@ import {Injectable} from '@angular/core';
 import {Http,Response} from "@angular/http";
 
 @Injectable()
-export class ComicvineTopCowCharactersService {
+export class ComicvineCharactersService {
 
-  constructor(public http:Http) {
-  }
-  private _heroesUrl = '/api/comicvine/top-cow/characters';
+  constructor(public http:Http) {}
 
-  getCharactersFromTopCow(): Observable<any>{
-    return this.http.get(this._heroesUrl)
+
+  getCharacters(characterUrl): Observable<any>{
+    return this.http.get(characterUrl)
       .map(this.extractData)
       .catch(this.handleError);
   }
 
-  getMoreCharactersFromTopCow(lastName,qty): Observable<any>{
+  getMoreCharacters(characterUrl,lastName,qty): Observable<any>{
     if(lastName){
-      return this.http.get(this._heroesUrl + "?lastName=" + lastName + "&qty=" + qty)
+      return this.http.get(characterUrl + "?lastName=" + lastName + "&qty=" + qty)
         .map(this.extractData)
         .catch(this.handleError);
     }
   }
 
-  searchCharactersByNameFromTopCow(userInput):Observable<any>{
-    return this.http.get(this._heroesUrl + "?name=" + userInput )
+  searchCharactersByName(characterUrl,userInput):Observable<any>{
+    return this.http.get(characterUrl+ "?name=" + userInput )
       .map(this.extractData)
       .catch(this.handleError);
   }

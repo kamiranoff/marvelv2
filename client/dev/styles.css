@@ -1058,6 +1058,7 @@ button, input {
 
 .graph-container .nv-bar {
   transition: 0.3s all ease;
+  cursor: pointer;
 }
 
 .graph-container .nv-bar text {

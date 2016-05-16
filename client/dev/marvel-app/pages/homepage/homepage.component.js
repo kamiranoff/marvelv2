@@ -72,6 +72,7 @@ var Homepage = (function () {
     Homepage.prototype.onCategoryClicked = function (categories) {
         var _this = this;
         this.searchTerm = '';
+        console.log(categories);
         this.selectedCategories = categories;
         if (categories.length === 0) {
             this.isFilterActivated = false;
@@ -89,7 +90,6 @@ var Homepage = (function () {
     };
     Homepage.prototype.onSearchChanged = function (searchInput) {
         var _this = this;
-        this.selectedCategories = [];
         this.searchTerm = searchInput;
         if (searchInput === '') {
             this.elems = this.allCharactersLoaded;

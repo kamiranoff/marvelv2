@@ -14,14 +14,19 @@ import {Subscription} from "rxjs/Subscription";
 
 export class FilterComponent{
   private categories = [];
-  private filter:Array<any> = [];
+  @Input() private selectedCategories:Array<any> = [];
   private isVisible = false;
   private subscription:Subscription;
-  @Input() private selectedCategories = [];
-  constructor(){
 
-    this.filter = this.selectedCategories;
-  };
+  constructor(){};
+
+  ngOnChanges() {
+    console.log(this.selectedCategories);
+    if(this.selectedCategories.length === 0){
+      this.isVisible = false;
+    }
+
+  }
 
   @Output() private onFilterChanged:EventEmitter<any> = new EventEmitter();
 
@@ -31,19 +36,19 @@ export class FilterComponent{
 
   onFilterClicked(category){
     var categoryName = category.name;
-    var indexOfCategory = this.filter.indexOf(categoryName);
+    var indexOfCategory = this.selectedCategories.indexOf(categoryName);
     //this._searchAndFilterService.resetSearch();
 
     if( indexOfCategory !== -1){
-      this.filter.splice(indexOfCategory,1);
+      this.selectedCategories.splice(indexOfCategory,1);
       category.selected=false;
     }else{
-      this.filter.push(categoryName);
+      this.selectedCategories.push(categoryName);
       category.selected=true;
     }
 
 
-    this.onFilterChanged.emit(this.filter);
+    this.onFilterChanged.emit(this.selectedCategories);
 
   }
 

@@ -13,34 +13,38 @@ var replace_pipe_1 = require("../../pipes/replace.pipe");
 var FilterComponent = (function () {
     function FilterComponent() {
         this.categories = [];
-        this.filter = [];
-        this.isVisible = false;
         this.selectedCategories = [];
+        this.isVisible = false;
         this.onFilterChanged = new core_1.EventEmitter();
-        this.filter = this.selectedCategories;
     }
     ;
+    FilterComponent.prototype.ngOnChanges = function () {
+        console.log(this.selectedCategories);
+        if (this.selectedCategories.length === 0) {
+            this.isVisible = false;
+        }
+    };
     FilterComponent.prototype.toggleFilter = function () {
         this.isVisible = !this.isVisible;
     };
     ;
     FilterComponent.prototype.onFilterClicked = function (category) {
         var categoryName = category.name;
-        var indexOfCategory = this.filter.indexOf(categoryName);
+        var indexOfCategory = this.selectedCategories.indexOf(categoryName);
         //this._searchAndFilterService.resetSearch();
         if (indexOfCategory !== -1) {
-            this.filter.splice(indexOfCategory, 1);
+            this.selectedCategories.splice(indexOfCategory, 1);
             category.selected = false;
         }
         else {
-            this.filter.push(categoryName);
+            this.selectedCategories.push(categoryName);
             category.selected = true;
         }
-        this.onFilterChanged.emit(this.filter);
+        this.onFilterChanged.emit(this.selectedCategories);
     };
     __decorate([
         core_1.Input(), 
-        __metadata('design:type', Object)
+        __metadata('design:type', Array)
     ], FilterComponent.prototype, "selectedCategories", void 0);
     __decorate([
         core_1.Output(), 

@@ -11,33 +11,32 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var Rx_1 = require("rxjs/Rx");
 var core_1 = require('@angular/core');
 var http_1 = require("@angular/http");
-var ComicvineMarvelAppearancesService = (function () {
-    function ComicvineMarvelAppearancesService(http) {
+var ComicvineAppearancesService = (function () {
+    function ComicvineAppearancesService(http) {
         this.http = http;
-        this._heroesUrl = '/api/comicvine/marvel/appearances';
     }
-    ComicvineMarvelAppearancesService.prototype.getAppearancesFromMarvel = function () {
-        return this.http.get(this._heroesUrl)
+    ComicvineAppearancesService.prototype.getAppearances = function (url) {
+        return this.http.get(url)
             .map(this.extractData)
             .catch(this.handleError);
     };
-    ComicvineMarvelAppearancesService.prototype.extractData = function (res) {
+    ComicvineAppearancesService.prototype.extractData = function (res) {
         if (res.status < 200 || res.status >= 300) {
             throw new Error('Bad response status: ' + res.status);
         }
         var body = res.json();
         return body || {};
     };
-    ComicvineMarvelAppearancesService.prototype.handleError = function (error) {
+    ComicvineAppearancesService.prototype.handleError = function (error) {
         // In a real world app, we might send the error to remote logging infrastructure
         var errMsg = error.message || 'Server error';
         console.error(errMsg); // log to console instead
         return Rx_1.Observable.throw(errMsg);
     };
-    ComicvineMarvelAppearancesService = __decorate([
+    ComicvineAppearancesService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [http_1.Http])
-    ], ComicvineMarvelAppearancesService);
-    return ComicvineMarvelAppearancesService;
+    ], ComicvineAppearancesService);
+    return ComicvineAppearancesService;
 }());
-exports.ComicvineMarvelAppearancesService = ComicvineMarvelAppearancesService;
+exports.ComicvineAppearancesService = ComicvineAppearancesService;

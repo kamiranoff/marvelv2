@@ -3,14 +3,13 @@ import {Injectable} from '@angular/core';
 import {Http,Response} from "@angular/http";
 
 @Injectable()
-export class ComicvineDCAppearancesService {
+export class ComicvineAppearancesService {
 
   constructor(public http:Http) {
   }
-  private _heroesUrl = '/api/comicvine/dc/appearances';
 
-  getAppearancesFromDC(): Observable<any>{
-    return this.http.get(this._heroesUrl)
+  getAppearances(url): Observable<any>{
+    return this.http.get(url)
       .map(this.extractData)
       .catch(this.handleError);
   }

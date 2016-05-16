@@ -96,6 +96,7 @@ export class Homepage {
 
   onCategoryClicked(categories){
     this.searchTerm = '';
+    console.log(categories);
     this.selectedCategories = categories;
     if(categories.length === 0){
       this.isFilterActivated = false;
@@ -116,7 +117,6 @@ export class Homepage {
   }
 
   onSearchChanged(searchInput) {
-    this.selectedCategories = [];
     this.searchTerm = searchInput;
     if (searchInput === '') {
       this.elems = this.allCharactersLoaded;
