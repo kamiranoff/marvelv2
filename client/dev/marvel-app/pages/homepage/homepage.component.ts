@@ -17,7 +17,7 @@ import {Grid} from "../../modules/grid/grid.component";
     <search-component [isActive]="isActive" class="search-view-container"
     (searchEvent)="onSearchChanged($event)" [(searchTerm)]="searchTerm"></search-component>
     <filter [categories]="categories" (onFilterChanged)="onCategoryClicked($event)" [(selectedCategories)]="selectedCategories"></filter>
-    <grid [page]="page" [loadMoreElem]="loadMoreElem" [elems]="elems" (onBottomOfPage)="onBottomOfPage($event)"></grid>
+    <grid [page]="page" [loadMoreElem]="loadMoreElem" [elems]="elems" (onBottomOfPage)="onBottomOfPage()"></grid>
     <go-back-up></go-back-up>
   `
 })
@@ -29,7 +29,7 @@ export class Homepage {
   private allCharactersLoaded;
   private errorMessage:string;
   private isActive:boolean;
-  private lastId;
+  private lastName;
   private searchTerm = '';
   private isSearchedActivated = false;
   private isFilterActivated = false;
@@ -50,27 +50,35 @@ export class Homepage {
         characters => {
           this.elems = characters;
           this.allCharactersLoaded = characters;
-          this.lastId = characters[characters.length -1]._id;
+          this.lastName = characters[characters.length -1].character.name;
         },
         error => this.errorMessage = <any>error
       );
 
   }
 
-  getMoreCharacters(lastId,qty){
-    if(!this._characterService.getMoreCharacters(lastId,qty)){
+  getMoreCharacters(lastName,qty){
+    this.loadMoreElem = false;
+
+    if(!this._characterService.getMoreCharacters(lastName,qty)){
       return;
     }
-    this._characterService.getMoreCharacters(lastId,qty)
+    this._characterService.getMoreCharacters(lastName,qty)
       .subscribe(
         characters => {
           if(characters.length === 0){
             return;
           }
+
           this.elems = this.elems.concat(characters);
           this.allCharactersLoaded = this.elems;
-          this.lastId = characters[characters.length -1]._id;
-          this.loadMoreElem = true;
+          this.lastName = characters[characters.length -1].character.name;
+          console.log(this.lastName);
+          console.log("this.elems",this.elems.length);
+          if(characters.length === qty){
+            this.loadMoreElem = true;
+          }
+
         },
         error => this.errorMessage = <any>error
       );
@@ -133,12 +141,13 @@ export class Homepage {
 
   }
 
-  onBottomOfPage($event){
-    this.loadMoreElem = false;
+  onBottomOfPage(){
     if(this.isFilterActivated || this.isSearchedActivated){
      return;
     }
-    this.getMoreCharacters(this.lastId,100);
+    if(this.loadMoreElem){
+      this.getMoreCharacters(this.lastName,100);
+    }
 
   }
 }

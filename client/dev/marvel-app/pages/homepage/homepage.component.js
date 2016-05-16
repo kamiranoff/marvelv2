@@ -38,23 +38,28 @@ var Homepage = (function () {
             .subscribe(function (characters) {
             _this.elems = characters;
             _this.allCharactersLoaded = characters;
-            _this.lastId = characters[characters.length - 1]._id;
+            _this.lastName = characters[characters.length - 1].character.name;
         }, function (error) { return _this.errorMessage = error; });
     };
-    Homepage.prototype.getMoreCharacters = function (lastId, qty) {
+    Homepage.prototype.getMoreCharacters = function (lastName, qty) {
         var _this = this;
-        if (!this._characterService.getMoreCharacters(lastId, qty)) {
+        this.loadMoreElem = false;
+        if (!this._characterService.getMoreCharacters(lastName, qty)) {
             return;
         }
-        this._characterService.getMoreCharacters(lastId, qty)
+        this._characterService.getMoreCharacters(lastName, qty)
             .subscribe(function (characters) {
             if (characters.length === 0) {
                 return;
             }
             _this.elems = _this.elems.concat(characters);
             _this.allCharactersLoaded = _this.elems;
-            _this.lastId = characters[characters.length - 1]._id;
-            _this.loadMoreElem = true;
+            _this.lastName = characters[characters.length - 1].character.name;
+            console.log(_this.lastName);
+            console.log("this.elems", _this.elems.length);
+            if (characters.length === qty) {
+                _this.loadMoreElem = true;
+            }
         }, function (error) { return _this.errorMessage = error; });
     };
     Homepage.prototype.getCategories = function () {
@@ -104,19 +109,20 @@ var Homepage = (function () {
             _this.isActive = false;
         });
     };
-    Homepage.prototype.onBottomOfPage = function ($event) {
-        this.loadMoreElem = false;
+    Homepage.prototype.onBottomOfPage = function () {
         if (this.isFilterActivated || this.isSearchedActivated) {
             return;
         }
-        this.getMoreCharacters(this.lastId, 100);
+        if (this.loadMoreElem) {
+            this.getMoreCharacters(this.lastName, 100);
+        }
     };
     Homepage = __decorate([
         core_1.Component({
             selector: 'homepage',
             providers: [characters_service_1.CharactersService, categories_service_1.CategoriesService],
             directives: [grid_component_1.Grid, search_component_1.SearchComponent, filter_component_1.FilterComponent, go_back_up_component_1.GoBackUpComponent],
-            template: "\n\n    <search-component [isActive]=\"isActive\" class=\"search-view-container\"\n    (searchEvent)=\"onSearchChanged($event)\" [(searchTerm)]=\"searchTerm\"></search-component>\n    <filter [categories]=\"categories\" (onFilterChanged)=\"onCategoryClicked($event)\" [(selectedCategories)]=\"selectedCategories\"></filter>\n    <grid [page]=\"page\" [loadMoreElem]=\"loadMoreElem\" [elems]=\"elems\" (onBottomOfPage)=\"onBottomOfPage($event)\"></grid>\n    <go-back-up></go-back-up>\n  "
+            template: "\n\n    <search-component [isActive]=\"isActive\" class=\"search-view-container\"\n    (searchEvent)=\"onSearchChanged($event)\" [(searchTerm)]=\"searchTerm\"></search-component>\n    <filter [categories]=\"categories\" (onFilterChanged)=\"onCategoryClicked($event)\" [(selectedCategories)]=\"selectedCategories\"></filter>\n    <grid [page]=\"page\" [loadMoreElem]=\"loadMoreElem\" [elems]=\"elems\" (onBottomOfPage)=\"onBottomOfPage()\"></grid>\n    <go-back-up></go-back-up>\n  "
         }), 
         __metadata('design:paramtypes', [characters_service_1.CharactersService, categories_service_1.CategoriesService])
     ], Homepage);

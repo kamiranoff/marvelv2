@@ -21,9 +21,9 @@ var CharactersService = (function () {
             .map(this.extractData)
             .catch(this.handleError);
     };
-    CharactersService.prototype.getMoreCharacters = function (lastId, qty) {
-        if (lastId) {
-            return this.http.get(this._heroesUrl + "?lastid=" + lastId + "&qty=" + qty)
+    CharactersService.prototype.getMoreCharacters = function (lastName, qty) {
+        if (lastName) {
+            return this.http.get(this._heroesUrl + "?lastName=" + lastName + "&qty=" + qty)
                 .map(this.extractData)
                 .catch(this.handleError);
         }

@@ -16,7 +16,7 @@ characterSchema.statics.getAll = () => {
 
     Characters
       .find(_query,fields)
-      .sort({ "_id": 1 })
+      .sort({ "character.name": 1 })
       .limit(100)
       .exec((err, characters) => {
         if(err){ reject(err)}else{
@@ -26,14 +26,15 @@ characterSchema.statics.getAll = () => {
   });
 };
 
-characterSchema.statics.getMoreCharacters = (lastid,qty) => {
+characterSchema.statics.getMoreCharacters = (lastName,qty) => {
+  console.log("lastName",lastName);
   return new Promise((resolve, reject) => {
-    let _query = { "_id": { "$gt": lastid }};
+    let _query = { "character.name": { "$gt": lastName }};
     let fields = fieldsToRetreive;
 
     Characters
       .find(_query,fields)
-      .sort({ "_id": 1 })
+      .sort({ "character.name": 1 })
       .limit(qty)
       .exec((err, characters) => {
         if(err){ reject(err)}else{
