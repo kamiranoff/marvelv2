@@ -3,6 +3,21 @@
   text{
     font-size: 11px;
   }
+  .nv-bar{
+    transition: 0.3s all ease;
+    text{
+      transition: 0.3s all ease;
+      font-size: 8px;
+
+    }
+    &:hover{
+      text{
+        font-size: 15px;
+        transform: translateY(-20px);
+      }
+
+    }
+  }
 }
 
 .nvtooltip{
@@ -10,7 +25,7 @@
   border-radius: 5px;
   border: 1px solid rgba(50,50,50,0.4);
   >div {
-    padding: 20px 20px 20px;
+    padding: 10px 20px 10px;
     h3{
       margin:0;
     }

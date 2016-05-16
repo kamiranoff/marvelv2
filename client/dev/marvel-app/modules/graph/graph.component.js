@@ -13,6 +13,7 @@ var ng2_nvd3_1 = require('ng2-nvd3');
 var GraphComponent = (function () {
     function GraphComponent() {
         this.appearances = [];
+        this.onHeroClicked = new core_1.EventEmitter();
         this.colorFunction = function () {
             return function (d, i) {
                 var opacity = i / 1000;
@@ -25,13 +26,14 @@ var GraphComponent = (function () {
         };
     }
     GraphComponent.prototype.ngOnInit = function () {
+        var self = this;
         this.options = {
             chart: {
                 type: 'discreteBarChart',
                 height: 300,
                 width: 35000,
                 margin: {
-                    top: 20,
+                    top: 30,
                     right: 30,
                     bottom: 100,
                     left: 30
@@ -50,7 +52,6 @@ var GraphComponent = (function () {
                 duration: 500,
                 xAxis: {
                     rotateLabels: -45,
-                    axisLabel: 'X Axis',
                     tickFormat: function (d) {
                         return (d);
                     },
@@ -70,7 +71,15 @@ var GraphComponent = (function () {
                     }
                 },
                 staggerLabels: false,
-                showYAxis: false
+                showYAxis: false,
+                discretebar: {
+                    dispatch: {
+                        elementClick: function (e) {
+                            self.characterName = e.data.character.name;
+                            self.onHeroClicked.emit(self.characterName);
+                        }
+                    }
+                }
             }
         };
     };
@@ -82,6 +91,10 @@ var GraphComponent = (function () {
         core_1.Input(), 
         __metadata('design:type', Number)
     ], GraphComponent.prototype, "collectionLength", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', core_1.EventEmitter)
+    ], GraphComponent.prototype, "onHeroClicked", void 0);
     GraphComponent = __decorate([
         core_1.Component({
             selector: 'graph',

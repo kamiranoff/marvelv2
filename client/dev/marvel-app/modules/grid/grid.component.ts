@@ -2,6 +2,8 @@ import {Component,ElementRef,EventEmitter,Output,Input} from "@angular/core";
 import {ROUTER_DIRECTIVES} from '@angular/router-deprecated';
 import {GetAverageRgb} from "../../helpers/get-average-rgb.helper";
 
+declare var $;
+
 @Component({
   selector:'grid',
   inputs:['elems'],

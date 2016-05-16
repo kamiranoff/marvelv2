@@ -15,13 +15,11 @@ var characters_service_1 = require("../../services/marvel/characters.service");
 var filter_component_1 = require("../../modules/filter/filter.component");
 var categories_service_1 = require("../../services/marvel/categories-service");
 var go_back_up_component_1 = require("../../modules/go-back-up/go-back-up.component");
-var search_filter_service_1 = require("../../services/search-filter.service");
 var grid_component_1 = require("../../modules/grid/grid.component");
 var Homepage = (function () {
-    function Homepage(_characterService, _categoriesService, _searchAndFilterService) {
+    function Homepage(_characterService, _categoriesService) {
         this._characterService = _characterService;
         this._categoriesService = _categoriesService;
-        this._searchAndFilterService = _searchAndFilterService;
         this.elems = [];
         this.categories = [];
         this.selectedCategories = [];
@@ -68,6 +66,7 @@ var Homepage = (function () {
     };
     Homepage.prototype.onCategoryClicked = function (categories) {
         var _this = this;
+        this.searchTerm = '';
         this.selectedCategories = categories;
         if (categories.length === 0) {
             this.isFilterActivated = false;
@@ -85,6 +84,7 @@ var Homepage = (function () {
     };
     Homepage.prototype.onSearchChanged = function (searchInput) {
         var _this = this;
+        this.selectedCategories = [];
         this.searchTerm = searchInput;
         if (searchInput === '') {
             this.elems = this.allCharactersLoaded;
@@ -114,11 +114,11 @@ var Homepage = (function () {
     Homepage = __decorate([
         core_1.Component({
             selector: 'homepage',
-            providers: [characters_service_1.CharactersService, categories_service_1.CategoriesService, search_filter_service_1.SearchAndFilterService],
+            providers: [characters_service_1.CharactersService, categories_service_1.CategoriesService],
             directives: [grid_component_1.Grid, search_component_1.SearchComponent, filter_component_1.FilterComponent, go_back_up_component_1.GoBackUpComponent],
-            template: "\n\n    <search-component [isActive]=\"isActive\" class=\"search-view-container\"\n    (searchEvent)=\"onSearchChanged($event)\" [(value)]=\"searchTerm\"></search-component>\n    <filter [categories]=\"categories\" (onFilterChanged)=\"onCategoryClicked($event)\"></filter>\n    <grid [page]=\"page\" [loadMoreElem]=\"loadMoreElem\" [elems]=\"elems\" (onBottomOfPage)=\"onBottomOfPage($event)\"></grid>\n    <go-back-up></go-back-up>\n  "
+            template: "\n\n    <search-component [isActive]=\"isActive\" class=\"search-view-container\"\n    (searchEvent)=\"onSearchChanged($event)\" [(searchTerm)]=\"searchTerm\"></search-component>\n    <filter [categories]=\"categories\" (onFilterChanged)=\"onCategoryClicked($event)\" [(selectedCategories)]=\"selectedCategories\"></filter>\n    <grid [page]=\"page\" [loadMoreElem]=\"loadMoreElem\" [elems]=\"elems\" (onBottomOfPage)=\"onBottomOfPage($event)\"></grid>\n    <go-back-up></go-back-up>\n  "
         }), 
-        __metadata('design:paramtypes', [characters_service_1.CharactersService, categories_service_1.CategoriesService, search_filter_service_1.SearchAndFilterService])
+        __metadata('design:paramtypes', [characters_service_1.CharactersService, categories_service_1.CategoriesService])
     ], Homepage);
     return Homepage;
 }());

@@ -1056,6 +1056,20 @@ button, input {
   font-size: 11px;
 }
 
+.graph-container .nv-bar {
+  transition: 0.3s all ease;
+}
+
+.graph-container .nv-bar text {
+  transition: 0.3s all ease;
+  font-size: 8px;
+}
+
+.graph-container .nv-bar:hover text {
+  font-size: 15px;
+  transform: translateY(-20px);
+}
+
 .nvtooltip {
   background-color: #f4f5f6;
   border-radius: 5px;
@@ -1063,7 +1077,7 @@ button, input {
 }
 
 .nvtooltip > div {
-  padding: 20px 20px 20px;
+  padding: 10px 20px 10px;
 }
 
 .nvtooltip > div h3 {

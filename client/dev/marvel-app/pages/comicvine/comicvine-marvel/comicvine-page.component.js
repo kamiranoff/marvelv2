@@ -31,6 +31,9 @@ var ComicvineCharPageMarvel = (function () {
         this.getAppearances();
         this.loadMoreElem = true;
     }
+    ComicvineCharPageMarvel.prototype.onHeroCLickedFromGraph = function (heroName) {
+        this.searchTerm = heroName;
+    };
     ComicvineCharPageMarvel.prototype.getCharacters = function () {
         var _this = this;
         this._comicvineMarvelCharacterService.getCharactersFromMarvel()
@@ -108,7 +111,7 @@ var ComicvineCharPageMarvel = (function () {
             selector: 'ComicvinePageMarvel',
             providers: [comicvine_marvel_service_1.ComicvineMarvelCharactersService, comicvine_marvel_appearance_service_1.ComicvineMarvelAppearancesService, search_filter_service_1.SearchAndFilterService],
             directives: [grid_component_1.Grid, search_component_1.SearchComponent, go_back_up_component_1.GoBackUpComponent, graph_component_1.GraphComponent],
-            template: "\n\n    <search-component [isActive]=\"isActive\" class=\"search-view-container\"\n    (searchEvent)=\"onSearchChanged($event)\" [(value)]=\"searchTerm\"></search-component>\n    <graph class=\"graph\" [appearances]=\"appearances\"[collectionLength]=\"collectionLength\"></graph>\n    <grid [page]=\"page\" [loadMoreElem]=\"loadMoreElem\" [elems]=\"elems\" (onBottomOfPage)=\"onBottomOfPage($event)\"></grid>\n    <go-back-up></go-back-up>\n  "
+            template: "\n\n    <search-component [isActive]=\"isActive\" class=\"search-view-container\"\n    (searchEvent)=\"onSearchChanged($event)\" value=\"{{searchTerm}}\"  [(searchTerm)]=\"searchTerm\"></search-component>\n    <graph class=\"graph\" [appearances]=\"appearances\"[collectionLength]=\"collectionLength\" (onHeroClicked)=\"onHeroCLickedFromGraph($event)\"></graph>\n    <grid [page]=\"page\" [loadMoreElem]=\"loadMoreElem\" [elems]=\"elems\" (onBottomOfPage)=\"onBottomOfPage($event)\"></grid>\n    <go-back-up></go-back-up>\n  "
         }), 
         __metadata('design:paramtypes', [comicvine_marvel_service_1.ComicvineMarvelCharactersService, comicvine_marvel_appearance_service_1.ComicvineMarvelAppearancesService])
     ], ComicvineCharPageMarvel);

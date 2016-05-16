@@ -10,7 +10,9 @@
     },
     "exclude": [
 	    "node_modules",
-      "typings"
+      "typings",
+      "typings/main",
+      "typings/main.d.ts"
     ],
     "filesGlob": [
       "**/*.ts",

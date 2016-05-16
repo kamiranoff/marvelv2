@@ -17,8 +17,8 @@ import {GraphComponent} from "../../../modules/graph/graph.component";
   template: `
 
     <search-component [isActive]="isActive" class="search-view-container"
-    (searchEvent)="onSearchChanged($event)" [(value)]="searchTerm"></search-component>
-    <graph class="graph" [appearances]="appearances"[collectionLength]="collectionLength"></graph>
+    (searchEvent)="onSearchChanged($event)" value="{{searchTerm}}"  [(searchTerm)]="searchTerm"></search-component>
+    <graph class="graph" [appearances]="appearances"[collectionLength]="collectionLength" (onHeroClicked)="onHeroCLickedFromGraph($event)"></graph>
     <grid [page]="page" [loadMoreElem]="loadMoreElem" [elems]="elems" (onBottomOfPage)="onBottomOfPage($event)"></grid>
     <go-back-up></go-back-up>
   `
@@ -44,6 +44,10 @@ export class ComicvineCharPageMarvel {
     this.loadMoreElem = true;
 
 
+  }
+
+  onHeroCLickedFromGraph(heroName){
+    this.searchTerm = heroName;
   }
 
   getCharacters() {

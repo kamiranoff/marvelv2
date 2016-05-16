@@ -1,3 +1,5 @@
+/* Avoid: 'error TS2304: Cannot find name <type>' during compilation */
+///<reference path="../../typings/browser/ambient/es6-shim/index.d.ts"/>
 "use strict";
 var platform_browser_dynamic_1 = require('@angular/platform-browser-dynamic');
 var http_1 = require('@angular/http');

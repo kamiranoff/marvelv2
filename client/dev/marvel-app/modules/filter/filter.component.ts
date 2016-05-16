@@ -17,16 +17,10 @@ export class FilterComponent{
   private filter:Array<any> = [];
   private isVisible = false;
   private subscription:Subscription;
+  @Input() private selectedCategories = [];
+  constructor(){
 
-  constructor(private _searchAndFilterService:SearchAndFilterService){
-    this.subscription = _searchAndFilterService.filterChanged$.subscribe(() =>{
-      this.filter = [];
-
-      for(var i = 0;i< this.categories.length;i++){
-        this.categories[i].selected = false;
-      }
-      this.isVisible = false;
-    })
+    this.filter = this.selectedCategories;
   };
 
   @Output() private onFilterChanged:EventEmitter<any> = new EventEmitter();
@@ -38,6 +32,7 @@ export class FilterComponent{
   onFilterClicked(category){
     var categoryName = category.name;
     var indexOfCategory = this.filter.indexOf(categoryName);
+    //this._searchAndFilterService.resetSearch();
 
     if( indexOfCategory !== -1){
       this.filter.splice(indexOfCategory,1);
@@ -47,7 +42,7 @@ export class FilterComponent{
       category.selected=true;
     }
 
-    this._searchAndFilterService.resetSearch();
+
     this.onFilterChanged.emit(this.filter);
 
   }

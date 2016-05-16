@@ -10,22 +10,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var replace_pipe_1 = require("../../pipes/replace.pipe");
-var search_filter_service_1 = require("../../services/search-filter.service");
 var FilterComponent = (function () {
-    function FilterComponent(_searchAndFilterService) {
-        var _this = this;
-        this._searchAndFilterService = _searchAndFilterService;
+    function FilterComponent() {
         this.categories = [];
         this.filter = [];
         this.isVisible = false;
+        this.selectedCategories = [];
         this.onFilterChanged = new core_1.EventEmitter();
-        this.subscription = _searchAndFilterService.filterChanged$.subscribe(function () {
-            _this.filter = [];
-            for (var i = 0; i < _this.categories.length; i++) {
-                _this.categories[i].selected = false;
-            }
-            _this.isVisible = false;
-        });
+        this.filter = this.selectedCategories;
     }
     ;
     FilterComponent.prototype.toggleFilter = function () {
@@ -35,6 +27,7 @@ var FilterComponent = (function () {
     FilterComponent.prototype.onFilterClicked = function (category) {
         var categoryName = category.name;
         var indexOfCategory = this.filter.indexOf(categoryName);
+        //this._searchAndFilterService.resetSearch();
         if (indexOfCategory !== -1) {
             this.filter.splice(indexOfCategory, 1);
             category.selected = false;
@@ -43,9 +36,12 @@ var FilterComponent = (function () {
             this.filter.push(categoryName);
             category.selected = true;
         }
-        this._searchAndFilterService.resetSearch();
         this.onFilterChanged.emit(this.filter);
     };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], FilterComponent.prototype, "selectedCategories", void 0);
     __decorate([
         core_1.Output(), 
         __metadata('design:type', core_1.EventEmitter)
@@ -57,7 +53,7 @@ var FilterComponent = (function () {
             pipes: [replace_pipe_1.ReplacePipe],
             templateUrl: "marvel-app/modules/filter/filter.component.html"
         }), 
-        __metadata('design:paramtypes', [search_filter_service_1.SearchAndFilterService])
+        __metadata('design:paramtypes', [])
     ], FilterComponent);
     return FilterComponent;
 }());

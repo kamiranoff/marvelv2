@@ -10,18 +10,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var common_1 = require("@angular/common");
-var search_filter_service_1 = require("../../services/search-filter.service");
 var SearchComponent = (function () {
-    function SearchComponent(_searchAndFilterService) {
-        var _this = this;
-        this._searchAndFilterService = _searchAndFilterService;
+    function SearchComponent() {
         this.isActive = false;
         this.searchTerm = '';
         this.searchEvent = new core_1.EventEmitter();
         this.searchTermControl = new common_1.Control();
-        this.subscription = _searchAndFilterService.searchChange$.subscribe(function () {
-            _this.searchTerm = '';
-        });
+        //this.subscription = _searchAndFilterService.searchChange$.subscribe(() => {
+        //  this.searchTerm='';
+        //})
     }
     SearchComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -29,10 +26,14 @@ var SearchComponent = (function () {
             .debounceTime(400)
             .map(function (str) { return str.trim(); }).subscribe(function (x) {
             _this.searchTerm = x;
-            _this._searchAndFilterService.resetFilter();
+            //  this._searchAndFilterService.resetFilter();
             _this.searchEvent.emit(x);
         });
     };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], SearchComponent.prototype, "searchTerm", void 0);
     __decorate([
         core_1.Output(), 
         __metadata('design:type', Object)
@@ -41,9 +42,9 @@ var SearchComponent = (function () {
         core_1.Component({
             selector: 'search-component',
             inputs: ['isActive'],
-            template: "\n   <form>\n    <input id=\"search\" class=\"search-box\" type=\"text\" placeholder=\"Search...\" [value]=\"searchTerm\" [ngFormControl]=\"searchTermControl\">\n    <span class=\"icon icon-iron-man loader-icon\" [class.active]=\"isActive\"></span>\n    </form>\n  "
+            template: "\n   <form>\n    <input id=\"search\" class=\"search-box\" type=\"text\" placeholder=\"Search...\" [(ngModel)]=\"searchTerm\"  [ngFormControl]=\"searchTermControl\">\n    <span class=\"icon icon-iron-man loader-icon\" [class.active]=\"isActive\"></span>\n    </form>\n  "
         }), 
-        __metadata('design:paramtypes', [search_filter_service_1.SearchAndFilterService])
+        __metadata('design:paramtypes', [])
     ], SearchComponent);
     return SearchComponent;
 }());

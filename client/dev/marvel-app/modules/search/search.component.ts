@@ -1,4 +1,4 @@
-import {Component,Output,EventEmitter} from "@angular/core";
+import {Component,Output,EventEmitter,Input} from "@angular/core";
 import {Control} from "@angular/common";
 import {SearchAndFilterService} from "../../services/search-filter.service";
 import {Subscription} from "rxjs/Subscription";
@@ -8,7 +8,7 @@ import {Subscription} from "rxjs/Subscription";
   inputs: ['isActive'],
   template: `
    <form>
-    <input id="search" class="search-box" type="text" placeholder="Search..." [value]="searchTerm" [ngFormControl]="searchTermControl">
+    <input id="search" class="search-box" type="text" placeholder="Search..." [(ngModel)]="searchTerm"  [ngFormControl]="searchTermControl">
     <span class="icon icon-iron-man loader-icon" [class.active]="isActive"></span>
     </form>
   `
@@ -17,18 +17,18 @@ import {Subscription} from "rxjs/Subscription";
 export class SearchComponent {
   private searchTermControl;
   private isActive = false;
-  private searchTerm:string ='';
+  @Input() private searchTerm:string ='';
 
   subscription:Subscription;
 
   @Output() private searchEvent = new EventEmitter();
 
-  constructor(private _searchAndFilterService:SearchAndFilterService) {
+  constructor() {
     this.searchTermControl = new Control();
 
-    this.subscription = _searchAndFilterService.searchChange$.subscribe(() => {
-      this.searchTerm='';
-    })
+    //this.subscription = _searchAndFilterService.searchChange$.subscribe(() => {
+    //  this.searchTerm='';
+    //})
   }
 
   ngOnInit() {
@@ -36,7 +36,7 @@ export class SearchComponent {
       .debounceTime(400)
       .map(str=>(<string>str).trim()).subscribe(x => {
       this.searchTerm = x;
-      this._searchAndFilterService.resetFilter();
+    //  this._searchAndFilterService.resetFilter();
       this.searchEvent.emit(x);
     });
   }

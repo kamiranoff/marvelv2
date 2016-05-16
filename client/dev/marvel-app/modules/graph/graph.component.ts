@@ -1,4 +1,4 @@
-import {Component,OnInit,Input,ChangeDetectionStrategy,ChangeDetectorRef} from '@angular/core'
+import {Component,OnInit,Input,ChangeDetectionStrategy,ChangeDetectorRef,Output,EventEmitter} from '@angular/core'
 import {nvD3} from 'ng2-nvd3'
 declare let d3: any;
 
@@ -14,13 +14,23 @@ declare let d3: any;
   `
 })
 
+
 export class GraphComponent{
-  @Input() appearances = [];
-  @Input() collectionLength:number;
+  private characterName:string;
   options;
   data;
 
+  @Input() appearances = [];
+  @Input() collectionLength:number;
+  @Output() private onHeroClicked:EventEmitter<any> = new EventEmitter();
+
+
+
   constructor(){}
+
+
+
+
   colorFunction = function() {
     return function(d,i) {
       var opacity = i / 1000;
@@ -34,15 +44,14 @@ export class GraphComponent{
 
 
   ngOnInit(){
-
+    var self = this;
     this.options = {
       chart: {
         type: 'discreteBarChart',
         height: 300,
         width:35000,
-
         margin : {
-          top: 20,
+          top: 30,
           right: 30,
           bottom: 100,
           left: 30
@@ -61,7 +70,6 @@ export class GraphComponent{
         duration: 500,
         xAxis: {
           rotateLabels: -45,
-          axisLabel: 'X Axis',
           tickFormat: function(d) {
             return (d);
 
@@ -86,7 +94,15 @@ export class GraphComponent{
           }
         },
         staggerLabels:false,
-        showYAxis:false
+        showYAxis:false,
+        discretebar:{
+          dispatch: {
+            elementClick: function (e) {
+              self.characterName = e.data.character.name;
+              self.onHeroClicked.emit(self.characterName);
+            }
+          }
+        }
       }
     };
   }

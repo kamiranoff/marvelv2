@@ -6,18 +6,17 @@ import {CharactersService} from "../../services/marvel/characters.service";
 import {FilterComponent} from "../../modules/filter/filter.component";
 import {CategoriesService} from "../../services/marvel/categories-service";
 import {GoBackUpComponent} from "../../modules/go-back-up/go-back-up.component";
-import {SearchAndFilterService} from "../../services/search-filter.service";
 import {Grid} from "../../modules/grid/grid.component";
 
 @Component({
   selector: 'homepage',
-  providers: [CharactersService,CategoriesService,SearchAndFilterService],
+  providers: [CharactersService,CategoriesService],
   directives: [Grid, SearchComponent, FilterComponent,GoBackUpComponent],
   template: `
 
     <search-component [isActive]="isActive" class="search-view-container"
-    (searchEvent)="onSearchChanged($event)" [(value)]="searchTerm"></search-component>
-    <filter [categories]="categories" (onFilterChanged)="onCategoryClicked($event)"></filter>
+    (searchEvent)="onSearchChanged($event)" [(searchTerm)]="searchTerm"></search-component>
+    <filter [categories]="categories" (onFilterChanged)="onCategoryClicked($event)" [(selectedCategories)]="selectedCategories"></filter>
     <grid [page]="page" [loadMoreElem]="loadMoreElem" [elems]="elems" (onBottomOfPage)="onBottomOfPage($event)"></grid>
     <go-back-up></go-back-up>
   `
@@ -37,7 +36,7 @@ export class Homepage {
   private loadMoreElem = true;
   private page = "marvelApi";
 
-  constructor(private _characterService:CharactersService,private _categoriesService:CategoriesService,private _searchAndFilterService:SearchAndFilterService) {
+  constructor(private _characterService:CharactersService,private _categoriesService:CategoriesService) {
     this.getCharacters();
     this.getCategories();
     this.loadMoreElem = true;
@@ -88,6 +87,7 @@ export class Homepage {
   }
 
   onCategoryClicked(categories){
+    this.searchTerm = '';
     this.selectedCategories = categories;
     if(categories.length === 0){
       this.isFilterActivated = false;
@@ -108,6 +108,7 @@ export class Homepage {
   }
 
   onSearchChanged(searchInput) {
+    this.selectedCategories = [];
     this.searchTerm = searchInput;
     if (searchInput === '') {
       this.elems = this.allCharactersLoaded;
