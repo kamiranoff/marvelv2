@@ -8,7 +8,7 @@ module.exports = class DBConfig {
       var URL;
       if(process.env.NODE_ENV === 'production'){
        // URL = process.env.MONGOHQ_URL
-        URL = dbConst.localhost;
+        URL = dbConst.prod;
       }else{
         URL = dbConst.localhost;
       }
