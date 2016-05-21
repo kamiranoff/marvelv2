@@ -7,7 +7,7 @@
     "watch": "gulp",
     "dev": "tsc && concurrently \"npm start\" \"gulp\"",
     "build-dev": "node index && gulp client.watch",
-    "build-dist": "8",
+    "build-dist": "gulp client.build:dist",
     "test-client": "gulp client.unit_test",
     "test-server": "mocha ./tests/server/**/*.js --recursive --check-leaks --reporter min --compilers js:babel-register",
     "coverage-server": "istanbul cover ./node_modules/mocha/bin/_mocha -- tests/**/*.js --compilers js:babel-register",
