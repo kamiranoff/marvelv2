@@ -23,8 +23,8 @@ import {ComicvineAppearancesService} from "../../../services/comicvine/comicvine
 
 export class ComicvineCharPageTopCow extends ComicvineCharPage{
   protected page = "comicvineChars";
-  protected characterServiceUrl = '/api/comicvine/dc/characters';
-  protected appearancesServiceUrl = 'api/comicvine/dc/appearances';
+  protected characterServiceUrl = '/api/comicvine/top-cow/characters';
+  protected appearancesServiceUrl = 'api/comicvine/top-cow/appearances';
 
 
   constructor(private _comicvineCharacterService:ComicvineCharactersService,private _comicvineAppearancesService:ComicvineAppearancesService) {

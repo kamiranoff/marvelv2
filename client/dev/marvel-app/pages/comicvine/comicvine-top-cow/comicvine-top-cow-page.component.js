@@ -29,8 +29,8 @@ var ComicvineCharPageTopCow = (function (_super) {
         this._comicvineCharacterService = _comicvineCharacterService;
         this._comicvineAppearancesService = _comicvineAppearancesService;
         this.page = "comicvineChars";
-        this.characterServiceUrl = '/api/comicvine/dc/characters';
-        this.appearancesServiceUrl = 'api/comicvine/dc/appearances';
+        this.characterServiceUrl = '/api/comicvine/top-cow/characters';
+        this.appearancesServiceUrl = 'api/comicvine/top-cow/appearances';
     }
     ComicvineCharPageTopCow = __decorate([
         core_1.Component({
