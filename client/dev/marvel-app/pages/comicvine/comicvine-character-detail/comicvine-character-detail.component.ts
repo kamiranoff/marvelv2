@@ -6,14 +6,16 @@ import {Parallax,ParallaxConfig} from "../../../helpers/parallax.directive";
 import {ComicvineCharacterDetailService} from "../../../services/comicvine/comicvine-character-detail.service";
 import {LoadImagesPipe} from "../../../pipes/load-images.pipe";
 import {GoBackUpComponent} from "../../../modules/go-back-up/go-back-up.component";
+import {MakeComicvineLinksPipe} from "../../../pipes/make-comicvine-links";
 
 @Component({
   selector:'character-detail',
   directives:[Parallax,GoBackUpComponent],
-  pipes:[LoadImagesPipe],
+  pipes:[LoadImagesPipe,MakeComicvineLinksPipe],
   providers:[ComicvineCharacterDetailService],
   templateUrl:'marvel-app/pages/comicvine/comicvine-character-detail/comicvine-character-detail.component.html'
 })
+
 
 export class ComicvineCharacterDetail{
   private character = {};

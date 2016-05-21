@@ -14,6 +14,7 @@ var parallax_directive_1 = require("../../../helpers/parallax.directive");
 var comicvine_character_detail_service_1 = require("../../../services/comicvine/comicvine-character-detail.service");
 var load_images_pipe_1 = require("../../../pipes/load-images.pipe");
 var go_back_up_component_1 = require("../../../modules/go-back-up/go-back-up.component");
+var make_comicvine_links_1 = require("../../../pipes/make-comicvine-links");
 var ComicvineCharacterDetail = (function () {
     function ComicvineCharacterDetail(_characterDetailService, params) {
         this._characterDetailService = _characterDetailService;
@@ -36,7 +37,7 @@ var ComicvineCharacterDetail = (function () {
         core_1.Component({
             selector: 'character-detail',
             directives: [parallax_directive_1.Parallax, go_back_up_component_1.GoBackUpComponent],
-            pipes: [load_images_pipe_1.LoadImagesPipe],
+            pipes: [load_images_pipe_1.LoadImagesPipe, make_comicvine_links_1.MakeComicvineLinksPipe],
             providers: [comicvine_character_detail_service_1.ComicvineCharacterDetailService],
             templateUrl: 'marvel-app/pages/comicvine/comicvine-character-detail/comicvine-character-detail.component.html'
         }), 

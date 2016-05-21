@@ -26,7 +26,7 @@
   </h2>
 
   <section class="layout-single-column">
-    <div class="bio" [innerHTML]="character.description | loadImages"></div>
+    <div class="bio" [innerHTML]="character.description | loadImages | makeComicvineLinks"></div>
 
   </section>
 
