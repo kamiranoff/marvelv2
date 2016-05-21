@@ -32,7 +32,9 @@ module.exports = class MarvelRoutes {
 
     router
     .route('/api/marvelapi/characters-details/:name')
-    .get(CharactersDetailsController.getCharFromComivine)
+    .get(CharactersDetailsController.getCharFromComivine);
+
+
   }
 
 

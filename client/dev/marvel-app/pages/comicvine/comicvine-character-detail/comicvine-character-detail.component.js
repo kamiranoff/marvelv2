@@ -22,6 +22,7 @@ var ComicvineCharacterDetail = (function () {
         this.id = params.get('id');
         this.name = params.get('name');
         this.getCharacterDetail(this.id);
+        this.saveCharacterDetail(this.name);
         document.body.scrollTop = document.documentElement.scrollTop = 0;
     }
     ComicvineCharacterDetail.prototype.getCharacterDetail = function (id) {
@@ -31,7 +32,15 @@ var ComicvineCharacterDetail = (function () {
             _this.character = character[0].character;
         }, function (error) { return _this.errorMessage = error; });
     };
-    ComicvineCharacterDetail.prototype.getAllImages = function () {
+    ComicvineCharacterDetail.prototype.saveCharacterDetail = function (name) {
+        var _this = this;
+        this._characterDetailService.saveCharWithName(name)
+            .subscribe(function () {
+            console.log('success');
+        }, function (error) {
+            _this.errorMessage = error;
+            console.log('error', error);
+        });
     };
     ComicvineCharacterDetail = __decorate([
         core_1.Component({

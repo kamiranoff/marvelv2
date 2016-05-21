@@ -9,33 +9,36 @@ const _ = require('lodash');
 //http://gateway.marvel.com:80/v1/public/characters?name=psylocke&apikey=14a03ab1d130513b2b947672fc11128f
 
 
+characterDetailSchema.statics.saveMoreCharacterDetail = (data) => {
+  var count = 0;
+  data.forEach(function(n) {
+    CharacterDetail.findOneAndUpdate( {"character.id": n.character.id}, n, { upsert: true }, function(err,doc) {
+      if(err) {
+        console.log(err);
+      }else{
+        count++;
+        console.log( "updated",count);
+      }
+    });
+
+  });
+};
+
 characterDetailSchema.statics.saveCharacterDetail = (data) => {
+    var count = 0;
     data.forEach(function(n) {
-      console.log(n.character.id);
       CharacterDetail.findOneAndUpdate( {"character.id": n.character.id}, n, { upsert: true }, function(err,doc) {
         if(err) {
           console.log(err);
         }else{
-          console.log( "updated" );
+          count++;
+          console.log( "updated",count);
         }
       });
 
     });
 };
 
-characterDetailSchema.statics.saveMarvelApiCharacter = (data) => {
-  data.forEach(function(n) {
-    console.log(n.character.id);
-    CharacterDetail.findOneAndUpdate( {"character.id": n.character.id}, n, { upsert: true }, function(err,doc) {
-      if(err) {
-        console.log(err);
-      }else{
-        console.log( "updated" );
-      }
-    });
-
-  });
-};
 
 
 

@@ -15,9 +15,15 @@ var ComicvineCharacterDetailService = (function () {
     function ComicvineCharacterDetailService(http) {
         this.http = http;
         this._heroDetailUrl = '/api/comicvine/character/';
+        this._saveHeroUrl = '/api/marvelapi/characters-details/';
     }
     ComicvineCharacterDetailService.prototype.getCharacterById = function (id) {
         return this.http.get(this._heroDetailUrl + id)
+            .map(this.extractData)
+            .catch(this.handleError);
+    };
+    ComicvineCharacterDetailService.prototype.saveCharWithName = function (name) {
+        return this.http.get(this._saveHeroUrl + name)
             .map(this.extractData)
             .catch(this.handleError);
     };

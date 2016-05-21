@@ -5,6 +5,7 @@ import {Http,Response} from "@angular/http";
 @Injectable()
 export class ComicvineCharacterDetailService {
   private _heroDetailUrl = '/api/comicvine/character/';
+  private _saveHeroUrl = '/api/marvelapi/characters-details/';
 
   constructor(public http:Http) {
   }
@@ -16,6 +17,11 @@ export class ComicvineCharacterDetailService {
       .catch(this.handleError);
   }
 
+  saveCharWithName(name):Observable<any>{
+    return this.http.get(this._saveHeroUrl + name)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
 
   private extractData(res: Response) {
     if (res.status < 200 || res.status >= 300) {

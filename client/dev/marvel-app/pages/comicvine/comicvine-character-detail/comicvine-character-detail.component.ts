@@ -27,6 +27,7 @@ export class ComicvineCharacterDetail{
     this.id = params.get('id');
     this.name = params.get('name');
     this.getCharacterDetail(this.id);
+    this.saveCharacterDetail(this.name);
     document.body.scrollTop = document.documentElement.scrollTop = 0;
 
   }
@@ -43,7 +44,19 @@ export class ComicvineCharacterDetail{
 
   }
 
-  getAllImages(){
+  saveCharacterDetail(name){
+
+
+    this._characterDetailService.saveCharWithName(name)
+      .subscribe(
+        () => {
+          console.log('success');
+        },
+        error => {
+          this.errorMessage = <any>error;
+          console.log('error',error);
+        }
+      );
 
   }
 
