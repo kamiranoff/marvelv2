@@ -5,3 +5,6 @@ unit_coverage
 bower_components
 typings
 server/cert/
+client/dist/
+newrelic_agent.log
+npm-debug.log
