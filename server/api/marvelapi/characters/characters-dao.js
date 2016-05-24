@@ -88,5 +88,29 @@ characterSchema.statics.getCharactersByCategory = (input) => {
   });
 };
 
+
+characterSchema.statics.getRandomCharactersWithLimit = (qty) => {
+  qty = parseInt(qty);
+  if(!qty || qty > 50){
+    qty = 20;
+  }
+
+  return new Promise((resolve, reject) => {
+    if (!_.isNumber(qty)) {
+      return reject(new TypeError('is not a valid number.'));
+    }
+    let _query = {};
+    let fields = 'character.id character.thumbnail character.name';
+
+    Characters
+      .aggregate([ { $sample: { size: qty } } ])
+      .exec((err, characters) => {
+        if(err){ reject(err)}else{
+          resolve(characters);
+        }
+      });
+  });
+};
+
 const Characters  = mongoose.model('Character', characterSchema,"characters");
 module.exports = Characters;
