@@ -17,6 +17,7 @@ const Image = 'Image';
 const AspenMLT = 'Aspen MLT';
 const Dynamite = 'Dynamite Entertainment';
 const IDW = 'IDW Publishing';
+const BroadSword = 'Broadsword Comics';
 
 var unwantedPublishers =[
   {'character.publisher.name':Marvel},
@@ -32,7 +33,8 @@ var publishers = [
   {'character.publisher.name':DarkHorse},
   {'character.publisher.name':Image},
   {'character.publisher.name':AspenMLT},
-  {'character.publisher.name':Dynamite}
+  {'character.publisher.name':Dynamite},
+  {'character.publisher.name':BroadSword}
 ] ;
 
 comicvineCharacterSchema.statics.getAllNamesAndAppearancesFromTopCow = () => {
