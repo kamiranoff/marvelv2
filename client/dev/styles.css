@@ -614,6 +614,11 @@ button, input {
   max-width: 100%;
 }
 
+.cards img {
+  width: 80px;
+  height: 80px;
+}
+
 .cards span {
   display: inline-block;
   cursor: pointer;
@@ -636,11 +641,6 @@ button, input {
 .cards span:hover {
   border-bottom-right-radius: 15px;
   background-color: #448AA5;
-}
-
-img {
-  width: 80px;
-  height: 80px;
 }
 
 .panel-top {
