@@ -44,13 +44,18 @@ comicvineCharacterSchema.statics.getAllFromMarvel = () => {
 
 
 comicvineCharacterSchema.statics.getMoreCharacters = (lastName,qty) => {
+  var qty = parseInt(qty);
   return new Promise((resolve, reject) => {
+
     let _query = {
       "character.name": { "$gt": lastName },
       'character.publisher.name':'Marvel'
     };
     let fields = fieldsToRetreive;
 
+    if (!_.isNumber(qty)) {
+      return reject(new TypeError('is not a valid number.'));
+    }
     Characters
       .find(_query,fields)
       .sort({ "character.name": 1 })

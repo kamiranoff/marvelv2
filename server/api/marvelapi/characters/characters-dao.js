@@ -27,11 +27,15 @@ characterSchema.statics.getAll = () => {
 };
 
 characterSchema.statics.getMoreCharacters = (lastName,qty) => {
+  var qty = parseInt(qty);
   console.log("lastName",lastName);
   return new Promise((resolve, reject) => {
+    if (!_.isNumber(qty)) {
+      return reject(new TypeError('is not a valid number.'));
+    }
     let _query = { "character.name": { "$gt": lastName }};
     let fields = fieldsToRetreive;
-
+    console.log('qty',qty);
     Characters
       .find(_query,fields)
       .sort({ "character.name": 1 })
@@ -90,7 +94,7 @@ characterSchema.statics.getCharactersByCategory = (input) => {
 
 
 characterSchema.statics.getRandomCharactersWithLimit = (qty) => {
-  qty = parseInt(qty);
+ var qty = parseInt(qty);
   if(!qty || qty > 50){
     qty = 20;
   }

@@ -15,6 +15,7 @@ module.exports = class CharactersDCController {
         .catch(error => res.status(400).json(error));
 
     }else if(req.query.lastName && req.query.qty){
+      console.log('req.query.qty',req.query.qty);
       CharactersDCDao.getMoreCharactersFromDC(req.query.lastName,req.query.qty)
         .then(characters => res.status(200).json(characters))
         .catch(error => res.status(400).json(error));

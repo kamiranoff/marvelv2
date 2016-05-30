@@ -28,10 +28,13 @@ comicsSchema.statics.getAll = () => {
 };
 
 comicsSchema.statics.getMoreComics = (lastid,qty) => {
+  var qty = parseInt(qty);
   return new Promise((resolve, reject) => {
     let _query = { "_id": { "$gt": lastid }};
     let fields = 'comic.thumbnail comic.title comic.dates';
-
+    if (!_.isNumber(qty)) {
+      return reject(new TypeError('is not a valid number.'));
+    }
     Comics
       .find(_query,fields)
       .sort({ "_id": 1 })

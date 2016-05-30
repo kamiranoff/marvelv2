@@ -77,7 +77,12 @@ comicvineCharacterSchema.statics.getAllFromTopCow = () => {
 
 
 comicvineCharacterSchema.statics.getMoreCharactersFromTopCow = (lastName,qty) => {
+  var qty = parseInt(qty);
   return new Promise((resolve, reject) => {
+
+    if (!_.isNumber(qty)) {
+      return reject(new TypeError('is not a valid number.'));
+    }
     let _query = {
       "character.name": { "$gt": lastName },
       $or:publishers
