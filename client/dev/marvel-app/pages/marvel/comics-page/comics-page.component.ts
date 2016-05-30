@@ -11,7 +11,7 @@ import {ComicsService} from "../../../services/marvel/comics.service";
 @Component({
   selector: 'comics-page',
   providers: [ComicsService,SearchAndFilterService],
-  directives: [Grid, SearchComponent, FilterComponent,GoBackUpComponent],
+  directives: [Grid, SearchComponent, FilterComponent, GoBackUpComponent],
   template: `
     <search-component [isActive]="isActive" class="search-view-container"
     (searchEvent)="onSearchChanged($event)" [(value)]="searchTerm"></search-component>

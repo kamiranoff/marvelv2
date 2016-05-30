@@ -12,7 +12,7 @@ import {ComicvineCharacterDetail} from "./pages/comicvine/comicvine-character-de
 import {NavbarComponent} from "./modules/navbar/navbar.component";
 import {ComicvineCharPageDC} from "./pages/comicvine/comicvine-dc/comicvine-dc-page.component";
 import {ComicvineCharPageTopCow} from "./pages/comicvine/comicvine-top-cow/comicvine-top-cow-page.component";
-
+import {MemoryGame} from "./pages/memory-game/memory-game.component";
 
 @RouteConfig([
   {
@@ -50,21 +50,25 @@ import {ComicvineCharPageTopCow} from "./pages/comicvine/comicvine-top-cow/comic
     path: '/characters/:id',
     name: 'CharacterDetail',
     component: CharacterDetail
+  },
+  {
+    path: '/memory-game',
+    name: 'MemoryGame',
+    component: MemoryGame
   }
-
 ])
 
 @Component({
   selector: 'my-app',
-  directives:[NavbarComponent,HeaderComponent,ROUTER_DIRECTIVES],
+  directives:[ROUTER_DIRECTIVES,NavbarComponent,HeaderComponent],
   styleUrls: ['app/app.component.css'],
   template:`
   <navbar></navbar>
   <header-component [class.small-header]="!router.isRouteActive(router.generate(['/Homepage']))">"></header-component>
   <router-outlet></router-outlet>
   `
-
 })
+
 
 export class AppComponent {
   constructor(public router: Router) {

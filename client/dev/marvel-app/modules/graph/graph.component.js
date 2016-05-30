@@ -31,7 +31,7 @@ var GraphComponent = (function () {
             chart: {
                 type: 'discreteBarChart',
                 height: 300,
-                width: 35000,
+                width: 100000,
                 margin: {
                     top: 30,
                     right: 30,
@@ -100,7 +100,7 @@ var GraphComponent = (function () {
             selector: 'graph',
             directives: [ng2_nvd3_1.nvD3],
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
-            template: "\n    <div class=\"graph-container\" [style.width]=\"'35000px'\">\n    <h2>Characters by Appearances</h2>\n      <nvd3 [options]=\"options\" [data]=\"appearances\"></nvd3>\n    </div>\n  "
+            template: "\n    <div class=\"graph-container\" [style.width]=\"'100000px'\">\n    <h2>Characters by Appearances</h2>\n      <nvd3 [options]=\"options\" [data]=\"appearances\"></nvd3>\n    </div>\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], GraphComponent);

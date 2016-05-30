@@ -1,0 +1,13 @@
+<h1>{{title}}</h1>
+<div class="panel-top">
+  <button class="reset" (click)="onReset()">{{textButton}}</button>
+  {{textInfo}}
+
+</div>
+<div class="cards">
+      <span *ngFor=" let card of cards"
+            [ngStyle]="{'background-image': card.image}"
+            [class.found]="card.found"
+            (click)="onFlip(card)">
+      </span>
+</div>

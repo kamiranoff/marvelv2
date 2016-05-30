@@ -19,6 +19,7 @@ var comicvine_character_detail_component_1 = require("./pages/comicvine/comicvin
 var navbar_component_1 = require("./modules/navbar/navbar.component");
 var comicvine_dc_page_component_1 = require("./pages/comicvine/comicvine-dc/comicvine-dc-page.component");
 var comicvine_top_cow_page_component_1 = require("./pages/comicvine/comicvine-top-cow/comicvine-top-cow-page.component");
+var memory_game_component_1 = require("./pages/memory-game/memory-game.component");
 var AppComponent = (function () {
     function AppComponent(router) {
         this.router = router;
@@ -60,11 +61,16 @@ var AppComponent = (function () {
                 path: '/characters/:id',
                 name: 'CharacterDetail',
                 component: character_detail_component_1.CharacterDetail
+            },
+            {
+                path: '/memory-game',
+                name: 'MemoryGame',
+                component: memory_game_component_1.MemoryGame
             }
         ]),
         core_1.Component({
             selector: 'my-app',
-            directives: [navbar_component_1.NavbarComponent, header_component_1.HeaderComponent, router_deprecated_1.ROUTER_DIRECTIVES],
+            directives: [router_deprecated_1.ROUTER_DIRECTIVES, navbar_component_1.NavbarComponent, header_component_1.HeaderComponent],
             styleUrls: ['app/app.component.css'],
             template: "\n  <navbar></navbar>\n  <header-component [class.small-header]=\"!router.isRouteActive(router.generate(['/Homepage']))\">\"></header-component>\n  <router-outlet></router-outlet>\n  "
         }), 
