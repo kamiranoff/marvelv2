@@ -15,7 +15,6 @@ import {ComicsService} from "../../../services/marvel/comics.service";
   template: `
     <search-component [isActive]="isActive" class="search-view-container"
     (searchEvent)="onSearchChanged($event)" [(value)]="searchTerm"></search-component>
-    <filter [categories]="categories" (onFilterChanged)="onCategoryClicked($event)"></filter>
     <grid  [page]="page" [loadMoreElem]="loadMoreElem" [elems]="elems" (onBottomOfPage)="onBottomOfPage($event)"></grid>
     <go-back-up></go-back-up>
   `
@@ -24,8 +23,6 @@ import {ComicsService} from "../../../services/marvel/comics.service";
 
 export class ComicsPage {
   private elems:Array<any> = [];
-  private categories:Array<String> = [];
-  private selectedCategories:Array<String> = [];
   private allComicsLoaded;
   private errorMessage:string;
   private isActive:boolean;

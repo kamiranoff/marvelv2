@@ -21,8 +21,6 @@ var ComicsPage = (function () {
         this._comicsService = _comicsService;
         this._searchAndFilterService = _searchAndFilterService;
         this.elems = [];
-        this.categories = [];
-        this.selectedCategories = [];
         this.searchTerm = '';
         this.isSearchedActivated = false;
         this.isFilterActivated = false;
@@ -121,7 +119,7 @@ var ComicsPage = (function () {
             selector: 'comics-page',
             providers: [comics_service_1.ComicsService, search_filter_service_1.SearchAndFilterService],
             directives: [grid_component_1.Grid, search_component_1.SearchComponent, filter_component_1.FilterComponent, go_back_up_component_1.GoBackUpComponent],
-            template: "\n    <search-component [isActive]=\"isActive\" class=\"search-view-container\"\n    (searchEvent)=\"onSearchChanged($event)\" [(value)]=\"searchTerm\"></search-component>\n    <filter [categories]=\"categories\" (onFilterChanged)=\"onCategoryClicked($event)\"></filter>\n    <grid  [page]=\"page\" [loadMoreElem]=\"loadMoreElem\" [elems]=\"elems\" (onBottomOfPage)=\"onBottomOfPage($event)\"></grid>\n    <go-back-up></go-back-up>\n  "
+            template: "\n    <search-component [isActive]=\"isActive\" class=\"search-view-container\"\n    (searchEvent)=\"onSearchChanged($event)\" [(value)]=\"searchTerm\"></search-component>\n    <grid  [page]=\"page\" [loadMoreElem]=\"loadMoreElem\" [elems]=\"elems\" (onBottomOfPage)=\"onBottomOfPage($event)\"></grid>\n    <go-back-up></go-back-up>\n  "
         }), 
         __metadata('design:paramtypes', [comics_service_1.ComicsService, search_filter_service_1.SearchAndFilterService])
     ], ComicsPage);
