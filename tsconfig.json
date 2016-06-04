@@ -1,12 +1,12 @@
 {
-    "compilerOptions": {
-        "module": "commonjs",
-        "moduleResolution": "node",
-        "target": "es5",
-        "sourceMap": true,
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
-        "noImplicitAny": false
+  "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "es5",
+    "sourceMap": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "noImplicitAny": false
     },
     "exclude": [
 	    "node_modules",
@@ -15,7 +15,7 @@
       "typings/main.d.ts"
     ],
     "filesGlob": [
-      "**/*.ts",
+      //"**/*.ts",
       "typings/main",
       "typings/main.d.ts"
     ]
