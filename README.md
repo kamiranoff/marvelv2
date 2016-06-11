@@ -1,3 +1,7 @@
 # marvel-encyclopedia
-[![Build Status](https://secure.travis-ci.org/kamiranoff/marvel-encyclopedia.png?branch=master)](https://travis-ci.org/kamiranoff/marvel-encyclopedia)
-[![Coverage Status](https://coveralls.io/repos/kamiranoff/marvel-encyclopedia/badge.svg?branch=master)](https://coveralls.io/r/kamiranoff/marvel-encyclopedia/?branch=master)
+
+This is a personal project build with angular2 and nodejs
+
+The demo is available here : www.dev.kevinamiranoff.com
+
+It is still a work in progress.	
