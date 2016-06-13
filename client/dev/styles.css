@@ -973,19 +973,19 @@ button.reset {
 
 @media (min-width: 641px) {
   .characters-list .single-hero-link, .characters-list .single-comic-link, .comics-list .single-hero-link, .comics-list .single-comic-link {
-    flex: 0 0 50%;
+    flex: 0 0 33%;
   }
 }
 
 @media (min-width: 961px) {
   .characters-list .single-hero-link, .characters-list .single-comic-link, .comics-list .single-hero-link, .comics-list .single-comic-link {
-    flex: 0 0 25%;
+    flex: 0 0 20%;
   }
 }
 
 @media (min-width: 1281px) {
   .characters-list .single-hero-link, .characters-list .single-comic-link, .comics-list .single-hero-link, .comics-list .single-comic-link {
-    flex: 0 0 16.666%;
+    flex: 0 0 10%;
   }
 }
 
@@ -995,7 +995,6 @@ button.reset {
 }
 
 .characters-list .single-hero-link img, .characters-list .single-comic-link img, .comics-list .single-hero-link img, .comics-list .single-comic-link img {
-  transition: 0.5s all linear;
   transition: 0.5s all linear;
   filter: grayscale(100%);
   width: 100%;

@@ -10,3 +10,6 @@ newrelic_agent.log
 npm-debug.log
 *.js.map
 *.css.map
+
+client/dev/**/*.js
+old.tests/client/**/*.js
