@@ -9,3 +9,4 @@ client/dist/
 newrelic_agent.log
 npm-debug.log
 *.js.map
+*.css.map
