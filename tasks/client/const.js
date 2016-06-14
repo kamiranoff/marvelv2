@@ -11,6 +11,8 @@ export const tasks = {
 
   CLIENT_BUILD_SCSS_DEV:'client.build_scss:dev',
 
+  CLIENT_BUNDLE_TS:'client.bundle_ts:dist',
+  CLIENT_BUNDLE_JS: 'client.bundle_js:dist',
   CLIENT_CSS_DIST: 'client.build_css:dist',
   CLIENT_JS_DIST: 'client.build_js:dist',
   CLIENT_VIEWS_DIST: 'client.views:dist',
@@ -18,7 +20,7 @@ export const tasks = {
   CLIENT_DEL_DIST: 'client.del:dist',
 
   CLIENT_COPY: 'client.copy',
-
+  RENAME:'client.rename',
   CLIENT_UNIT_TEST: 'client.unit_test',
   CLIENT_COVERAGE: 'client.coverage',
 

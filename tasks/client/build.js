@@ -14,5 +14,9 @@ gulp.task(tasks.CLIENT_BUILD_DIST, () => {
     tasks.CLIENT_COPY,
     tasks.CLIENT_VIEWS_DIST,
     [tasks.CLIENT_IMAGE_DIST,
-      tasks.CLIENT_JS_DIST]);
+      tasks.CLIENT_JS_DIST],
+    tasks.CLIENT_BUNDLE_TS,
+    tasks.CLIENT_BUNDLE_JS,
+    tasks.RENAME
+  );
 });
