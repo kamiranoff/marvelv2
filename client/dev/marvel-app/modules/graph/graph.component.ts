@@ -7,7 +7,7 @@ declare let d3: any;
   directives: [nvD3],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template:`
-    <div class="graph-container" [style.width]="'100000px'">
+    <div class="graph-container" [style.width]="'15000px'">
     <h2>Characters by Appearances</h2>
       <nvd3 [options]="options" [data]="appearances"></nvd3>
     </div>
@@ -49,7 +49,7 @@ export class GraphComponent{
       chart: {
         type: 'discreteBarChart',
         height: 300,
-        width:100000,
+        width:15000,
         margin : {
           top: 30,
           right: 30,

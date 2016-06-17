@@ -41,7 +41,7 @@ comicvineCharacterSchema.statics.getAllNamesAndAppearancesFromTopCow = () => {
   return new Promise((resolve, reject) => {
     let _query = {
       $or:publishers,
-      'character.count_of_issue_appearances':{ $gt: 0}};
+      'character.count_of_issue_appearances':{ $gt: 29}};
     let fields = 'character.name character.id character.count_of_issue_appearances';
 
     CharactersFromTopCow

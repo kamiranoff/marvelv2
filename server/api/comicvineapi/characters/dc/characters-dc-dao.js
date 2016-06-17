@@ -12,7 +12,7 @@ comicvineCharacterSchema.statics.getAllNamesAndAppearancesFromDC = () => {
   return new Promise((resolve, reject) => {
     let _query = {
       'character.publisher.name':publisher,
-      'character.count_of_issue_appearances':{ $gt: 0}};
+      'character.count_of_issue_appearances':{ $gt: 99}};
     let fields = 'character.name character.id character.count_of_issue_appearances';
 
     CharactersFromDC
