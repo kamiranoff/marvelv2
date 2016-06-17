@@ -8,5 +8,8 @@ import {ROUTER_DIRECTIVES} from '@angular/router-deprecated';
 })
 
 export class NavbarComponent{
-
+  private isVisible = false;
+  toggleNavigation(){
+    this.isVisible = !this.isVisible;
+  };
 }

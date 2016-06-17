@@ -1,7 +1,12 @@
+
 .navigation{
+  .toggle-navigation{
+    display: none;
+  }
   background-color: $background-fifth;
   ul{
-    padding:24px ;
+    transition: 0.3s all ease;
+    padding:24px;
     display: flex;
     justify-content: space-between;
     li{
@@ -13,9 +18,50 @@
           &:before{
             font-size: 20px;
           }
-
         }
       }
+    }
+  }
+  @media screen and (max-width: 1024px) {
+    .toggle-navigation{
+      display: block;
+      color:$lightgrey;
+
+      padding: 20px;
+
+      cursor: pointer;
+      .navigation-text{
+        text-align: left;
+      }
+      .icon-wolverine-claws{
+        float: right;
+        transition: 0.3s all ease;
+        font-size: 20px;
+      }
+    }
+    ul{
+      transition: 0.3s all ease;
+      max-height: 0;
+      overflow: hidden;
+      display: flex;
+      padding: 0;
+      flex-direction: column ;
+      li{
+        a{
+          padding:20px;
+        }
+      }
+    }
+    .open{
+      .icon-wolverine-claws{
+        transform: rotate(180deg);
+      }
+    }
+    .open + ul{
+      transition: 0.3s all ease;
+      border-top: 1px solid $darkblue;
+      padding: 24px;
+      max-height: 1000px;
     }
   }
 }

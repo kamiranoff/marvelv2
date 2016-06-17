@@ -1,5 +1,9 @@
+
 <nav class="navigation">
-  <ul>
+  <div (click)="toggleNavigation()" [class.open]="isVisible" class="toggle-navigation">
+    <span class="navigation-text">Navigation</span>
+    <span class="icon icon-wolverine-claws"></span></div>
+  <ul class="navigation-links">
     <li>
       <a href="#" [routerLink]="['Homepage']"><span class="icon icon-marvel-logo"></span> Homepage (marvelapi)</a>
     </li>
