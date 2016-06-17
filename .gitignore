@@ -13,3 +13,4 @@ npm-debug.log
 
 client/dev/marvel-app/**/*.js
 old.tests/client/**/*.js
+client/dev/**/*.css
