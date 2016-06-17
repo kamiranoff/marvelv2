@@ -10,6 +10,7 @@ const _ = require('lodash');
 
 
 characterDetailSchema.statics.saveMoreCharacterDetail = (data) => {
+  console.log('saving More Character Details');
   var count = 0;
   data.forEach(function(n) {
     CharacterDetail.findOneAndUpdate( {"character.id": n.character.id}, n, { upsert: true }, function(err,doc) {
