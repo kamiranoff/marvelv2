@@ -1,106 +1,88 @@
-import {Observable} from "rxjs/Rx";
-import {Component} from "@angular/core";
-import {ComicvineCharactersService} from "../../../../services/comicvine/comicvine-character.service";
-import {ComicvineAppearancesService} from "../../../../services/comicvine/comicvine-appearance.service";
-import {SearchAndFilterService} from "../../../../services/search-filter.service";
+import {Component,Input,EventEmitter} from "@angular/core";
+import {Observable} from "rxjs/Rx"; //full api
+
 import {SearchComponent} from "../../../../modules/search/search.component";
 import {GoBackUpComponent} from "../../../../modules/go-back-up/go-back-up.component";
-import {GraphComponent} from "../../../../modules/graph/graph.component";
-import {Grid} from "../../../../modules/grid/grid.component"; //full api
-
+import {Grid} from "../../../../modules/grid/grid.component";
+import {ComicvineStoryService} from "../../../../services/comicvine/story-arcs.service";
 
 @Component({
-  selector: 'ComicvinePageMarvel',
-  providers: [ComicvineCharactersService,ComicvineAppearancesService,SearchAndFilterService],
-  directives: [Grid,SearchComponent,GoBackUpComponent,GraphComponent],
-  templateUrl:'marvel-app/pages/comicvine/comicvine-arcs/comicvine-arc-marvel.html'
+  selector: 'story-arcs',
+  providers: [ComicvineStoryService],
+  directives: [Grid, SearchComponent,GoBackUpComponent],
+  templateUrl:'marvel-app/pages/comicvine/comicvine-arcs/marvel/comicvine-arc-marvel.html'
 })
 
-
-export class ComicvineCharPage {
+export class ComicvineStoryArcMarvelPage {
   private elems:Array<any> = [];
-  private appearances:Array<any> = [];
-  private collectionLength:number;
-  private allCharactersLoaded;
+  private categories:Array<String> = [];
+  private selectedCategories:Array<String> = [];
+  private allStoriesLoaded;
   private errorMessage:string;
   private isActive:boolean;
-  private lastName;
+  private lastStoryArc;
   private searchTerm = '';
   private isSearchedActivated = false;
+  private isFilterActivated = false;
   private loadMoreElem = true;
-  protected page;
-  protected characterServiceUrl;
-  protected appearancesServiceUrl;
+  private storyArcsUrl = '/api/comicvine/story_arcs/';
+  private page = 'storyArcsMarvelPage';
 
-
-  constructor(private _charactersService,private _appearancesService) {
+  constructor(private _storyArcsService:ComicvineStoryService) {
+    this.getArcs(this.storyArcsUrl);
     this.loadMoreElem = true;
+
+
   }
 
-  ngOnInit(){
-    this.getCharacters(this.characterServiceUrl);
-    this.getAppearances(this.appearancesServiceUrl);
-  }
-
-  onHeroCLickedFromGraph(heroName){
-    this.searchTerm = heroName;
-  }
-
-  getCharacters(url) {
-    console.log(url);
-    this._charactersService.getCharacters(url)
+  getArcs(storyArcsUrl) {
+    this._storyArcsService.getStoryArcs(storyArcsUrl)
       .subscribe(
-        characters => {
-          this.elems = characters;
-          this.allCharactersLoaded = characters;
-          this.lastName = characters[characters.length -1].character.name;
+        storyArcs => {
+          this.elems = storyArcs;
+          this.allStoriesLoaded = storyArcs;
+          this.lastStoryArc = storyArcs[storyArcs.length -1].story_arc.name;
         },
         error => this.errorMessage = <any>error
       );
 
   }
 
-  getMoreCharacters(lastName,qty){
-    if(!this._charactersService.getMoreCharacters(this.characterServiceUrl,lastName,qty)){
+  getMoreArcs(storyArcsUrl,lastStoryName,qty){
+    this.loadMoreElem = false;
+
+    if(!this._storyArcsService.getMoreStoryArcs(storyArcsUrl,lastStoryName,qty)){
       return;
     }
-    this._charactersService.getMoreCharacters(this.characterServiceUrl,lastName,qty)
+    this._storyArcsService.getMoreStoryArcs(storyArcsUrl,lastStoryName,qty)
       .subscribe(
-        characters => {
-          if(characters.length === 0){
+        storyArcs => {
+          if(storyArcs.length === 0){
             return;
           }
-          this.elems = this.elems.concat(characters);
-          this.allCharactersLoaded = this.elems;
-          this.lastName = characters[characters.length -1].character.name;
-          this.loadMoreElem = true;
+
+          this.elems = this.elems.concat(storyArcs);
+          this.allStoriesLoaded = this.elems;
+          this.lastStoryArc = storyArcs[storyArcs.length -1].story_arc.name;
+          console.log(this.lastStoryArc);
+          console.log("this.elems",this.elems.length);
+          if(storyArcs.length === qty){
+            this.loadMoreElem = true;
+          }
+
         },
         error => this.errorMessage = <any>error
       );
   }
 
-  getAppearances(url){
-    this._appearancesService.getAppearances(url)
-      .subscribe(
-        data => {
-          this.collectionLength = data.length;
-          this.appearances = [
-            {
-              key: "Characters'Appearances",
-              values: data
-            }
-          ];
 
-        },
-        error => this.errorMessage = <any>error
-      );
 
-  }
+
 
   onSearchChanged(searchInput) {
     this.searchTerm = searchInput;
     if (searchInput === '') {
-      this.elems = this.allCharactersLoaded;
+      this.elems = this.allStoriesLoaded;
       this.isActive = false;
       this.isSearchedActivated = false;
 
@@ -112,30 +94,23 @@ export class ComicvineCharPage {
       .filter(text => text.length >= 1)
       .debounceTime(300)
       .distinctUntilChanged()
-      .flatMap(searchTerm => this._charactersService.searchCharactersByName(this.characterServiceUrl,searchTerm));
+      .flatMap(searchTerm => this._storyArcsService.searchStoryArcsByName(this.storyArcsUrl,searchTerm));
 
-    keyups.subscribe((data:Array<any>) => {
+
+    keyups.subscribe( (data:Array<any>) => {
       this.elems = data;
       this.isActive = false;
     });
 
   }
 
-  onBottomOfPage($event){
-
-    if(this.isSearchedActivated){
+  onBottomOfPage(){
+    if(this.isFilterActivated || this.isSearchedActivated){
       return;
     }
     if(this.loadMoreElem){
-
-      if(typeof(this.lastName) !== 'undefined'){
-        this.getMoreCharacters(this.lastName,100);
-      }
+      this.getMoreArcs(this.storyArcsUrl,this.lastStoryArc,100);
     }
-    if(typeof(this.lastName) !== 'undefined') {
-      this.loadMoreElem = false;
-    }
-
 
   }
 }

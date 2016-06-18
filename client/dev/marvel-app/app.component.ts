@@ -13,6 +13,8 @@ import {NavbarComponent} from "./modules/navbar/navbar.component";
 import {ComicvineCharPageDC} from "./pages/comicvine/comicvine-dc/comicvine-dc-page.component";
 import {ComicvineCharPageTopCow} from "./pages/comicvine/comicvine-top-cow/comicvine-top-cow-page.component";
 import {MemoryGame} from "./pages/memory-game/memory-game.component";
+import {ComicvineStoryArcMarvelPage} from "./pages/comicvine/comicvine-arcs/marvel/comicvine-arc-marvel.component";
+
 
 @RouteConfig([
   {
@@ -55,6 +57,11 @@ import {MemoryGame} from "./pages/memory-game/memory-game.component";
     path: '/memory-game',
     name: 'MemoryGame',
     component: MemoryGame
+  },
+  {
+    path: '/story-arcs',
+    name: 'StoryArcs',
+    component: ComicvineStoryArcMarvelPage
   }
 ])
 

@@ -27,3 +27,12 @@
   </div>
 </div>
 
+<div *ngIf="page === 'storyArcsMarvelPage'" class="characters-list" (window:scroll)="onScroll($event)" >
+  <div class="single-comic-link" *ngFor="let story of elems;let idx = index"  #comicInGrid  (mouseenter)="changeTitleColorOnHover(idx,$event)">
+    <a  class="comic-link">
+      <img  crossOrigin="anonymous" src="{{story.story_arc.image?.medium_url}}"/>
+      <h3 class="name" [style.backgroundColor]="story.dominantColor" > {{story.story_arc.name}}</h3>
+    </a>
+  </div>
+</div>
+

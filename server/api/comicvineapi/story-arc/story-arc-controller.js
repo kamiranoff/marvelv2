@@ -39,6 +39,23 @@ function saveStoryArc(error, response, body) {
 
 module.exports = class StoryArcController {
 
+  static getStoryArcs(req,res){
+    if(req.query.name){
+      StoryArcDAO.getStoryByName(req.query.name)
+        .then(stories => res.status(200).json(stories))
+        .catch(error => res.status(400).json(error));
+
+    }else if(req.query.lastStoryArc && req.query.qty){
+      StoryArcDAO.getMoreStories(req.query.lastStoryArc,req.query.qty)
+        .then(stories => res.status(200).json(stories))
+        .catch(error => res.status(400).json(error));
+    }else{
+      StoryArcDAO.getAllStories()
+        .then(stories => res.status(200).json(stories))
+        .catch(error => res.status(400).json(error));
+
+    }
+  }
 
   static getStoryArc(req,res){
     console.log("storyArc - getStoryArc");
