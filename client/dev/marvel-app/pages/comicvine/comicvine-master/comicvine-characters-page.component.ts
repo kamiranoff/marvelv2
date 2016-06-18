@@ -30,7 +30,6 @@ export class ComicvineCharPage {
   }
 
   getCharacters(url) {
-    console.log(url);
     this._charactersService.getCharacters(url)
       .subscribe(
         characters => {

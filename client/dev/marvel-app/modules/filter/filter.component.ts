@@ -21,7 +21,6 @@ export class FilterComponent{
   constructor(){};
 
   ngOnChanges() {
-    console.log(this.selectedCategories);
     if(this.selectedCategories.length === 0){
       this.isVisible = false;
     }

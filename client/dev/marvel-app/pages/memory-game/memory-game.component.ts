@@ -41,7 +41,6 @@ export class MemoryGame {
         for(var i = 0; i < this.logos.length;i++){
           this.logos[i].idLogo = i;
         }
-      console.log(heroes);
       this.initBoard();
     },
         error => this.errorMessage = <any>error

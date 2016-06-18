@@ -73,8 +73,7 @@ export class Homepage {
           this.elems = this.elems.concat(characters);
           this.allCharactersLoaded = this.elems;
           this.lastName = characters[characters.length -1].character.name;
-          console.log(this.lastName);
-          console.log("this.elems",this.elems.length);
+
           if(characters.length === qty){
             this.loadMoreElem = true;
           }
@@ -96,7 +95,6 @@ export class Homepage {
 
   onCategoryClicked(categories){
     this.searchTerm = '';
-    console.log(categories);
     this.selectedCategories = categories;
     if(categories.length === 0){
       this.isFilterActivated = false;

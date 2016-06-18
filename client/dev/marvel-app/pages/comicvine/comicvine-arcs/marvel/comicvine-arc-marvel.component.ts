@@ -64,8 +64,6 @@ export class ComicvineStoryArcMarvelPage {
           this.elems = this.elems.concat(storyArcs);
           this.allStoriesLoaded = this.elems;
           this.lastStoryArc = storyArcs[storyArcs.length -1].story_arc.name;
-          console.log(this.lastStoryArc);
-          console.log("this.elems",this.elems.length);
           if(storyArcs.length === qty){
             this.loadMoreElem = true;
           }

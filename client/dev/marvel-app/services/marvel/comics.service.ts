@@ -32,7 +32,6 @@ export class ComicsService {
   }
 
   getMoreComicsFromSearch(searchTerm,lastId,qty){
-    console.log(searchTerm);
     if(lastId){
       return this.http.get(this._comicsUrl + "?title=" + searchTerm + "&lastid=" + lastId + "&qty=" + qty)
         .map(this.extractData)
