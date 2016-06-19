@@ -48,7 +48,7 @@ module.exports = class ComicvineRoutes {
       .get(StoryArcController.getStoryArcs);
 
     router
-    .route('/api/comicvine/story_arcs/:stortyArcName')
+    .route('/api/comicvine/story_arc')
     .get(StoryArcController.getStoryArc);
   }
 

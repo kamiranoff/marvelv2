@@ -60,7 +60,7 @@ module.exports = class StoryArcController {
   static getStoryArc(req,res){
     console.log("storyArc - getStoryArc");
     count = 0;
-    let _name = req.params.stortyArcName;
+    let _name = req.query.storyArcName;
     console.log(_name);
     if(_name){
       console.log('name',_name);
