@@ -15,7 +15,12 @@ const _storyArcSchema = {
       "name": String,
       "issue_number": String
     },
-    "first_appeared_in_episode": String,
+    "first_appeared_in_episode": {
+      "api_detail_url": String,
+      "id": Number,
+      "name": String,
+      "episode_number": String
+    },
     "id": Number,
     "image": {
       "icon_url": String,
