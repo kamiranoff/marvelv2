@@ -1,6 +1,6 @@
 import {Component} from "@angular/core";
 import {ROUTER_DIRECTIVES} from '@angular/router-deprecated';
-
+import {Router} from  '@angular/router-deprecated';
 @Component({
   selector:'navbar',
   directives:[ROUTER_DIRECTIVES],
@@ -12,4 +12,13 @@ export class NavbarComponent{
   toggleNavigation(){
     this.isVisible = !this.isVisible;
   };
+
+  constructor(private router: Router) {
+    router.subscribe(() => {
+      if(this.isVisible){
+        this.toggleNavigation()
+      }
+
+    })
+  }
 }
