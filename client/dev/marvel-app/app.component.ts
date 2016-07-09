@@ -21,12 +21,13 @@ import {ComicvineStoryArcMarvelPage} from "./pages/comicvine/comicvine-arcs/marv
     path: '/',
     name: 'Homepage',
     component: Homepage,
-    useAsDefault:true
+
   },
   {
     path: '/comicvine-marvel',
     name: 'ComicvineCharsMarvel',
-    component: ComicvineCharPageMarvel
+    component: ComicvineCharPageMarvel,
+    useAsDefault:true
   },
   {
     path: '/comicvine-dc',
@@ -71,7 +72,7 @@ import {ComicvineStoryArcMarvelPage} from "./pages/comicvine/comicvine-arcs/marv
   styleUrls: ['app/app.component.css'],
   template:`
   <navbar></navbar>
-  <header-component [class.small-header]="!router.isRouteActive(router.generate(['/Homepage']))">"></header-component>
+  <header-component [class.small-header]="!router.isRouteActive(router.generate(['/ComicvineCharsMarvel']))">"></header-component>
   <router-outlet></router-outlet>
   `
 })
