@@ -20,14 +20,10 @@ export class Grid{
   constructor() {
 
   }
-
-
-
   onScroll () {
     if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
       this.onBottomOfPage.emit("on the bottom");
     }
-
   }
 
   changeTitleColorOnHover(idx,elm){

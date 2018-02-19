@@ -40,3 +40,18 @@
   }
 }
 
+@media screen and (max-width: 1024px) {
+
+  .comicvine-hero-page{
+    .hero-description-wiki{
+      float:none;
+      width: 100%;
+    }
+    .hero-name{
+      float:none;
+      width: 100%;
+    }
+
+
+  }
+}
