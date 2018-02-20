@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":1,"key":{"_id":1},"name":"_id_","ns":"marvelapi.comics"},{"v":1,"key":{"date":1},"name":"date_1","ns":"marvelapi.comics","background":true},{"v":1,"key":{"dates":1},"name":"dates_1","ns":"marvelapi.comics","background":true}]}
