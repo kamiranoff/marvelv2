@@ -1,0 +1,17 @@
+version: "2"
+services:
+  marvelv2:
+    container_name: marvelv2
+    restart: always
+    build: .
+    ports:
+      - "3333:3333"
+    links:
+      - mongo
+  mongo:
+    container_name: mongo
+    image: mongo
+    volumes:
+      - ./docker/data:/data/db
+    ports:
+      - "27017:27017"
