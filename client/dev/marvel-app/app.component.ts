@@ -19,12 +19,6 @@ import {ComicvineStoryArcMarvelPage} from "./pages/comicvine/comicvine-arcs/marv
 @RouteConfig([
   {
     path: '/',
-    name: 'Homepage',
-    component: Homepage,
-
-  },
-  {
-    path: '/comicvine-marvel',
     name: 'ComicvineCharsMarvel',
     component: ComicvineCharPageMarvel,
     useAsDefault:true
