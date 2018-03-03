@@ -1,4 +1,4 @@
 {
-  "localhost": "mongodb://127.0.0.1/marvelapi",
-  "prod": "mongodb://127.0.0.1/marvelapi"
+  "localhost": "mongodb://mongo/marvelapi",
+  "prod": "mongodb://mongo/marvelapi"
 }
