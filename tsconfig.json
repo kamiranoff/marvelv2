@@ -15,7 +15,6 @@
       "typings/main.d.ts"
     ],
     "filesGlob": [
-      //"**/*.ts",
       "typings/main",
       "typings/main.d.ts"
     ]
