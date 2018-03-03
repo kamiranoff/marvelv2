@@ -1,9 +1,6 @@
-
 import {Component} from '@angular/core';
 import {RouteConfig,ROUTER_DIRECTIVES,Router} from '@angular/router-deprecated';
 
-
-import {Homepage} from "./pages/homepage/homepage.component";
 import {HeaderComponent} from "./modules/header/header.component";
 import {CharacterDetail} from "./pages/marvel/character-detail/character-detail.component";
 import {ComicsPage} from "./pages/marvel/comics-page/comics-page.component";
@@ -14,7 +11,6 @@ import {ComicvineCharPageDC} from "./pages/comicvine/comicvine-dc/comicvine-dc-p
 import {ComicvineCharPageTopCow} from "./pages/comicvine/comicvine-top-cow/comicvine-top-cow-page.component";
 import {MemoryGame} from "./pages/memory-game/memory-game.component";
 import {ComicvineStoryArcMarvelPage} from "./pages/comicvine/comicvine-arcs/marvel/comicvine-arc-marvel.component";
-
 
 @RouteConfig([
   {
@@ -71,9 +67,7 @@ import {ComicvineStoryArcMarvelPage} from "./pages/comicvine/comicvine-arcs/marv
   `
 })
 
-
 export class AppComponent {
   constructor(public router: Router) {
   }
-
 }
