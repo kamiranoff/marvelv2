@@ -1,6 +1,12 @@
 <header>
 <h1 class="title">
-  <video class="video" autoplay autobuffer autoloop loop muted>
+  <video
+      class="video"
+      autoplay
+      loop
+      muted
+      onloadedmetadata="this.muted = true"
+  >
     <source src="assets/videos/marvel-intro.webm" type="video/webm">
     <source src="assets/videos/marvel-intro.mp4" type="video/mp4">
   </video>
