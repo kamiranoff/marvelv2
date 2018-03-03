@@ -1,11 +1,11 @@
-.characters-list,.comics-list {
+.characters-list, .comics-list {
   display: flex;
   flex-wrap: wrap;
   align-content: stretch;
   flex-direction: row;
   flex-flow: row wrap;
   justify-content: space-around;
-  .single-hero-link,.single-comic-link {
+  .single-hero-link, .single-comic-link {
     position: relative;
     flex: 0 0 100%;
     text-align: center;
@@ -26,13 +26,15 @@
     @include very-large-only {
       flex: 0 0 16.6%;
     }
-    .character-link,.comic-link {
+    .character-link, .comic-link {
       display: block;
       overflow: hidden;
     }
     img {
       transition: 0.5s all linear;
-      filter: grayscale(100%);
+      @include medium-only {
+        filter: grayscale(100%);
+      }
       width: 100%;
       height: 300px;
       vertical-align: bottom;
@@ -65,14 +67,13 @@
         background: $background-secondary;
         @include bg-text-alt(1);
         color: $text-alt;
-        &:hover{
+        &:hover {
           color: $darkblue;
         }
       }
     }
   }
 }
-
 
 .comics-list {
   .single-comic-link {
