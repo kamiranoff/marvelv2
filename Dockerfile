@@ -16,5 +16,5 @@ RUN npm install
 COPY . .
 
 EXPOSE 3333
-CMD [ "npm", "build-dist" ]
-CMD [ "npm", "start:production"]
+CMD [ "yarn", "build-dist" ]
+CMD [ "yarn", "start:production"]
