@@ -12,5 +12,7 @@ npm-debug.log
 *.css.map
 
 client/dev/marvel-app/**/*.js
+!client/dev/marvel-app/libs/*.js
+
 old.tests/client/**/*.js
 client/dev/**/*.css

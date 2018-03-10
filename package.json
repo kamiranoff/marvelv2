@@ -4,7 +4,7 @@
   "main": "src/marvel-encyclopedia.js",
   "scripts": {
     "start": "node index",
-    "start:production":"NODE_ENV=production node index",
+    "start:production":"node index",
     "watch": "gulp",
     "dev": "tsc && concurrently \"npm start\" \"gulp\"",
     "build-dev": "node index && gulp client.watch",
