@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 const mongoose = require('mongoose');
 const dbConst = require('../constants/db.json');
@@ -13,9 +13,24 @@ class DBConfig {
       URL = dbConst.localhost;
     }
 
-    mongoose.connect(URL);
-    mongoose.connection.on('error', console.error.bind(console, 'An error ocurred with the DB connection: '));
+    const dbOptions = {
+      socketOptions: {
+        // This option is on by default, but why not set it explicitly
+        autoReconnect: true
+      },
+      // This options is 1 second by default, its possible the ha
+      // takes longer than 30 seconds to recover.
+      reconnectInterval: 5000,
+      // This options is 30 by default, why not make it 60
+      reconnectTries: 60
+    };
+
+    mongoose.connect(URL, dbOptions)
+      .then(() => console.log('successfully connected to db'))
+      .catch(err => {
+        console.error(err);
+      });
   }
-};
+}
 
 module.exports = DBConfig;
