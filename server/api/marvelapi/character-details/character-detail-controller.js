@@ -1,37 +1,30 @@
-"use strict";
+'use strict';
+
 //http://comicvine.gamespot.com/api/characters/?api_key=5de7765cd42651ccb9bf0d1a16c8c42d88693d13&filter=name%3APsylocke&format=json
 
-var request = require('request');
+const request = require('request');
 const CharacterDetailDao = require('./character-detail-dao');
 
-const options = {
-  url: 'http://comicvine.gamespot.com/api/characters/?api_key=5de7765cd42651ccb9bf0d1a16c8c42d88693d13&filter=name%3APsylocke&format=json',
-  headers: {
-    'User-Agent': 'my-encyclopedia marvel'
-  }
-};
-
-var name ='';
-var count = 0;
+let name ='';
+let count = 0;
 function saveCharacter(error, response, body) {
-  if (!error && response.statusCode == 200) {
-    var result = JSON.parse(body);
-    var listOfHerosDetail = [];
-    var characterObject = {};
+  if (!error && response.statusCode === 200) {
+    const result = JSON.parse(body);
+    const listOfHerosDetail = [];
+    let characterObject = {};
     for (var i = 0; i < result.results.length; i++) {
       characterObject.character = result.results[i];
-      console.log(characterObject.character.id);
+      console.log('saveCharacter - CharacterId: ', characterObject.character.id);
       listOfHerosDetail.push(characterObject);
       characterObject = {};
     }
 
     CharacterDetailDao.saveCharacterDetail(listOfHerosDetail);
-    console.log('listOfHerosDetail',listOfHerosDetail.length);
+    console.log('saveCharacter - Number of characters to save: ', listOfHerosDetail.length);
 
     if (listOfHerosDetail.length >= 100) {
-
       count = count + 100;
-      console.log(count);
+      console.log('saveCharacter - Saving more characters', count);
       request({
         url: 'http://comicvine.gamespot.com/api/characters/?api_key=5de7765cd42651ccb9bf0d1a16c8c42d88693d13&format=json&offset=' + count + '&filter=name%3A' + name,
         headers: {
@@ -42,15 +35,13 @@ function saveCharacter(error, response, body) {
   }
 }
 
-
 module.exports = class CharacterDetailController {
-
 
   static getCharFromComivine(req,res){
     count = 0;
     let _name = req.params.name;
     if(_name){
-      console.log('name',_name);
+      console.log('getCharFromComivine - Saving charaters with names including: ',_name);
       name = _name;
       request(  {
         url: 'http://comicvine.gamespot.com/api/characters/?api_key=5de7765cd42651ccb9bf0d1a16c8c42d88693d13&format=json&filter=name%3A'+ _name,
