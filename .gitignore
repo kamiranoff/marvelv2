@@ -10,7 +10,7 @@ newrelic_agent.log
 npm-debug.log
 *.js.map
 *.css.map
-
+*.pem
 client/dev/marvel-app/**/*.js
 !client/dev/marvel-app/libs/*.js
 
