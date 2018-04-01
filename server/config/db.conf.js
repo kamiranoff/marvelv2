@@ -2,6 +2,18 @@
 
 const mongoose = require('mongoose');
 const dbConst = require('../constants/db.json');
+mongoose.Promise = Promise; // Set mongoose to use ES6 Promises.
+
+const reconnectTimeout = 5000; // ms.
+
+function connect(dbURI) {
+  mongoose.connect(dbURI, { auto_reconnect: true })
+    .catch((e) => {
+      console.log(e);
+    }); // Catch the warning, no further treatment is required
+  // because the Connection events are already doing this
+  // for us.
+}
 
 class DBConfig {
   static init() {
@@ -13,23 +25,37 @@ class DBConfig {
       URL = dbConst.localhost;
     }
 
-    const dbOptions = {
-      socketOptions: {
-        // This option is on by default, but why not set it explicitly
-        autoReconnect: true
-      },
-      // This options is 1 second by default, its possible the ha
-      // takes longer than 30 seconds to recover.
-      reconnectInterval: 5000,
-      // This options is 30 by default, why not make it 60
-      reconnectTries: 60
-    };
+    const db = mongoose.connection;
 
-    mongoose.connect(URL, dbOptions)
-      .then(() => console.log('successfully connected to db'))
-      .catch(err => {
-        console.error(err);
-      });
+    db.on('connecting', () => {
+      console.info('Connecting to MongoDB...');
+    });
+
+    db.on('error', (error) => {
+      console.error(`MongoDB connection error: ${error}`);
+      mongoose.disconnect()
+        .then(()=> console.log('successfully disconnected from db'))
+        .catch(e => console.log('failed disconnecting from db', e));
+    });
+
+    db.on('connected', () => {
+      console.info('Connected to MongoDB!');
+    });
+
+    db.once('open', () => {
+      console.info('MongoDB connection opened!');
+    });
+
+    db.on('reconnected', () => {
+      console.info('MongoDB reconnected!');
+    });
+
+    db.on('disconnected', () => {
+      console.error(`MongoDB disconnected! Reconnecting in ${reconnectTimeout / 1000}s...`);
+      setTimeout(() => connect(URL), reconnectTimeout);
+    });
+
+    return connect(URL);
   }
 }
 

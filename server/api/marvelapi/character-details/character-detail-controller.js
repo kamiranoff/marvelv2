@@ -5,8 +5,9 @@
 const request = require('request');
 const CharacterDetailDao = require('./character-detail-dao');
 
-let name ='';
+let name = '';
 let count = 0;
+
 function saveCharacter(error, response, body) {
   if (!error && response.statusCode === 200) {
     const result = JSON.parse(body);
@@ -37,20 +38,23 @@ function saveCharacter(error, response, body) {
 
 module.exports = class CharacterDetailController {
 
-  static getCharFromComivine(req,res){
+  static getCharFromComivine(req, res) {
     count = 0;
     let _name = req.params.name;
-    if(_name){
-      console.log('getCharFromComivine - Saving charaters with names including: ',_name);
+    if (_name) {
+      console.log('getCharFromComivine - Saving charaters with names including: ', _name);
       name = _name;
-      request(  {
-        url: 'http://comicvine.gamespot.com/api/characters/?api_key=5de7765cd42651ccb9bf0d1a16c8c42d88693d13&format=json&filter=name%3A'+ _name,
-        headers: {
-          'User-Agent': 'my-encyclopedia marvel'
-        }
-      }, saveCharacter);
-
-      res.status(200).json({status:_name});
+      try {
+        request({
+          url: 'http://comicvine.gamespot.com/api/characters/?api_key=5de7765cd42651ccb9bf0d1a16c8c42d88693d13&format=json&filter=name%3A' + _name,
+          headers: {
+            'User-Agent': 'my-encyclopedia marvel'
+          }
+        }, saveCharacter);
+      } catch (e) {
+        console.error(e);
+      }
+      res.status(200).json({ status: _name });
     }
   }
 
