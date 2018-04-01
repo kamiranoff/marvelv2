@@ -7,5 +7,5 @@ import {Component} from '@angular/core'
 
 export class HeaderComponent {
   title="Marvel Encyclopedia";
-  subtitle="With great powers comes great responsabilities";
+  subtitle="With great powers comes great responsibilities";
 }
