@@ -4,7 +4,7 @@
   "main": "src/marvel-encyclopedia.js",
   "scripts": {
     "start": "node index",
-    "start:production":"NODE_ENV=production node index",
+    "start:production": "NODE_ENV=production node index",
     "watch": "gulp",
     "dev": "tsc && concurrently \"npm start\" \"gulp\"",
     "build-dev": "node index && gulp client.watch",
@@ -82,6 +82,7 @@
     "karma-phantomjs-launcher": "0.1.4",
     "karma-safari-launcher": "0.1.1",
     "mocha": "2.4.5",
+    "node-sass": "4.8.3",
     "protractor": "3.1.0",
     "require-dir": "0.3.2",
     "run-sequence": "1.1.5",
