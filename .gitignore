@@ -13,6 +13,6 @@ npm-debug.log
 *.pem
 client/dev/marvel-app/**/*.js
 !client/dev/marvel-app/libs/*.js
-
+docker
 old.tests/client/**/*.js
 client/dev/**/*.css
