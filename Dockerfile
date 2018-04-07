@@ -14,7 +14,7 @@ RUN npm install
 
 # Bundle app source
 COPY . .
+RUN npm run build-dist
 
 EXPOSE 3333
-CMD [ "yarn", "build-dist" ]
 CMD [ "yarn", "start:production"]
